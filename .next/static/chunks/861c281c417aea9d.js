@@ -1,0 +1,3628 @@
+(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push([
+  'object' == typeof document ? document.currentScript : void 0,
+  3050,
+  (e) => {
+    'use strict';
+    var t = e.i(43476),
+      r = e.i(29391);
+    function n() {
+      return (0, t.jsx)('div', {
+        className: 'wallet-connect',
+        style: { padding: '1rem', display: 'flex', justifyContent: 'flex-end' },
+        children: (0, t.jsxs)('div', {
+          className: 'wallet-panel',
+          children: [
+            (0, t.jsxs)('div', {
+              className: 'wallet-brand',
+              children: [
+                (0, t.jsx)('img', {
+                  src: '/kfc-logo.png',
+                  alt: 'KFC',
+                  className: 'wallet-logo',
+                  onError: (e) => {
+                    let t = e.target,
+                      r =
+                        "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect fill='%23cc0000' width='100%' height='100%' rx='12'/><text x='50%' y='56%' font-size='34' fill='%23ffffff' font-family='Arial' font-weight='700' text-anchor='middle'>K</text></svg>";
+                    t.src !== r && (t.src = r);
+                  },
+                }),
+                (0, t.jsxs)('div', {
+                  className: 'wallet-copy',
+                  children: [
+                    (0, t.jsx)('div', { className: 'wallet-title', children: 'KFC Box' }),
+                    (0, t.jsx)('div', {
+                      className: 'wallet-sub',
+                      children: 'Connect to fry, collect & claim rewards',
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            (0, t.jsx)('div', {
+              className: 'wallet-cta',
+              children: (0, t.jsx)(r.ConnectButton, {}),
+            }),
+          ],
+        }),
+      });
+    }
+    e.s(['WalletConnect', () => n]);
+  },
+  18102,
+  (e, t, r) => {
+    'use strict';
+    Object.defineProperty(r, '__esModule', { value: !0 }),
+      (r.cssValue = r.parseLengthAndUnit = void 0);
+    var n = {
+      cm: !0,
+      mm: !0,
+      in: !0,
+      px: !0,
+      pt: !0,
+      pc: !0,
+      em: !0,
+      ex: !0,
+      ch: !0,
+      rem: !0,
+      vw: !0,
+      vh: !0,
+      vmin: !0,
+      vmax: !0,
+      '%': !0,
+    };
+    function a(e) {
+      if ('number' == typeof e) return { value: e, unit: 'px' };
+      var t,
+        r = (e.match(/^[0-9.]*/) || '').toString();
+      t = r.includes('.') ? parseFloat(r) : parseInt(r, 10);
+      var a = (e.match(/[^0-9]*$/) || '').toString();
+      return n[a]
+        ? { value: t, unit: a }
+        : (console.warn(
+            'React Spinners: '
+              .concat(e, ' is not a valid css value. Defaulting to ')
+              .concat(t, 'px.')
+          ),
+          { value: t, unit: 'px' });
+    }
+    (r.parseLengthAndUnit = a),
+      (r.cssValue = function (e) {
+        var t = a(e);
+        return ''.concat(t.value).concat(t.unit);
+      });
+  },
+  93367,
+  (e, t, r) => {
+    'use strict';
+    Object.defineProperty(r, '__esModule', { value: !0 }),
+      (r.createAnimation = void 0),
+      (r.createAnimation = function (e, t, r) {
+        var n = 'react-spinners-'.concat(e, '-').concat(r);
+        if ('undefined' == typeof window || !window.document) return n;
+        var a = document.createElement('style');
+        document.head.appendChild(a);
+        var s = a.sheet,
+          i = '\n    @keyframes '.concat(n, ' {\n      ').concat(t, '\n    }\n  ');
+        return s && s.insertRule(i, 0), n;
+      });
+  },
+  65079,
+  (e, t, r) => {
+    'use strict';
+    var n =
+        (e.e && e.e.__assign) ||
+        function () {
+          return (n =
+            Object.assign ||
+            function (e) {
+              for (var t, r = 1, n = arguments.length; r < n; r++)
+                for (var a in (t = arguments[r]))
+                  Object.prototype.hasOwnProperty.call(t, a) && (e[a] = t[a]);
+              return e;
+            }).apply(this, arguments);
+        },
+      a =
+        (e.e && e.e.__createBinding) ||
+        (Object.create
+          ? function (e, t, r, n) {
+              void 0 === n && (n = r);
+              var a = Object.getOwnPropertyDescriptor(t, r);
+              (!a || ('get' in a ? !t.__esModule : a.writable || a.configurable)) &&
+                (a = {
+                  enumerable: !0,
+                  get: function () {
+                    return t[r];
+                  },
+                }),
+                Object.defineProperty(e, n, a);
+            }
+          : function (e, t, r, n) {
+              void 0 === n && (n = r), (e[n] = t[r]);
+            }),
+      s =
+        (e.e && e.e.__setModuleDefault) ||
+        (Object.create
+          ? function (e, t) {
+              Object.defineProperty(e, 'default', { enumerable: !0, value: t });
+            }
+          : function (e, t) {
+              e.default = t;
+            }),
+      i =
+        (e.e && e.e.__importStar) ||
+        function (e) {
+          if (e && e.__esModule) return e;
+          var t = {};
+          if (null != e)
+            for (var r in e)
+              'default' !== r && Object.prototype.hasOwnProperty.call(e, r) && a(t, e, r);
+          return s(t, e), t;
+        },
+      o =
+        (e.e && e.e.__rest) ||
+        function (e, t) {
+          var r = {};
+          for (var n in e)
+            Object.prototype.hasOwnProperty.call(e, n) && 0 > t.indexOf(n) && (r[n] = e[n]);
+          if (null != e && 'function' == typeof Object.getOwnPropertySymbols)
+            for (var a = 0, n = Object.getOwnPropertySymbols(e); a < n.length; a++)
+              0 > t.indexOf(n[a]) &&
+                Object.prototype.propertyIsEnumerable.call(e, n[a]) &&
+                (r[n[a]] = e[n[a]]);
+          return r;
+        };
+    Object.defineProperty(r, '__esModule', { value: !0 });
+    var l = i(e.r(71645)),
+      c = e.r(18102),
+      u = (0, e.r(93367).createAnimation)(
+        'ClipLoader',
+        '0% {transform: rotate(0deg) scale(1)} 50% {transform: rotate(180deg) scale(0.8)} 100% {transform: rotate(360deg) scale(1)}',
+        'clip'
+      );
+    r.default = function (e) {
+      var t = e.loading,
+        r = e.color,
+        a = void 0 === r ? '#000000' : r,
+        s = e.speedMultiplier,
+        i = e.cssOverride,
+        d = e.size,
+        p = void 0 === d ? 35 : d,
+        m = o(e, ['loading', 'color', 'speedMultiplier', 'cssOverride', 'size']),
+        g = n(
+          {
+            background: 'transparent !important',
+            width: (0, c.cssValue)(p),
+            height: (0, c.cssValue)(p),
+            borderRadius: '100%',
+            border: '2px solid',
+            borderTopColor: a,
+            borderBottomColor: 'transparent',
+            borderLeftColor: a,
+            borderRightColor: a,
+            display: 'inline-block',
+            animation: ''
+              .concat(u, ' ')
+              .concat(0.75 / (void 0 === s ? 1 : s), 's 0s infinite linear'),
+            animationFillMode: 'both',
+          },
+          void 0 === i ? {} : i
+        );
+      return void 0 === t || t ? l.createElement('span', n({ style: g }, m)) : null;
+    };
+  },
+  86794,
+  (e, t, r) => {
+    t.exports = function () {
+      var e = document.getSelection();
+      if (!e.rangeCount) return function () {};
+      for (var t = document.activeElement, r = [], n = 0; n < e.rangeCount; n++)
+        r.push(e.getRangeAt(n));
+      switch (t.tagName.toUpperCase()) {
+        case 'INPUT':
+        case 'TEXTAREA':
+          t.blur();
+          break;
+        default:
+          t = null;
+      }
+      return (
+        e.removeAllRanges(),
+        function () {
+          'Caret' === e.type && e.removeAllRanges(),
+            e.rangeCount ||
+              r.forEach(function (t) {
+                e.addRange(t);
+              }),
+            t && t.focus();
+        }
+      );
+    };
+  },
+  44343,
+  (e, t, r) => {
+    'use strict';
+    var n = e.r(86794),
+      a = { 'text/plain': 'Text', 'text/html': 'Url', default: 'Text' };
+    t.exports = function (e, t) {
+      var r,
+        s,
+        i,
+        o,
+        l,
+        c,
+        u,
+        d,
+        p = !1;
+      t || (t = {}), (i = t.debug || !1);
+      try {
+        if (
+          ((l = n()),
+          (c = document.createRange()),
+          (u = document.getSelection()),
+          ((d = document.createElement('span')).textContent = e),
+          (d.ariaHidden = 'true'),
+          (d.style.all = 'unset'),
+          (d.style.position = 'fixed'),
+          (d.style.top = 0),
+          (d.style.clip = 'rect(0, 0, 0, 0)'),
+          (d.style.whiteSpace = 'pre'),
+          (d.style.webkitUserSelect = 'text'),
+          (d.style.MozUserSelect = 'text'),
+          (d.style.msUserSelect = 'text'),
+          (d.style.userSelect = 'text'),
+          d.addEventListener('copy', function (r) {
+            if ((r.stopPropagation(), t.format))
+              if ((r.preventDefault(), void 0 === r.clipboardData)) {
+                i && console.warn('unable to use e.clipboardData'),
+                  i && console.warn('trying IE specific stuff'),
+                  window.clipboardData.clearData();
+                var n = a[t.format] || a.default;
+                window.clipboardData.setData(n, e);
+              } else r.clipboardData.clearData(), r.clipboardData.setData(t.format, e);
+            t.onCopy && (r.preventDefault(), t.onCopy(r.clipboardData));
+          }),
+          document.body.appendChild(d),
+          c.selectNodeContents(d),
+          u.addRange(c),
+          !document.execCommand('copy'))
+        )
+          throw Error('copy command was unsuccessful');
+        p = !0;
+      } catch (n) {
+        i && console.error('unable to copy using execCommand: ', n),
+          i && console.warn('trying IE specific stuff');
+        try {
+          window.clipboardData.setData(t.format || 'text', e),
+            t.onCopy && t.onCopy(window.clipboardData),
+            (p = !0);
+        } catch (n) {
+          i && console.error('unable to copy using clipboardData: ', n),
+            i && console.error('falling back to prompt'),
+            (r = 'message' in t ? t.message : 'Copy to clipboard: #{key}, Enter'),
+            (s = (/mac os x/i.test(navigator.userAgent) ? '⌘' : 'Ctrl') + '+C'),
+            (o = r.replace(/#{\s*key\s*}/g, s)),
+            window.prompt(o, e);
+        }
+      } finally {
+        u && ('function' == typeof u.removeRange ? u.removeRange(c) : u.removeAllRanges()),
+          d && document.body.removeChild(d),
+          l();
+      }
+      return p;
+    };
+  },
+  28028,
+  (e) => {
+    'use strict';
+    var t,
+      r,
+      n,
+      a,
+      s,
+      i,
+      o,
+      l,
+      c,
+      u,
+      d = e.i(43476),
+      p = e.i(29391),
+      m = e.i(71645),
+      g = e.i(36416),
+      f = e.i(69010),
+      b = e.i(43240),
+      h = e.i(10297);
+    function y(e) {
+      let t = Object.entries(e).map(([e, t]) => (0, b.object)({ [e]: t }));
+      return (0, b.pipe)(
+        (0, b.union)(t),
+        (0, b.transform)((e) => ({ ...e, $kind: Object.keys(e)[0] }))
+      );
+    }
+    let v = (0, b.pipe)(
+        (0, b.string)(),
+        (0, b.transform)((e) => (0, h.normalizeIotaAddress)(e)),
+        (0, b.check)(h.isValidIotaAddress)
+      ),
+      j = (0, b.string)(),
+      x = (0, b.pipe)(
+        (0, b.union)([(0, b.string)(), (0, b.pipe)((0, b.number)(), (0, b.integer)())]),
+        (0, b.check)((e) => {
+          try {
+            return BigInt(e), BigInt(e) >= 0 && 0xffffffffffffffffn >= BigInt(e);
+          } catch {
+            return !1;
+          }
+        }, 'Invalid u64')
+      ),
+      w = (0, b.object)({ objectId: v, version: x, digest: (0, b.string)() }),
+      k = (0, b.pipe)(
+        (0, b.union)([
+          (0, b.object)({ GasCoin: (0, b.literal)(!0) }),
+          (0, b.object)({
+            Input: (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+            type: (0, b.optional)((0, b.literal)('pure')),
+          }),
+          (0, b.object)({
+            Input: (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+            type: (0, b.optional)((0, b.literal)('object')),
+          }),
+          (0, b.object)({ Result: (0, b.pipe)((0, b.number)(), (0, b.integer)()) }),
+          (0, b.object)({
+            NestedResult: (0, b.tuple)([
+              (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+              (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+            ]),
+          }),
+        ]),
+        (0, b.transform)((e) => ({ ...e, $kind: Object.keys(e)[0] }))
+      ),
+      O = (0, b.object)({
+        budget: (0, b.nullable)(x),
+        price: (0, b.nullable)(x),
+        owner: (0, b.nullable)(v),
+        payment: (0, b.nullable)((0, b.array)(w)),
+      });
+    (0, b.object)({
+      address: (0, b.string)(),
+      module: (0, b.string)(),
+      name: (0, b.string)(),
+      typeParams: (0, b.array)((0, b.string)()),
+    });
+    let C = (0, b.union)([
+        (0, b.literal)('address'),
+        (0, b.literal)('bool'),
+        (0, b.literal)('u8'),
+        (0, b.literal)('u16'),
+        (0, b.literal)('u32'),
+        (0, b.literal)('u64'),
+        (0, b.literal)('u128'),
+        (0, b.literal)('u256'),
+        (0, b.object)({ vector: (0, b.lazy)(() => C) }),
+        (0, b.object)({
+          datatype: (0, b.object)({
+            package: (0, b.string)(),
+            module: (0, b.string)(),
+            type: (0, b.string)(),
+            typeParameters: (0, b.array)((0, b.lazy)(() => C)),
+          }),
+        }),
+        (0, b.object)({ typeParameter: (0, b.pipe)((0, b.number)(), (0, b.integer)()) }),
+      ]),
+      I = (0, b.object)({
+        ref: (0, b.nullable)((0, b.union)([(0, b.literal)('&'), (0, b.literal)('&mut')])),
+        body: C,
+      }),
+      N = (0, b.object)({
+        package: v,
+        module: (0, b.string)(),
+        function: (0, b.string)(),
+        typeArguments: (0, b.array)((0, b.string)()),
+        arguments: (0, b.array)(k),
+        _argumentTypes: (0, b.optional)((0, b.nullable)((0, b.array)(I))),
+      }),
+      S = (0, b.object)({
+        name: (0, b.string)(),
+        inputs: (0, b.record)((0, b.string)(), (0, b.union)([k, (0, b.array)(k)])),
+        data: (0, b.record)((0, b.string)(), (0, b.unknown)()),
+      }),
+      P = y({
+        MoveCall: N,
+        TransferObjects: (0, b.object)({ objects: (0, b.array)(k), address: k }),
+        SplitCoins: (0, b.object)({ coin: k, amounts: (0, b.array)(k) }),
+        MergeCoins: (0, b.object)({ destination: k, sources: (0, b.array)(k) }),
+        Publish: (0, b.object)({ modules: (0, b.array)(j), dependencies: (0, b.array)(v) }),
+        MakeMoveVec: (0, b.object)({
+          type: (0, b.nullable)((0, b.string)()),
+          elements: (0, b.array)(k),
+        }),
+        Upgrade: (0, b.object)({
+          modules: (0, b.array)(j),
+          dependencies: (0, b.array)(v),
+          package: v,
+          ticket: k,
+        }),
+        $Intent: S,
+      }),
+      M = y({
+        ImmOrOwnedObject: w,
+        SharedObject: (0, b.object)({
+          objectId: v,
+          initialSharedVersion: x,
+          mutable: (0, b.boolean)(),
+        }),
+        Receiving: w,
+      }),
+      E = y({
+        Object: M,
+        Pure: (0, b.object)({ bytes: j }),
+        UnresolvedPure: (0, b.object)({ value: (0, b.unknown)() }),
+        UnresolvedObject: (0, b.object)({
+          objectId: v,
+          version: (0, b.optional)((0, b.nullable)(x)),
+          digest: (0, b.optional)((0, b.nullable)((0, b.string)())),
+          initialSharedVersion: (0, b.optional)((0, b.nullable)(x)),
+        }),
+      }),
+      R = y({ Object: M, Pure: (0, b.object)({ bytes: j }) }),
+      U = y({ None: (0, b.literal)(!0), Epoch: x }),
+      $ = (0, b.object)({
+        version: (0, b.literal)(2),
+        sender: (0, b.nullish)(v),
+        expiration: (0, b.nullish)(U),
+        gasData: O,
+        inputs: (0, b.array)(E),
+        commands: (0, b.array)(P),
+      });
+    var z =
+      (((t = z || {})[(t.COMPATIBLE = 0)] = 'COMPATIBLE'),
+      (t[(t.ADDITIVE = 128)] = 'ADDITIVE'),
+      (t[(t.DEP_ONLY = 192)] = 'DEP_ONLY'),
+      t);
+    let T = {
+      MoveCall(e) {
+        let [t, r = '', n = ''] =
+          'target' in e ? e.target.split('::') : [e.package, e.module, e.function];
+        return {
+          $kind: 'MoveCall',
+          MoveCall: {
+            package: t,
+            module: r,
+            function: n,
+            typeArguments: e.typeArguments ?? [],
+            arguments: e.arguments ?? [],
+          },
+        };
+      },
+      TransferObjects: (e, t) => ({
+        $kind: 'TransferObjects',
+        TransferObjects: { objects: e.map((e) => (0, b.parse)(k, e)), address: (0, b.parse)(k, t) },
+      }),
+      SplitCoins: (e, t) => ({
+        $kind: 'SplitCoins',
+        SplitCoins: { coin: (0, b.parse)(k, e), amounts: t.map((e) => (0, b.parse)(k, e)) },
+      }),
+      MergeCoins: (e, t) => ({
+        $kind: 'MergeCoins',
+        MergeCoins: { destination: (0, b.parse)(k, e), sources: t.map((e) => (0, b.parse)(k, e)) },
+      }),
+      Publish: ({ modules: e, dependencies: t }) => ({
+        $kind: 'Publish',
+        Publish: {
+          modules: e.map((e) => ('string' == typeof e ? e : (0, g.toBase64)(new Uint8Array(e)))),
+          dependencies: t.map((e) => (0, h.normalizeIotaObjectId)(e)),
+        },
+      }),
+      Upgrade: ({ modules: e, dependencies: t, package: r, ticket: n }) => ({
+        $kind: 'Upgrade',
+        Upgrade: {
+          modules: e.map((e) => ('string' == typeof e ? e : (0, g.toBase64)(new Uint8Array(e)))),
+          dependencies: t.map((e) => (0, h.normalizeIotaObjectId)(e)),
+          package: r,
+          ticket: (0, b.parse)(k, n),
+        },
+      }),
+      MakeMoveVec: ({ type: e, elements: t }) => ({
+        $kind: 'MakeMoveVec',
+        MakeMoveVec: { type: e ?? null, elements: t.map((e) => (0, b.parse)(k, e)) },
+      }),
+      Intent: ({ name: e, inputs: t = {}, data: r = {} }) => ({
+        $kind: '$Intent',
+        $Intent: {
+          name: e,
+          inputs: Object.fromEntries(
+            Object.entries(t).map(([e, t]) => [
+              e,
+              Array.isArray(t) ? t.map((e) => (0, b.parse)(k, e)) : (0, b.parse)(k, t),
+            ])
+          ),
+          data: r,
+        },
+      }),
+    };
+    var A = e.i(58112);
+    let B = (0, b.object)({
+        digest: (0, b.string)(),
+        objectId: (0, b.string)(),
+        version: (0, b.union)([
+          (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+          (0, b.string)(),
+          (0, b.bigint)(),
+        ]),
+      }),
+      D = y({
+        ImmOrOwned: B,
+        Shared: (0, b.object)({ objectId: v, initialSharedVersion: x, mutable: (0, b.boolean)() }),
+        Receiving: B,
+      }),
+      G = y({ Object: D, Pure: (0, b.array)((0, b.pipe)((0, b.number)(), (0, b.integer)())) }),
+      V = (0, b.union)([
+        (0, b.object)({
+          kind: (0, b.literal)('Input'),
+          index: (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+          value: (0, b.unknown)(),
+          type: (0, b.optional)((0, b.literal)('object')),
+        }),
+        (0, b.object)({
+          kind: (0, b.literal)('Input'),
+          index: (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+          value: (0, b.unknown)(),
+          type: (0, b.literal)('pure'),
+        }),
+      ]),
+      _ = (0, b.union)([
+        (0, b.object)({ Epoch: (0, b.pipe)((0, b.number)(), (0, b.integer)()) }),
+        (0, b.object)({ None: (0, b.nullable)((0, b.literal)(!0)) }),
+      ]),
+      F = (0, b.pipe)(
+        (0, b.union)([(0, b.number)(), (0, b.string)(), (0, b.bigint)()]),
+        (0, b.check)((e) => {
+          if (!['string', 'number', 'bigint'].includes(typeof e)) return !1;
+          try {
+            return BigInt(e), !0;
+          } catch {
+            return !1;
+          }
+        })
+      ),
+      L = (0, b.union)([
+        (0, b.object)({ bool: (0, b.nullable)((0, b.literal)(!0)) }),
+        (0, b.object)({ u8: (0, b.nullable)((0, b.literal)(!0)) }),
+        (0, b.object)({ u64: (0, b.nullable)((0, b.literal)(!0)) }),
+        (0, b.object)({ u128: (0, b.nullable)((0, b.literal)(!0)) }),
+        (0, b.object)({ address: (0, b.nullable)((0, b.literal)(!0)) }),
+        (0, b.object)({ signer: (0, b.nullable)((0, b.literal)(!0)) }),
+        (0, b.object)({ vector: (0, b.lazy)(() => L) }),
+        (0, b.object)({ struct: (0, b.lazy)(() => K) }),
+        (0, b.object)({ u16: (0, b.nullable)((0, b.literal)(!0)) }),
+        (0, b.object)({ u32: (0, b.nullable)((0, b.literal)(!0)) }),
+        (0, b.object)({ u256: (0, b.nullable)((0, b.literal)(!0)) }),
+      ]),
+      K = (0, b.object)({
+        address: (0, b.string)(),
+        module: (0, b.string)(),
+        name: (0, b.string)(),
+        typeParams: (0, b.array)(L),
+      }),
+      W = (0, b.object)({
+        budget: (0, b.optional)(F),
+        price: (0, b.optional)(F),
+        payment: (0, b.optional)((0, b.array)(B)),
+        owner: (0, b.optional)((0, b.string)()),
+      }),
+      H = [
+        V,
+        (0, b.object)({ kind: (0, b.literal)('GasCoin') }),
+        (0, b.object)({
+          kind: (0, b.literal)('Result'),
+          index: (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+        }),
+        (0, b.object)({
+          kind: (0, b.literal)('NestedResult'),
+          index: (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+          resultIndex: (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+        }),
+      ],
+      Y = (0, b.union)([...H]),
+      J = (0, b.object)({
+        kind: (0, b.literal)('MoveCall'),
+        target: (0, b.pipe)(
+          (0, b.string)(),
+          (0, b.check)((e) => 3 === e.split('::').length)
+        ),
+        typeArguments: (0, b.array)((0, b.string)()),
+        arguments: (0, b.array)(Y),
+      }),
+      X = (0, b.object)({
+        kind: (0, b.literal)('TransferObjects'),
+        objects: (0, b.array)(Y),
+        address: Y,
+      }),
+      q = (0, b.object)({ kind: (0, b.literal)('SplitCoins'), coin: Y, amounts: (0, b.array)(Y) }),
+      Q = (0, b.object)({
+        kind: (0, b.literal)('MergeCoins'),
+        destination: Y,
+        sources: (0, b.array)(Y),
+      }),
+      Z = (0, b.object)({
+        kind: (0, b.literal)('MakeMoveVec'),
+        type: (0, b.union)([
+          (0, b.object)({ Some: L }),
+          (0, b.object)({ None: (0, b.nullable)((0, b.literal)(!0)) }),
+        ]),
+        objects: (0, b.array)(Y),
+      }),
+      ee = (0, b.object)({
+        kind: (0, b.literal)('Publish'),
+        modules: (0, b.array)((0, b.array)((0, b.pipe)((0, b.number)(), (0, b.integer)()))),
+        dependencies: (0, b.array)((0, b.string)()),
+      }),
+      et = (0, b.object)({
+        kind: (0, b.literal)('Upgrade'),
+        modules: (0, b.array)((0, b.array)((0, b.pipe)((0, b.number)(), (0, b.integer)()))),
+        dependencies: (0, b.array)((0, b.string)()),
+        packageId: (0, b.string)(),
+        ticket: Y,
+      }),
+      er = (0, b.union)([J, X, q, Q, ee, et, Z]);
+    function en(e) {
+      let t = e.inputs.map((e, t) => {
+        if (e.Object)
+          return {
+            kind: 'Input',
+            index: t,
+            value: {
+              Object: e.Object.ImmOrOwnedObject
+                ? { ImmOrOwned: e.Object.ImmOrOwnedObject }
+                : e.Object.Receiving
+                ? {
+                    Receiving: {
+                      digest: e.Object.Receiving.digest,
+                      version: e.Object.Receiving.version,
+                      objectId: e.Object.Receiving.objectId,
+                    },
+                  }
+                : {
+                    Shared: {
+                      mutable: e.Object.SharedObject.mutable,
+                      initialSharedVersion: e.Object.SharedObject.initialSharedVersion,
+                      objectId: e.Object.SharedObject.objectId,
+                    },
+                  },
+            },
+            type: 'object',
+          };
+        if (e.Pure)
+          return {
+            kind: 'Input',
+            index: t,
+            value: { Pure: Array.from((0, g.fromBase64)(e.Pure.bytes)) },
+            type: 'pure',
+          };
+        if (e.UnresolvedPure)
+          return { kind: 'Input', type: 'pure', index: t, value: e.UnresolvedPure.value };
+        if (e.UnresolvedObject)
+          return { kind: 'Input', type: 'object', index: t, value: e.UnresolvedObject.objectId };
+        throw Error('Invalid input');
+      });
+      return {
+        version: 1,
+        sender: e.sender ?? void 0,
+        expiration:
+          e.expiration?.$kind === 'Epoch'
+            ? { Epoch: Number(e.expiration.Epoch) }
+            : e.expiration
+            ? { None: !0 }
+            : null,
+        gasConfig: {
+          owner: e.gasData.owner ?? void 0,
+          budget: e.gasData.budget ?? void 0,
+          price: e.gasData.price ?? void 0,
+          payment: e.gasData.payment ?? void 0,
+        },
+        inputs: t,
+        transactions: e.commands.map((e) => {
+          if (e.MakeMoveVec)
+            return {
+              kind: 'MakeMoveVec',
+              type:
+                null === e.MakeMoveVec.type
+                  ? { None: !0 }
+                  : { Some: A.TypeTagSerializer.parseFromStr(e.MakeMoveVec.type) },
+              objects: e.MakeMoveVec.elements.map((e) => ea(e, t)),
+            };
+          if (e.MergeCoins)
+            return {
+              kind: 'MergeCoins',
+              destination: ea(e.MergeCoins.destination, t),
+              sources: e.MergeCoins.sources.map((e) => ea(e, t)),
+            };
+          if (e.MoveCall)
+            return {
+              kind: 'MoveCall',
+              target: `${e.MoveCall.package}::${e.MoveCall.module}::${e.MoveCall.function}`,
+              typeArguments: e.MoveCall.typeArguments,
+              arguments: e.MoveCall.arguments.map((e) => ea(e, t)),
+            };
+          if (e.Publish)
+            return {
+              kind: 'Publish',
+              modules: e.Publish.modules.map((e) => Array.from((0, g.fromBase64)(e))),
+              dependencies: e.Publish.dependencies,
+            };
+          if (e.SplitCoins)
+            return {
+              kind: 'SplitCoins',
+              coin: ea(e.SplitCoins.coin, t),
+              amounts: e.SplitCoins.amounts.map((e) => ea(e, t)),
+            };
+          if (e.TransferObjects)
+            return {
+              kind: 'TransferObjects',
+              objects: e.TransferObjects.objects.map((e) => ea(e, t)),
+              address: ea(e.TransferObjects.address, t),
+            };
+          if (e.Upgrade)
+            return {
+              kind: 'Upgrade',
+              modules: e.Upgrade.modules.map((e) => Array.from((0, g.fromBase64)(e))),
+              dependencies: e.Upgrade.dependencies,
+              packageId: e.Upgrade.package,
+              ticket: ea(e.Upgrade.ticket, t),
+            };
+          throw Error(`Unknown transaction ${Object.keys(e)}`);
+        }),
+      };
+    }
+    function ea(e, t) {
+      if ('GasCoin' === e.$kind) return { kind: 'GasCoin' };
+      if ('Result' === e.$kind) return { kind: 'Result', index: e.Result };
+      if ('NestedResult' === e.$kind)
+        return { kind: 'NestedResult', index: e.NestedResult[0], resultIndex: e.NestedResult[1] };
+      if ('Input' === e.$kind) return t[e.Input];
+      throw Error(`Invalid argument ${Object.keys(e)}`);
+    }
+    function es(e) {
+      switch (e.kind) {
+        case 'GasCoin':
+          return { GasCoin: !0 };
+        case 'Result':
+          return { Result: e.index };
+        case 'NestedResult':
+          return { NestedResult: [e.index, e.resultIndex] };
+        case 'Input':
+          return { Input: e.index };
+      }
+    }
+    function ei(e) {
+      return (0, b.union)(Object.entries(e).map(([e, t]) => (0, b.object)({ [e]: t })));
+    }
+    (0, b.object)({
+      version: (0, b.literal)(1),
+      sender: (0, b.optional)((0, b.string)()),
+      expiration: (0, b.nullish)(_),
+      gasConfig: W,
+      inputs: (0, b.array)(V),
+      transactions: (0, b.array)(er),
+    });
+    let eo = ei({
+        GasCoin: (0, b.literal)(!0),
+        Input: (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+        Result: (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+        NestedResult: (0, b.tuple)([
+          (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+          (0, b.pipe)((0, b.number)(), (0, b.integer)()),
+        ]),
+      }),
+      el = (0, b.object)({
+        budget: (0, b.nullable)(x),
+        price: (0, b.nullable)(x),
+        owner: (0, b.nullable)(v),
+        payment: (0, b.nullable)((0, b.array)(w)),
+      }),
+      ec = (0, b.object)({
+        package: v,
+        module: (0, b.string)(),
+        function: (0, b.string)(),
+        typeArguments: (0, b.array)((0, b.string)()),
+        arguments: (0, b.array)(eo),
+      }),
+      eu = (0, b.object)({
+        name: (0, b.string)(),
+        inputs: (0, b.record)((0, b.string)(), (0, b.union)([eo, (0, b.array)(eo)])),
+        data: (0, b.record)((0, b.string)(), (0, b.unknown)()),
+      }),
+      ed = ei({
+        MoveCall: ec,
+        TransferObjects: (0, b.object)({ objects: (0, b.array)(eo), address: eo }),
+        SplitCoins: (0, b.object)({ coin: eo, amounts: (0, b.array)(eo) }),
+        MergeCoins: (0, b.object)({ destination: eo, sources: (0, b.array)(eo) }),
+        Publish: (0, b.object)({ modules: (0, b.array)(j), dependencies: (0, b.array)(v) }),
+        MakeMoveVec: (0, b.object)({
+          type: (0, b.nullable)((0, b.string)()),
+          elements: (0, b.array)(eo),
+        }),
+        Upgrade: (0, b.object)({
+          modules: (0, b.array)(j),
+          dependencies: (0, b.array)(v),
+          package: v,
+          ticket: eo,
+        }),
+        $Intent: eu,
+      }),
+      ep = ei({
+        ImmOrOwnedObject: w,
+        SharedObject: (0, b.object)({
+          objectId: v,
+          initialSharedVersion: x,
+          mutable: (0, b.boolean)(),
+        }),
+        Receiving: w,
+      }),
+      em = ei({
+        Object: ep,
+        Pure: (0, b.object)({ bytes: j }),
+        UnresolvedPure: (0, b.object)({ value: (0, b.unknown)() }),
+        UnresolvedObject: (0, b.object)({
+          objectId: v,
+          version: (0, b.optional)((0, b.nullable)(x)),
+          digest: (0, b.optional)((0, b.nullable)((0, b.string)())),
+          initialSharedVersion: (0, b.optional)((0, b.nullable)(x)),
+        }),
+      }),
+      eg = ei({ None: (0, b.literal)(!0), Epoch: x }),
+      ef = (0, b.object)({
+        version: (0, b.literal)(2),
+        sender: (0, b.nullish)(v),
+        expiration: (0, b.nullish)(eg),
+        gasData: el,
+        inputs: (0, b.array)(em),
+        commands: (0, b.array)(ed),
+      }),
+      eb = function (e) {
+        return {
+          $kind: 'Pure',
+          Pure: { bytes: e instanceof Uint8Array ? (0, g.toBase64)(e) : e.toBase64() },
+        };
+      },
+      eh = ({ objectId: e, digest: t, version: r }) => ({
+        $kind: 'Object',
+        Object: {
+          $kind: 'ImmOrOwnedObject',
+          ImmOrOwnedObject: { digest: t, version: r, objectId: (0, h.normalizeIotaAddress)(e) },
+        },
+      }),
+      ey = ({ objectId: e, mutable: t, initialSharedVersion: r }) => ({
+        $kind: 'Object',
+        Object: {
+          $kind: 'SharedObject',
+          SharedObject: {
+            mutable: t,
+            initialSharedVersion: r,
+            objectId: (0, h.normalizeIotaAddress)(e),
+          },
+        },
+      }),
+      ev = ({ objectId: e, digest: t, version: r }) => ({
+        $kind: 'Object',
+        Object: {
+          $kind: 'Receiving',
+          Receiving: { digest: t, version: r, objectId: (0, h.normalizeIotaAddress)(e) },
+        },
+      });
+    var ej = e.i(35566);
+    BigInt(1e9), (0, h.normalizeIotaObjectId)('0x6');
+    function ex(e) {
+      if ('string' == typeof e)
+        switch (e) {
+          case 'Address':
+            return 'address';
+          case 'Bool':
+            return 'bool';
+          case 'U8':
+            return 'u8';
+          case 'U16':
+            return 'u16';
+          case 'U32':
+            return 'u32';
+          case 'U64':
+            return 'u64';
+          case 'U128':
+            return 'u128';
+          case 'U256':
+            return 'u256';
+          default:
+            throw Error(`Unexpected type ${e}`);
+        }
+      if ('Vector' in e) return { vector: ex(e.Vector) };
+      if ('Struct' in e)
+        return {
+          datatype: {
+            package: e.Struct.address,
+            module: e.Struct.module,
+            type: e.Struct.name,
+            typeParameters: e.Struct.typeArguments.map(ex),
+          },
+        };
+      if ('TypeParameter' in e) return { typeParameter: e.TypeParameter };
+      throw Error(`Unexpected type ${JSON.stringify(e)}`);
+    }
+    async function ew(e, t, r) {
+      return (
+        await eN(e, t),
+        await eI(e, t),
+        t.onlyTransactionKind || (await ek(e, t), await eO(e, t), await eC(e, t)),
+        await void e.inputs.forEach((e, t) => {
+          if ('Object' !== e.$kind && 'Pure' !== e.$kind)
+            throw Error(
+              `Input at index ${t} has not been resolved.  Expected a Pure or Object input, but found ${JSON.stringify(
+                e
+              )}`
+            );
+        }),
+        await r()
+      );
+    }
+    async function ek(e, t) {
+      e.gasConfig.price || (e.gasConfig.price = String(await eP(t).getReferenceGasPrice()));
+    }
+    async function eO(e, t) {
+      if (e.gasConfig.budget) return;
+      let r = await eP(t).dryRunTransactionBlock({
+        transactionBlock: e.build({
+          overrides: { gasData: { budget: String(5e10), payment: [] } },
+        }),
+      });
+      if ('success' !== r.effects.status.status)
+        throw Error(
+          `Dry run failed, could not automatically determine a budget: ${r.effects.status.error}`,
+          { cause: r }
+        );
+      let n = 1000n * BigInt(e.gasConfig.price || 1n),
+        a = BigInt(r.effects.gasUsed.computationCost) + n,
+        s = a + BigInt(r.effects.gasUsed.storageCost) - BigInt(r.effects.gasUsed.storageRebate);
+      e.gasConfig.budget = String(s > a ? s : a);
+    }
+    async function eC(e, t) {
+      if (!e.gasConfig.payment) {
+        let r = (
+          await eP(t).getCoins({
+            owner: e.gasConfig.owner || e.sender,
+            coinType: '0x2::iota::IOTA',
+          })
+        ).data
+          .filter(
+            (t) =>
+              !e.inputs.find(
+                (e) =>
+                  !!e.Object?.ImmOrOwnedObject &&
+                  t.coinObjectId === e.Object.ImmOrOwnedObject.objectId
+              )
+          )
+          .map((e) => ({ objectId: e.coinObjectId, digest: e.digest, version: e.version }));
+        if (!r.length) throw Error('No valid gas coins found for the transaction.');
+        e.gasConfig.payment = r.map((e) => (0, b.parse)(w, e));
+      }
+    }
+    async function eI(e, t) {
+      var r;
+      let n = [
+          ...new Set(
+            e.inputs
+              .filter(
+                (e) =>
+                  e.UnresolvedObject &&
+                  !(e.UnresolvedObject.version || e.UnresolvedObject?.initialSharedVersion)
+              )
+              .map((e) => (0, h.normalizeIotaObjectId)(e.UnresolvedObject.objectId))
+          ),
+        ],
+        a = n.length
+          ? Array.from({ length: Math.ceil((r = n).length / 50) }, (e, t) =>
+              r.slice(50 * t, 50 * t + 50)
+            )
+          : [],
+        s = new Map(),
+        i = new Map();
+      if (
+        (await Promise.all(
+          a.map(async (e) => {
+            for (let r of await eP(t).multiGetObjects({ ids: e, options: { showOwner: !0 } })) {
+              let e = r.data?.objectId;
+              if (e) {
+                if (r.error || !r.data) return void i.set(e, r.error);
+                let t = r.data.owner,
+                  n =
+                    t && 'object' == typeof t && 'Shared' in t
+                      ? t.Shared.initial_shared_version
+                      : null;
+                s.set(e, {
+                  objectId: e,
+                  digest: r.data.digest,
+                  version: r.data.version,
+                  initialSharedVersion: n,
+                });
+              }
+            }
+          })
+        ),
+        i.size > 0)
+      )
+        throw Error(`The following input objects are invalid: ${Array.from(i).join(', ')}`);
+      for (let [t, r] of e.inputs.entries()) {
+        let n;
+        if (!r.UnresolvedObject) continue;
+        let a = (0, h.normalizeIotaAddress)(r.UnresolvedObject.objectId),
+          i = s.get(a);
+        r.UnresolvedObject.initialSharedVersion ?? i?.initialSharedVersion
+          ? (n = ey({
+              objectId: a,
+              initialSharedVersion:
+                r.UnresolvedObject.initialSharedVersion || i?.initialSharedVersion,
+              mutable: (function (e, t) {
+                let r = !1;
+                return (
+                  e.getInputUses(t, (e, t) => {
+                    if (t.MoveCall && t.MoveCall._argumentTypes) {
+                      let n = t.MoveCall.arguments.indexOf(e);
+                      r = '&' !== t.MoveCall._argumentTypes[n].ref || r;
+                    }
+                    ('MakeMoveVec' === t.$kind ||
+                      'MergeCoins' === t.$kind ||
+                      'SplitCoins' === t.$kind) &&
+                      (r = !0);
+                  }),
+                  r
+                );
+              })(e, t),
+            }))
+          : (function (e, t) {
+              let r = !1;
+              return (
+                e.getInputUses(t, (e, t) => {
+                  if (t.MoveCall && t.MoveCall._argumentTypes) {
+                    var n;
+                    let a = t.MoveCall.arguments.indexOf(e);
+                    r =
+                      ('object' == typeof (n = t.MoveCall._argumentTypes[a]).body &&
+                        'datatype' in n.body &&
+                        '0x2' === n.body.datatype.package &&
+                        'transfer' === n.body.datatype.module &&
+                        'Receiving' === n.body.datatype.type) ||
+                      r;
+                  }
+                }),
+                r
+              );
+            })(e, t) &&
+            (n = ev({
+              objectId: a,
+              digest: r.UnresolvedObject.digest ?? i?.digest,
+              version: r.UnresolvedObject.version ?? i?.version,
+            })),
+          (e.inputs[e.inputs.indexOf(r)] =
+            n ??
+            eh({
+              objectId: a,
+              digest: r.UnresolvedObject.digest ?? i?.digest,
+              version: r.UnresolvedObject.version ?? i?.version,
+            }));
+      }
+    }
+    async function eN(e, t) {
+      let { inputs: r, commands: n } = e,
+        a = [],
+        s = new Set();
+      n.forEach((t) => {
+        if (t.MoveCall) {
+          if (t.MoveCall._argumentTypes) return;
+          if (
+            t.MoveCall.arguments
+              .map((t) => ('Input' === t.$kind ? e.inputs[t.Input] : null))
+              .some((e) => e?.UnresolvedPure || e?.UnresolvedObject)
+          ) {
+            let e = `${t.MoveCall.package}::${t.MoveCall.module}::${t.MoveCall.function}`;
+            s.add(e), a.push(t.MoveCall);
+          }
+        }
+        switch (t.$kind) {
+          case 'SplitCoins':
+            t.SplitCoins.amounts.forEach((t) => {
+              eS(t, ej.bcs.U64, e);
+            });
+            break;
+          case 'TransferObjects':
+            eS(t.TransferObjects.address, ej.bcs.Address, e);
+        }
+      });
+      let i = new Map();
+      if (s.size > 0) {
+        let e = eP(t);
+        await Promise.all(
+          [...s].map(async (t) => {
+            let [r, n, a] = t.split('::'),
+              s = await e.getNormalizedMoveFunction({ package: r, module: n, function: a });
+            i.set(
+              t,
+              s.parameters.map((e) =>
+                'object' == typeof e && 'Reference' in e
+                  ? { ref: '&', body: ex(e.Reference) }
+                  : 'object' == typeof e && 'MutableReference' in e
+                  ? { ref: '&mut', body: ex(e.MutableReference) }
+                  : { ref: null, body: ex(e) }
+              )
+            );
+          })
+        );
+      }
+      a.length &&
+        (await Promise.all(
+          a.map(async (e) => {
+            var t;
+            let r,
+              n = i.get(`${e.package}::${e.module}::${e.function}`);
+            n &&
+              (e._argumentTypes =
+                n.length > 0 &&
+                (r =
+                  'object' == typeof (t = n.at(-1)).body && 'datatype' in t.body
+                    ? t.body.datatype
+                    : null) &&
+                (0, h.normalizeIotaAddress)(r.package) === (0, h.normalizeIotaAddress)('0x2') &&
+                'tx_context' === r.module &&
+                'TxContext' === r.type
+                  ? n.slice(0, n.length - 1)
+                  : n);
+          })
+        )),
+        n.forEach((e) => {
+          if (!e.MoveCall) return;
+          let t = e.MoveCall,
+            n = `${t.package}::${t.module}::${t.function}`,
+            a = t._argumentTypes;
+          if (a) {
+            if (a.length !== e.MoveCall.arguments.length)
+              throw Error(`Incorrect number of arguments for ${n}`);
+            a.forEach((e, n) => {
+              let a = t.arguments[n];
+              if ('Input' !== a.$kind) return;
+              let s = r[a.Input];
+              if (!s.UnresolvedPure && !s.UnresolvedObject) return;
+              let i = s.UnresolvedPure?.value ?? s.UnresolvedObject?.objectId,
+                o = r.indexOf(s),
+                l = (function e(t) {
+                  if ('string' == typeof t)
+                    switch (t) {
+                      case 'address':
+                        return ej.bcs.Address;
+                      case 'bool':
+                        return ej.bcs.Bool;
+                      case 'u8':
+                        return ej.bcs.U8;
+                      case 'u16':
+                        return ej.bcs.U16;
+                      case 'u32':
+                        return ej.bcs.U32;
+                      case 'u64':
+                        return ej.bcs.U64;
+                      case 'u128':
+                        return ej.bcs.U128;
+                      case 'u256':
+                        return ej.bcs.U256;
+                      default:
+                        throw Error(`Unknown type signature ${t}`);
+                    }
+                  if ('vector' in t) {
+                    if ('u8' === t.vector)
+                      return ej.bcs
+                        .vector(ej.bcs.U8)
+                        .transform({
+                          input: (e) => ('string' == typeof e ? new TextEncoder().encode(e) : e),
+                          output: (e) => e,
+                        });
+                    let r = e(t.vector);
+                    return r ? ej.bcs.vector(r) : null;
+                  }
+                  if ('datatype' in t) {
+                    let r = (0, h.normalizeIotaAddress)(t.datatype.package);
+                    if (r === (0, h.normalizeIotaAddress)('0x1')) {
+                      if (
+                        ('ascii' === t.datatype.module && 'String' === t.datatype.type) ||
+                        ('string' === t.datatype.module && 'String' === t.datatype.type)
+                      )
+                        return ej.bcs.String;
+                      if ('option' === t.datatype.module && 'Option' === t.datatype.type) {
+                        let r = e(t.datatype.typeParameters[0]);
+                        return r ? ej.bcs.vector(r) : null;
+                      }
+                    }
+                    if (
+                      r === (0, h.normalizeIotaAddress)('0x2') &&
+                      'object' === t.datatype.module &&
+                      'ID' === t.datatype.type
+                    )
+                      return ej.bcs.Address;
+                  }
+                  return null;
+                })(e.body);
+              if (l) {
+                (a.type = 'pure'), (r[o] = eb(l.serialize(i)));
+                return;
+              }
+              if ('string' != typeof i)
+                throw Error(
+                  `Expect the argument to be an object id string, got ${JSON.stringify(i, null, 2)}`
+                );
+              a.type = 'object';
+              let c = s.UnresolvedPure
+                ? { $kind: 'UnresolvedObject', UnresolvedObject: { objectId: i } }
+                : s;
+              r[o] = c;
+            });
+          }
+        });
+    }
+    function eS(e, t, r) {
+      if ('Input' !== e.$kind) return;
+      let n = r.inputs[e.Input];
+      'UnresolvedPure' === n.$kind && (r.inputs[e.Input] = eb(t.serialize(n.UnresolvedPure.value)));
+    }
+    function eP(e) {
+      if (!e.client)
+        throw Error(
+          'No iota client passed to Transaction#build, but transaction data was not sufficient to build offline.'
+        );
+      return e.client;
+    }
+    function eM(e) {
+      switch (e) {
+        case 'u8':
+          return ej.bcs.u8();
+        case 'u16':
+          return ej.bcs.u16();
+        case 'u32':
+          return ej.bcs.u32();
+        case 'u64':
+          return ej.bcs.u64();
+        case 'u128':
+          return ej.bcs.u128();
+        case 'u256':
+          return ej.bcs.u256();
+        case 'bool':
+          return ej.bcs.bool();
+        case 'string':
+          return ej.bcs.string();
+        case 'id':
+        case 'address':
+          return ej.bcs.Address;
+      }
+      let t = e.match(/^(vector|option)<(.+)>$/);
+      if (t) {
+        let [e, r] = t.slice(1);
+        return 'vector' === e ? ej.bcs.vector(eM(r)) : ej.bcs.option(eM(r));
+      }
+      throw Error(`Invalid Pure type name: ${e}`);
+    }
+    (0, h.normalizeIotaObjectId)('0x5');
+    var eE = e.i(17423),
+      eR = e.i(51001);
+    function eU(e) {
+      return (0, h.normalizeIotaAddress)(e).replace('0x', '');
+    }
+    class e$ {
+      constructor(e) {
+        (this.version = 2),
+          (this.sender = e?.sender ?? null),
+          (this.expiration = e?.expiration ?? null),
+          (this.inputs = e?.inputs ?? []),
+          (this.commands = e?.commands ?? []),
+          (this.gasData = e?.gasData ?? { budget: null, price: null, owner: null, payment: null });
+      }
+      static fromKindBytes(e) {
+        let t = ej.bcs.TransactionKind.parse(e).ProgrammableTransaction;
+        if (!t) throw Error('Unable to deserialize from bytes.');
+        return e$.restore({
+          version: 2,
+          sender: null,
+          expiration: null,
+          gasData: { budget: null, owner: null, payment: null, price: null },
+          inputs: t.inputs,
+          commands: t.commands,
+        });
+      }
+      static fromBytes(e) {
+        let t = ej.bcs.TransactionData.parse(e),
+          r = t?.V1,
+          n = r.kind.ProgrammableTransaction;
+        if (!r || !n) throw Error('Unable to deserialize from bytes.');
+        return e$.restore({
+          version: 2,
+          sender: r.sender,
+          expiration: r.expiration,
+          gasData: r.gasData,
+          inputs: n.inputs,
+          commands: n.commands,
+        });
+      }
+      static restore(e) {
+        return 2 === e.version
+          ? new e$((0, b.parse)($, e))
+          : new e$(
+              (0, b.parse)(
+                $,
+                (0, b.parse)($, {
+                  version: 2,
+                  sender: e.sender ?? null,
+                  expiration: e.expiration
+                    ? 'Epoch' in e.expiration
+                      ? { Epoch: e.expiration.Epoch }
+                      : { None: !0 }
+                    : null,
+                  gasData: {
+                    owner: e.gasConfig.owner ?? null,
+                    budget: e.gasConfig.budget?.toString() ?? null,
+                    price: e.gasConfig.price?.toString() ?? null,
+                    payment:
+                      e.gasConfig.payment?.map((e) => ({
+                        digest: e.digest,
+                        objectId: e.objectId,
+                        version: e.version.toString(),
+                      })) ?? null,
+                  },
+                  inputs: e.inputs.map((e) => {
+                    if ('Input' === e.kind) {
+                      if ((0, b.is)(G, e.value)) {
+                        let t = (0, b.parse)(G, e.value);
+                        if (t.Object) {
+                          if (t.Object.ImmOrOwned)
+                            return {
+                              Object: {
+                                ImmOrOwnedObject: {
+                                  objectId: t.Object.ImmOrOwned.objectId,
+                                  version: String(t.Object.ImmOrOwned.version),
+                                  digest: t.Object.ImmOrOwned.digest,
+                                },
+                              },
+                            };
+                          if (t.Object.Shared)
+                            return {
+                              Object: {
+                                SharedObject: {
+                                  mutable: t.Object.Shared.mutable ?? null,
+                                  initialSharedVersion: t.Object.Shared.initialSharedVersion,
+                                  objectId: t.Object.Shared.objectId,
+                                },
+                              },
+                            };
+                          if (t.Object.Receiving)
+                            return {
+                              Object: {
+                                Receiving: {
+                                  digest: t.Object.Receiving.digest,
+                                  version: String(t.Object.Receiving.version),
+                                  objectId: t.Object.Receiving.objectId,
+                                },
+                              },
+                            };
+                          throw Error('Invalid object input');
+                        }
+                        return { Pure: { bytes: (0, g.toBase64)(new Uint8Array(t.Pure)) } };
+                      }
+                      return 'object' === e.type
+                        ? { UnresolvedObject: { objectId: e.value } }
+                        : { UnresolvedPure: { value: e.value } };
+                    }
+                    throw Error('Invalid input');
+                  }),
+                  commands: e.transactions.map((e) => {
+                    switch (e.kind) {
+                      case 'MakeMoveVec':
+                        return {
+                          MakeMoveVec: {
+                            type:
+                              'Some' in e.type
+                                ? A.TypeTagSerializer.tagToString(e.type.Some)
+                                : null,
+                            elements: e.objects.map((e) => es(e)),
+                          },
+                        };
+                      case 'MergeCoins':
+                        return {
+                          MergeCoins: {
+                            destination: es(e.destination),
+                            sources: e.sources.map((e) => es(e)),
+                          },
+                        };
+                      case 'MoveCall': {
+                        let [t, r, n] = e.target.split('::');
+                        return {
+                          MoveCall: {
+                            package: t,
+                            module: r,
+                            function: n,
+                            typeArguments: e.typeArguments,
+                            arguments: e.arguments.map((e) => es(e)),
+                          },
+                        };
+                      }
+                      case 'Publish':
+                        return {
+                          Publish: {
+                            modules: e.modules.map((e) => (0, g.toBase64)(Uint8Array.from(e))),
+                            dependencies: e.dependencies,
+                          },
+                        };
+                      case 'SplitCoins':
+                        return {
+                          SplitCoins: { coin: es(e.coin), amounts: e.amounts.map((e) => es(e)) },
+                        };
+                      case 'TransferObjects':
+                        return {
+                          TransferObjects: {
+                            objects: e.objects.map((e) => es(e)),
+                            address: es(e.address),
+                          },
+                        };
+                      case 'Upgrade':
+                        return {
+                          Upgrade: {
+                            modules: e.modules.map((e) => (0, g.toBase64)(Uint8Array.from(e))),
+                            dependencies: e.dependencies,
+                            package: e.packageId,
+                            ticket: es(e.ticket),
+                          },
+                        };
+                    }
+                    throw Error(`Unknown transaction ${Object.keys(e)}`);
+                  }),
+                })
+              )
+            );
+      }
+      static getDigestFromBytes(e) {
+        let t,
+          r,
+          n =
+            ((r = new Uint8Array(
+              (t = Array.from('TransactionData::').map((e) => e.charCodeAt(0))).length + e.length
+            )).set(t),
+            r.set(e, t.length),
+            (0, eR.blake2b)(r, { dkLen: 32 }));
+        return (0, eE.toBase58)(n);
+      }
+      get gasConfig() {
+        return this.gasData;
+      }
+      set gasConfig(e) {
+        this.gasData = e;
+      }
+      build({ maxSizeBytes: e = 1 / 0, overrides: t, onlyTransactionKind: r } = {}) {
+        let n = this.inputs,
+          a = this.commands;
+        if (r)
+          return ej.bcs.TransactionKind.serialize(
+            { ProgrammableTransaction: { inputs: n, commands: a } },
+            { maxSize: e }
+          ).toBytes();
+        let s = t?.expiration ?? this.expiration,
+          i = t?.sender ?? this.sender,
+          o = { ...this.gasData, ...t?.gasConfig, ...t?.gasData };
+        if (!i) throw Error('Missing transaction sender');
+        if (!o.budget) throw Error('Missing gas budget');
+        if (!o.payment) throw Error('Missing gas payment');
+        if (!o.price) throw Error('Missing gas price');
+        let l = {
+          sender: eU(i),
+          expiration: s || { None: !0 },
+          gasData: {
+            payment: o.payment,
+            owner: eU(this.gasData.owner ?? i),
+            price: BigInt(o.price),
+            budget: BigInt(o.budget),
+          },
+          kind: { ProgrammableTransaction: { inputs: n, commands: a } },
+        };
+        return ej.bcs.TransactionData.serialize({ V1: l }, { maxSize: e }).toBytes();
+      }
+      addInput(e, t) {
+        let r = this.inputs.length;
+        return this.inputs.push(t), { Input: r, type: e, $kind: 'Input' };
+      }
+      getInputUses(e, t) {
+        this.mapArguments((r, n) => ('Input' === r.$kind && r.Input === e && t(r, n), r));
+      }
+      mapArguments(e) {
+        for (let t of this.commands)
+          switch (t.$kind) {
+            case 'MoveCall':
+              t.MoveCall.arguments = t.MoveCall.arguments.map((r) => e(r, t));
+              break;
+            case 'TransferObjects':
+              (t.TransferObjects.objects = t.TransferObjects.objects.map((r) => e(r, t))),
+                (t.TransferObjects.address = e(t.TransferObjects.address, t));
+              break;
+            case 'SplitCoins':
+              (t.SplitCoins.coin = e(t.SplitCoins.coin, t)),
+                (t.SplitCoins.amounts = t.SplitCoins.amounts.map((r) => e(r, t)));
+              break;
+            case 'MergeCoins':
+              (t.MergeCoins.destination = e(t.MergeCoins.destination, t)),
+                (t.MergeCoins.sources = t.MergeCoins.sources.map((r) => e(r, t)));
+              break;
+            case 'MakeMoveVec':
+              t.MakeMoveVec.elements = t.MakeMoveVec.elements.map((r) => e(r, t));
+              break;
+            case 'Upgrade':
+              t.Upgrade.ticket = e(t.Upgrade.ticket, t);
+              break;
+            case '$Intent':
+              let r = t.$Intent.inputs;
+              for (let [n, a] of ((t.$Intent.inputs = {}), Object.entries(r)))
+                t.$Intent.inputs[n] = Array.isArray(a) ? a.map((r) => e(r, t)) : e(a, t);
+              break;
+            case 'Publish':
+              break;
+            default:
+              throw Error(`Unexpected transaction kind: ${t.$kind}`);
+          }
+      }
+      replaceCommand(e, t) {
+        if (!Array.isArray(t)) {
+          this.commands[e] = t;
+          return;
+        }
+        let r = t.length - 1;
+        this.commands.splice(e, 1, ...t),
+          0 !== r &&
+            this.mapArguments((t) => {
+              switch (t.$kind) {
+                case 'Result':
+                  t.Result > e && (t.Result += r);
+                  break;
+                case 'NestedResult':
+                  t.NestedResult[0] > e && (t.NestedResult[0] += r);
+              }
+              return t;
+            });
+      }
+      getDigest() {
+        let e = this.build({ onlyTransactionKind: !1 });
+        return e$.getDigestFromBytes(e);
+      }
+      snapshot() {
+        return (0, b.parse)($, this);
+      }
+    }
+    function ez(e) {
+      return 'string' == typeof e
+        ? (0, h.normalizeIotaAddress)(e)
+        : e.Object
+        ? e.Object.ImmOrOwnedObject
+          ? (0, h.normalizeIotaAddress)(e.Object.ImmOrOwnedObject.objectId)
+          : e.Object.Receiving
+          ? (0, h.normalizeIotaAddress)(e.Object.Receiving.objectId)
+          : (0, h.normalizeIotaAddress)(e.Object.SharedObject.objectId)
+        : e.UnresolvedObject
+        ? (0, h.normalizeIotaAddress)(e.UnresolvedObject.objectId)
+        : void 0;
+    }
+    var eT = (e) => {
+        throw TypeError(e);
+      },
+      eA = (e, t, r) => t.has(e) || eT('Cannot ' + r),
+      eB = (e, t, r) => (eA(e, t, 'read from private field'), r ? r.call(e) : t.get(e)),
+      eD = (e, t, r) =>
+        t.has(e)
+          ? eT('Cannot add the same private member more than once')
+          : t instanceof WeakSet
+          ? t.add(e)
+          : t.set(e, r),
+      eG = (e, t, r, n) => (eA(e, t, 'write to private field'), n ? n.call(e, r) : t.set(e, r), r),
+      eV = (e, t, r) => (eA(e, t, 'access private method'), r);
+    let e_ = Symbol.for('@iota/transaction'),
+      eF = { buildPlugins: new Map(), serializationPlugins: new Map() },
+      eL = Symbol.for('@iota/transaction/registry');
+    function eK() {
+      try {
+        let e = globalThis;
+        return e[eL] || (e[eL] = eF), e[eL];
+      } catch (e) {
+        return eF;
+      }
+    }
+    let eW = class e {
+      constructor() {
+        eD(this, i),
+          eD(this, r),
+          eD(this, n),
+          eD(this, a, new Map()),
+          eD(this, s),
+          (this.object = (function (e) {
+            function t(t) {
+              return e(t);
+            }
+            return (
+              (t.system = () => e('0x5')),
+              (t.clock = () => e('0x6')),
+              (t.random = () => e('0x8')),
+              (t.denyList = () => e('0x403')),
+              (t.option =
+                ({ type: e, value: t }) =>
+                (r) =>
+                  r.moveCall({
+                    typeArguments: [e],
+                    target: `0x1::option::${null === t ? 'none' : 'some'}`,
+                    arguments: null === t ? [] : [r.object(t)],
+                  })),
+              t
+            );
+          })((e) => {
+            if ('function' == typeof e) return this.object(e(this));
+            if ('object' == typeof e && (0, b.is)(k, e)) return e;
+            let t = ez(e),
+              r = eB(this, s).inputs.find((e) => t === ez(e));
+            return (
+              r?.Object?.SharedObject &&
+                'object' == typeof e &&
+                e.Object?.SharedObject &&
+                (r.Object.SharedObject.mutable =
+                  r.Object.SharedObject.mutable || e.Object.SharedObject.mutable),
+              r
+                ? { $kind: 'Input', Input: eB(this, s).inputs.indexOf(r), type: 'object' }
+                : eB(this, s).addInput(
+                    'object',
+                    'string' == typeof e
+                      ? {
+                          $kind: 'UnresolvedObject',
+                          UnresolvedObject: { objectId: (0, h.normalizeIotaAddress)(e) },
+                        }
+                      : e
+                  )
+            );
+          }));
+        const e = eK();
+        eG(this, s, new e$()),
+          eG(this, n, [...e.buildPlugins.values()]),
+          eG(this, r, [...e.serializationPlugins.values()]);
+      }
+      static fromKind(t) {
+        let r = new e();
+        return eG(r, s, e$.fromKindBytes('string' == typeof t ? (0, g.fromBase64)(t) : t)), r;
+      }
+      static from(t) {
+        let r = new e();
+        return (
+          t && 'object' == typeof t && !0 === t[e_]
+            ? eG(r, s, new e$(t.getData()))
+            : 'string' == typeof t && t.startsWith('{')
+            ? eG(r, s, e$.restore(JSON.parse(t)))
+            : eG(r, s, e$.fromBytes('string' == typeof t ? (0, g.fromBase64)(t) : t)),
+          r
+        );
+      }
+      static registerGlobalSerializationPlugin(e, t) {
+        eK().serializationPlugins.set(e, t ?? e);
+      }
+      static unregisterGlobalSerializationPlugin(e) {
+        eK().serializationPlugins.delete(e);
+      }
+      static registerGlobalBuildPlugin(e, t) {
+        eK().buildPlugins.set(e, t ?? e);
+      }
+      static unregisterGlobalBuildPlugin(e) {
+        eK().buildPlugins.delete(e);
+      }
+      addSerializationPlugin(e) {
+        eB(this, r).push(e);
+      }
+      addBuildPlugin(e) {
+        eB(this, n).push(e);
+      }
+      addIntentResolver(e, t) {
+        if (eB(this, a).has(e) && eB(this, a).get(e) !== t)
+          throw Error(`Intent resolver for ${e} already exists`);
+        eB(this, a).set(e, t);
+      }
+      setSender(e) {
+        eB(this, s).sender = e;
+      }
+      setSenderIfNotSet(e) {
+        eB(this, s).sender || (eB(this, s).sender = e);
+      }
+      setExpiration(e) {
+        eB(this, s).expiration = e ? (0, b.parse)(U, e) : null;
+      }
+      setGasPrice(e) {
+        eB(this, s).gasConfig.price = String(e);
+      }
+      setGasBudget(e) {
+        eB(this, s).gasConfig.budget = String(e);
+      }
+      setGasBudgetIfNotSet(e) {
+        null == eB(this, s).gasData.budget && (eB(this, s).gasConfig.budget = String(e));
+      }
+      setGasOwner(e) {
+        eB(this, s).gasConfig.owner = e;
+      }
+      setGasPayment(e) {
+        eB(this, s).gasConfig.payment = e.map((e) => (0, b.parse)(w, e));
+      }
+      get blockData() {
+        return en(eB(this, s).snapshot());
+      }
+      getData() {
+        return eB(this, s).snapshot();
+      }
+      get [e_]() {
+        return !0;
+      }
+      get pure() {
+        return (
+          Object.defineProperty(this, 'pure', {
+            enumerable: !1,
+            value: (function (e) {
+              function t(t, r) {
+                if ('string' == typeof t) return e(eM(t).serialize(r));
+                if (t instanceof Uint8Array || (0, f.isSerializedBcs)(t)) return e(t);
+                throw Error(
+                  'tx.pure must be called either a bcs type name, or a serialized bcs value'
+                );
+              }
+              return (
+                (t.u8 = (t) => e(ej.bcs.U8.serialize(t))),
+                (t.u16 = (t) => e(ej.bcs.U16.serialize(t))),
+                (t.u32 = (t) => e(ej.bcs.U32.serialize(t))),
+                (t.u64 = (t) => e(ej.bcs.U64.serialize(t))),
+                (t.u128 = (t) => e(ej.bcs.U128.serialize(t))),
+                (t.u256 = (t) => e(ej.bcs.U256.serialize(t))),
+                (t.bool = (t) => e(ej.bcs.Bool.serialize(t))),
+                (t.string = (t) => e(ej.bcs.String.serialize(t))),
+                (t.address = (t) => e(ej.bcs.Address.serialize(t))),
+                (t.id = t.address),
+                (t.vector = (t, r) => e(ej.bcs.vector(eM(t)).serialize(r))),
+                (t.option = (t, r) => e(ej.bcs.option(eM(t)).serialize(r))),
+                t
+              );
+            })((e) =>
+              (0, f.isSerializedBcs)(e)
+                ? eB(this, s).addInput('pure', { $kind: 'Pure', Pure: { bytes: e.toBase64() } })
+                : eB(this, s).addInput(
+                    'pure',
+                    (0, b.is)(R, e)
+                      ? (0, b.parse)(R, e)
+                      : e instanceof Uint8Array
+                      ? eb(e)
+                      : { $kind: 'UnresolvedPure', UnresolvedPure: { value: e } }
+                  )
+            ),
+          }),
+          this.pure
+        );
+      }
+      get gas() {
+        return { $kind: 'GasCoin', GasCoin: !0 };
+      }
+      objectRef(...e) {
+        return this.object(eh(...e));
+      }
+      receivingRef(...e) {
+        return this.object(ev(...e));
+      }
+      sharedObjectRef(...e) {
+        return this.object(ey(...e));
+      }
+      add(e) {
+        var t;
+        let r, n;
+        return 'function' == typeof e
+          ? e(this)
+          : ((t = eB(this, s).commands.push(e) - 1),
+            (r = []),
+            (n = (e) => r[e] ?? (r[e] = { $kind: 'NestedResult', NestedResult: [t, e] })),
+            new Proxy(
+              { $kind: 'Result', Result: t },
+              {
+                set() {
+                  throw Error(
+                    'The transaction result is a proxy, and does not support setting properties directly'
+                  );
+                },
+                get(e, t) {
+                  if (t in e) return Reflect.get(e, t);
+                  if (t === Symbol.iterator)
+                    return function* () {
+                      let e = 0;
+                      for (;;) yield n(e), e++;
+                    };
+                  if ('symbol' == typeof t) return;
+                  let r = parseInt(t, 10);
+                  if (!Number.isNaN(r) && !(r < 0)) return n(r);
+                },
+              }
+            ));
+      }
+      splitCoins(e, t) {
+        return this.add(
+          T.SplitCoins(
+            'string' == typeof e ? this.object(e) : eV(this, i, l).call(this, e),
+            t.map((e) =>
+              'number' == typeof e || 'bigint' == typeof e || 'string' == typeof e
+                ? this.pure.u64(e)
+                : eV(this, i, o).call(this, e)
+            )
+          )
+        );
+      }
+      mergeCoins(e, t) {
+        return this.add(
+          T.MergeCoins(
+            this.object(e),
+            t.map((e) => this.object(e))
+          )
+        );
+      }
+      publish({ modules: e, dependencies: t }) {
+        return this.add(T.Publish({ modules: e, dependencies: t }));
+      }
+      upgrade({ modules: e, dependencies: t, package: r, ticket: n }) {
+        return this.add(
+          T.Upgrade({ modules: e, dependencies: t, package: r, ticket: this.object(n) })
+        );
+      }
+      moveCall({ arguments: e, ...t }) {
+        return this.add(
+          T.MoveCall({ ...t, arguments: e?.map((e) => eV(this, i, o).call(this, e)) })
+        );
+      }
+      transferObjects(e, t) {
+        return this.add(
+          T.TransferObjects(
+            e.map((e) => this.object(e)),
+            'string' == typeof t ? this.pure.address(t) : eV(this, i, o).call(this, t)
+          )
+        );
+      }
+      makeMoveVec({ type: e, elements: t }) {
+        return this.add(T.MakeMoveVec({ type: e, elements: t.map((e) => this.object(e)) }));
+      }
+      serialize() {
+        return JSON.stringify(en(eB(this, s).snapshot()));
+      }
+      async toJSON(e = {}) {
+        return (
+          await this.prepareForSerialization(e),
+          JSON.stringify(
+            (0, b.parse)(ef, eB(this, s).snapshot()),
+            (e, t) => ('bigint' == typeof t ? t.toString() : t),
+            2
+          )
+        );
+      }
+      async sign(e) {
+        let { signer: t, ...r } = e,
+          n = await this.build(r);
+        return t.signTransaction(n);
+      }
+      async build(e = {}) {
+        return (
+          await this.prepareForSerialization(e),
+          await eV(this, i, c).call(this, e),
+          eB(this, s).build({
+            maxSizeBytes: e.maxSizeBytes,
+            onlyTransactionKind: e.onlyTransactionKind,
+          })
+        );
+      }
+      async getDigest(e = {}) {
+        return await eV(this, i, c).call(this, e), eB(this, s).getDigest();
+      }
+      async prepareForSerialization(e) {
+        let t = new Set();
+        for (let e of eB(this, s).commands) e.$Intent && t.add(e.$Intent.name);
+        let n = [...eB(this, r)];
+        for (let r of t)
+          if (!e.supportedIntents?.includes(r)) {
+            if (!eB(this, a).has(r)) throw Error(`Missing intent resolver for ${r}`);
+            n.push(eB(this, a).get(r));
+          }
+        await eV(this, i, u).call(this, n, e);
+      }
+    };
+    (r = new WeakMap()),
+      (n = new WeakMap()),
+      (a = new WeakMap()),
+      (s = new WeakMap()),
+      (i = new WeakSet()),
+      (o = function (e) {
+        return (0, f.isSerializedBcs)(e) ? this.pure(e) : eV(this, i, l).call(this, e);
+      }),
+      (l = function (e) {
+        return 'function' == typeof e ? (0, b.parse)(k, e(this)) : (0, b.parse)(k, e);
+      }),
+      (c = async function (e) {
+        if (!e.onlyTransactionKind && !eB(this, s).sender)
+          throw Error('Missing transaction sender');
+        await eV(this, i, u).call(this, [...eB(this, n), ew], e);
+      }),
+      (u = async function (e, t) {
+        let r = (n) => {
+          if (n >= e.length) return () => {};
+          let a = e[n];
+          return async () => {
+            let e = r(n + 1),
+              i = !1,
+              o = !1;
+            if (
+              (await a(eB(this, s), t, async () => {
+                if (i) throw Error(`next() was call multiple times in TransactionPlugin ${n}`);
+                (i = !0), await e(), (o = !0);
+              }),
+              !i)
+            )
+              throw Error(`next() was not called in TransactionPlugin ${n}`);
+            if (!o) throw Error(`next() was not awaited in TransactionPlugin ${n}`);
+          };
+        };
+        await r(0)();
+      });
+    var eH = e.i(61664),
+      eY = e.i(43794),
+      eJ = e.i(9840),
+      eX = e.i(14554),
+      eq = e.i(69931);
+    let eQ = { highContrast: { type: 'boolean', className: 'rt-high-contrast', default: void 0 } };
+    var eZ = e.i(10712);
+    let e0 = {
+        ...eX.asChildPropDef,
+        size: {
+          type: 'enum',
+          className: 'rt-r-size',
+          values: ['1', '2', '3', '4'],
+          default: '2',
+          responsive: !0,
+        },
+        variant: {
+          type: 'enum',
+          className: 'rt-variant',
+          values: ['classic', 'solid', 'soft', 'surface', 'outline', 'ghost'],
+          default: 'solid',
+        },
+        ...eq.accentColorPropDef,
+        ...eQ,
+        ...eZ.radiusPropDef,
+        loading: { type: 'boolean', className: 'rt-loading', default: !1 },
+      },
+      e1 = ['initial', 'xs', 'sm', 'md', 'lg', 'xl'];
+    function e6(e, t) {
+      return Object.prototype.hasOwnProperty.call(e, t);
+    }
+    function e2(e) {
+      return 'object' == typeof e && Object.keys(e).some((e) => e1.includes(e));
+    }
+    function e5({
+      allowArbitraryValues: e,
+      value: t,
+      className: r,
+      propValues: n,
+      parseValue: a = (e) => e,
+    }) {
+      let s = [];
+      if (t) {
+        if ('string' == typeof t && n.includes(t)) return e3(r, t, a);
+        if (e2(t)) {
+          for (let i in t) {
+            if (!e6(t, i) || !e1.includes(i)) continue;
+            let o = t[i];
+            if (void 0 !== o) {
+              if (n.includes(o)) {
+                let e = e3(r, o, a),
+                  t = 'initial' === i ? e : `${i}:${e}`;
+                s.push(t);
+              } else if (e) {
+                let e = 'initial' === i ? r : `${i}:${r}`;
+                s.push(e);
+              }
+            }
+          }
+          return s.join(' ');
+        }
+        if (e) return r;
+      }
+    }
+    function e3(e, t, r) {
+      let n = r(t),
+        a = n?.startsWith('-'),
+        s = a ? n?.substring(1) : n;
+      return `${a ? '-' : ''}${e}${e ? '-' : ''}${s}`;
+    }
+    function e4(...e) {
+      let t = {};
+      for (let r of e) r && (t = { ...t, ...r });
+      return Object.keys(t).length ? t : void 0;
+    }
+    function e8(e, ...t) {
+      let r,
+        n,
+        a = { ...e },
+        s = (function (...e) {
+          return Object.assign({}, ...e);
+        })(...t);
+      for (let e in s) {
+        let t = a[e],
+          i = s[e];
+        if (
+          (void 0 !== i.default && void 0 === t && (t = i.default),
+          'enum' !== i.type || [i.default, ...i.values].includes(t) || e2(t) || (t = i.default),
+          (a[e] = t),
+          'className' in i && i.className)
+        ) {
+          delete a[e];
+          let s = 'responsive' in i;
+          if (!t || (e2(t) && !s)) continue;
+          if (
+            (e2(t) &&
+              (void 0 !== i.default && void 0 === t.initial && (t.initial = i.default),
+              'enum' === i.type &&
+                ([i.default, ...i.values].includes(t.initial) || (t.initial = i.default))),
+            'enum' === i.type)
+          ) {
+            let e = e5({
+              allowArbitraryValues: !1,
+              value: t,
+              className: i.className,
+              propValues: i.values,
+              parseValue: i.parseValue,
+            });
+            r = (0, eY.default)(r, e);
+            continue;
+          }
+          if ('string' === i.type || 'enum | string' === i.type) {
+            let e = 'string' === i.type ? [] : i.values,
+              [a, s] = (function ({ className: e, customProperties: t, ...r }) {
+                return [
+                  e5({ allowArbitraryValues: !0, className: e, ...r }),
+                  (function ({
+                    customProperties: e,
+                    value: t,
+                    propValues: r,
+                    parseValue: n = (e) => e,
+                  }) {
+                    let a = {};
+                    if (!(!t || ('string' == typeof t && r.includes(t)))) {
+                      if (
+                        ('string' == typeof t && (a = Object.fromEntries(e.map((e) => [e, t]))),
+                        e2(t))
+                      )
+                        for (let n in t) {
+                          if (!e6(t, n) || !e1.includes(n)) continue;
+                          let s = t[n];
+                          if (!r.includes(s))
+                            for (let t of e) a = { ['initial' === n ? t : `${t}-${n}`]: s, ...a };
+                        }
+                      for (let e in a) {
+                        let t = a[e];
+                        void 0 !== t && (a[e] = n(t));
+                      }
+                      return a;
+                    }
+                  })({ customProperties: t, ...r }),
+                ];
+              })({
+                className: i.className,
+                customProperties: i.customProperties,
+                propValues: e,
+                parseValue: i.parseValue,
+                value: t,
+              });
+            (n = e4(n, s)), (r = (0, eY.default)(r, a));
+            continue;
+          }
+          if ('boolean' === i.type && t) {
+            r = (0, eY.default)(r, i.className);
+            continue;
+          }
+        }
+      }
+      return (a.className = (0, eY.default)(r, e.className)), (a.style = e4(n, e.style)), a;
+    }
+    let e9 = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+      e7 = {
+        p: {
+          type: 'enum | string',
+          className: 'rt-r-p',
+          customProperties: ['--p'],
+          values: e9,
+          responsive: !0,
+        },
+        px: {
+          type: 'enum | string',
+          className: 'rt-r-px',
+          customProperties: ['--pl', '--pr'],
+          values: e9,
+          responsive: !0,
+        },
+        py: {
+          type: 'enum | string',
+          className: 'rt-r-py',
+          customProperties: ['--pt', '--pb'],
+          values: e9,
+          responsive: !0,
+        },
+        pt: {
+          type: 'enum | string',
+          className: 'rt-r-pt',
+          customProperties: ['--pt'],
+          values: e9,
+          responsive: !0,
+        },
+        pr: {
+          type: 'enum | string',
+          className: 'rt-r-pr',
+          customProperties: ['--pr'],
+          values: e9,
+          responsive: !0,
+        },
+        pb: {
+          type: 'enum | string',
+          className: 'rt-r-pb',
+          customProperties: ['--pb'],
+          values: e9,
+          responsive: !0,
+        },
+        pl: {
+          type: 'enum | string',
+          className: 'rt-r-pl',
+          customProperties: ['--pl'],
+          values: e9,
+          responsive: !0,
+        },
+      },
+      te = {
+        height: {
+          type: 'string',
+          className: 'rt-r-h',
+          customProperties: ['--height'],
+          responsive: !0,
+        },
+        minHeight: {
+          type: 'string',
+          className: 'rt-r-min-h',
+          customProperties: ['--min-height'],
+          responsive: !0,
+        },
+        maxHeight: {
+          type: 'string',
+          className: 'rt-r-max-h',
+          customProperties: ['--max-height'],
+          responsive: !0,
+        },
+      },
+      tt = {
+        width: {
+          type: 'string',
+          className: 'rt-r-w',
+          customProperties: ['--width'],
+          responsive: !0,
+        },
+        minWidth: {
+          type: 'string',
+          className: 'rt-r-min-w',
+          customProperties: ['--min-width'],
+          responsive: !0,
+        },
+        maxWidth: {
+          type: 'string',
+          className: 'rt-r-max-w',
+          customProperties: ['--max-width'],
+          responsive: !0,
+        },
+      },
+      tr = ['visible', 'hidden', 'clip', 'scroll', 'auto'],
+      tn = [
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '-1',
+        '-2',
+        '-3',
+        '-4',
+        '-5',
+        '-6',
+        '-7',
+        '-8',
+        '-9',
+      ],
+      ta = {
+        ...e7,
+        ...tt,
+        ...te,
+        position: {
+          type: 'enum',
+          className: 'rt-r-position',
+          values: ['static', 'relative', 'absolute', 'fixed', 'sticky'],
+          responsive: !0,
+        },
+        inset: {
+          type: 'enum | string',
+          className: 'rt-r-inset',
+          customProperties: ['--inset'],
+          values: tn,
+          responsive: !0,
+        },
+        top: {
+          type: 'enum | string',
+          className: 'rt-r-top',
+          customProperties: ['--top'],
+          values: tn,
+          responsive: !0,
+        },
+        right: {
+          type: 'enum | string',
+          className: 'rt-r-right',
+          customProperties: ['--right'],
+          values: tn,
+          responsive: !0,
+        },
+        bottom: {
+          type: 'enum | string',
+          className: 'rt-r-bottom',
+          customProperties: ['--bottom'],
+          values: tn,
+          responsive: !0,
+        },
+        left: {
+          type: 'enum | string',
+          className: 'rt-r-left',
+          customProperties: ['--left'],
+          values: tn,
+          responsive: !0,
+        },
+        overflow: { type: 'enum', className: 'rt-r-overflow', values: tr, responsive: !0 },
+        overflowX: { type: 'enum', className: 'rt-r-ox', values: tr, responsive: !0 },
+        overflowY: { type: 'enum', className: 'rt-r-oy', values: tr, responsive: !0 },
+        flexBasis: {
+          type: 'string',
+          className: 'rt-r-fb',
+          customProperties: ['--flex-basis'],
+          responsive: !0,
+        },
+        flexShrink: {
+          type: 'enum | string',
+          className: 'rt-r-fs',
+          customProperties: ['--flex-shrink'],
+          values: ['0', '1'],
+          responsive: !0,
+        },
+        flexGrow: {
+          type: 'enum | string',
+          className: 'rt-r-fg',
+          customProperties: ['--flex-grow'],
+          values: ['0', '1'],
+          responsive: !0,
+        },
+        gridArea: {
+          type: 'string',
+          className: 'rt-r-ga',
+          customProperties: ['--grid-area'],
+          responsive: !0,
+        },
+        gridColumn: {
+          type: 'string',
+          className: 'rt-r-gc',
+          customProperties: ['--grid-column'],
+          responsive: !0,
+        },
+        gridColumnStart: {
+          type: 'string',
+          className: 'rt-r-gcs',
+          customProperties: ['--grid-column-start'],
+          responsive: !0,
+        },
+        gridColumnEnd: {
+          type: 'string',
+          className: 'rt-r-gce',
+          customProperties: ['--grid-column-end'],
+          responsive: !0,
+        },
+        gridRow: {
+          type: 'string',
+          className: 'rt-r-gr',
+          customProperties: ['--grid-row'],
+          responsive: !0,
+        },
+        gridRowStart: {
+          type: 'string',
+          className: 'rt-r-grs',
+          customProperties: ['--grid-row-start'],
+          responsive: !0,
+        },
+        gridRowEnd: {
+          type: 'string',
+          className: 'rt-r-gre',
+          customProperties: ['--grid-row-end'],
+          responsive: !0,
+        },
+      },
+      ts = [
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '-1',
+        '-2',
+        '-3',
+        '-4',
+        '-5',
+        '-6',
+        '-7',
+        '-8',
+        '-9',
+      ],
+      ti = {
+        m: {
+          type: 'enum | string',
+          values: ts,
+          responsive: !0,
+          className: 'rt-r-m',
+          customProperties: ['--m'],
+        },
+        mx: {
+          type: 'enum | string',
+          values: ts,
+          responsive: !0,
+          className: 'rt-r-mx',
+          customProperties: ['--ml', '--mr'],
+        },
+        my: {
+          type: 'enum | string',
+          values: ts,
+          responsive: !0,
+          className: 'rt-r-my',
+          customProperties: ['--mt', '--mb'],
+        },
+        mt: {
+          type: 'enum | string',
+          values: ts,
+          responsive: !0,
+          className: 'rt-r-mt',
+          customProperties: ['--mt'],
+        },
+        mr: {
+          type: 'enum | string',
+          values: ts,
+          responsive: !0,
+          className: 'rt-r-mr',
+          customProperties: ['--mr'],
+        },
+        mb: {
+          type: 'enum | string',
+          values: ts,
+          responsive: !0,
+          className: 'rt-r-mb',
+          customProperties: ['--mb'],
+        },
+        ml: {
+          type: 'enum | string',
+          values: ts,
+          responsive: !0,
+          className: 'rt-r-ml',
+          customProperties: ['--ml'],
+        },
+      };
+    eJ.Slot.Root;
+    let to = eJ.Slot.Root;
+    eJ.Slot.Slottable;
+    let tl = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+      tc = {
+        as: { type: 'enum', values: ['div', 'span'], default: 'div' },
+        ...eX.asChildPropDef,
+        display: {
+          type: 'enum',
+          className: 'rt-r-display',
+          values: ['none', 'inline-flex', 'flex'],
+          responsive: !0,
+        },
+        direction: {
+          type: 'enum',
+          className: 'rt-r-fd',
+          values: ['row', 'column', 'row-reverse', 'column-reverse'],
+          responsive: !0,
+        },
+        align: {
+          type: 'enum',
+          className: 'rt-r-ai',
+          values: ['start', 'center', 'end', 'baseline', 'stretch'],
+          responsive: !0,
+        },
+        justify: {
+          type: 'enum',
+          className: 'rt-r-jc',
+          values: ['start', 'center', 'end', 'between'],
+          parseValue: function (e) {
+            return 'between' === e ? 'space-between' : e;
+          },
+          responsive: !0,
+        },
+        wrap: {
+          type: 'enum',
+          className: 'rt-r-fw',
+          values: ['nowrap', 'wrap', 'wrap-reverse'],
+          responsive: !0,
+        },
+        gap: {
+          type: 'enum | string',
+          className: 'rt-r-gap',
+          customProperties: ['--gap'],
+          values: tl,
+          responsive: !0,
+        },
+        gapX: {
+          type: 'enum | string',
+          className: 'rt-r-cg',
+          customProperties: ['--column-gap'],
+          values: tl,
+          responsive: !0,
+        },
+        gapY: {
+          type: 'enum | string',
+          className: 'rt-r-rg',
+          customProperties: ['--row-gap'],
+          values: tl,
+          responsive: !0,
+        },
+      },
+      tu = m.forwardRef((e, t) => {
+        let { className: r, asChild: n, as: a = 'div', ...s } = e8(e, tc, ta, ti);
+        return m.createElement(n ? to : a, {
+          ...s,
+          ref: t,
+          className: (0, eY.default)('rt-Flex', r),
+        });
+      });
+    tu.displayName = 'Flex';
+    let td = {
+        size: {
+          type: 'enum',
+          className: 'rt-r-size',
+          values: ['1', '2', '3'],
+          default: '2',
+          responsive: !0,
+        },
+        loading: { type: 'boolean', default: !0 },
+      },
+      tp = m.forwardRef((e, t) => {
+        let { className: r, children: n, loading: a, ...s } = e8(e, td, ti);
+        if (!a) return n;
+        let i = m.createElement(
+          'span',
+          { ...s, ref: t, className: (0, eY.default)('rt-Spinner', r) },
+          m.createElement('span', { className: 'rt-SpinnerLeaf' }),
+          m.createElement('span', { className: 'rt-SpinnerLeaf' }),
+          m.createElement('span', { className: 'rt-SpinnerLeaf' }),
+          m.createElement('span', { className: 'rt-SpinnerLeaf' }),
+          m.createElement('span', { className: 'rt-SpinnerLeaf' }),
+          m.createElement('span', { className: 'rt-SpinnerLeaf' }),
+          m.createElement('span', { className: 'rt-SpinnerLeaf' }),
+          m.createElement('span', { className: 'rt-SpinnerLeaf' })
+        );
+        return void 0 === n
+          ? i
+          : m.createElement(
+              tu,
+              { asChild: !0, position: 'relative', align: 'center', justify: 'center' },
+              m.createElement(
+                'span',
+                null,
+                m.createElement(
+                  'span',
+                  {
+                    'aria-hidden': !0,
+                    style: { display: 'contents', visibility: 'hidden' },
+                    inert: void 0,
+                  },
+                  n
+                ),
+                m.createElement(
+                  tu,
+                  {
+                    asChild: !0,
+                    align: 'center',
+                    justify: 'center',
+                    position: 'absolute',
+                    inset: '0',
+                  },
+                  m.createElement('span', null, i)
+                )
+              )
+            );
+      });
+    tp.displayName = 'Spinner';
+    var tm = e.i(59411),
+      tm = tm;
+    let tg = tm.Root;
+    function tf(e) {
+      switch (e) {
+        case '1':
+          return '1';
+        case '2':
+        case '3':
+          return '2';
+        case '4':
+          return '3';
+      }
+    }
+    tm.Root;
+    let tb = m.forwardRef((e, t) => {
+      let { size: r = e0.size.default } = e,
+        {
+          className: n,
+          children: a,
+          asChild: s,
+          color: i,
+          radius: o,
+          disabled: l = e.loading,
+          ...c
+        } = e8(e, e0, ti),
+        u = s ? eJ.Slot.Root : 'button';
+      return m.createElement(
+        u,
+        {
+          'data-disabled': l || void 0,
+          'data-accent-color': i,
+          'data-radius': o,
+          ...c,
+          ref: t,
+          className: (0, eY.default)('rt-reset', 'rt-BaseButton', n),
+          disabled: l,
+        },
+        e.loading
+          ? m.createElement(
+              m.Fragment,
+              null,
+              m.createElement(
+                'span',
+                { style: { display: 'contents', visibility: 'hidden' }, 'aria-hidden': !0 },
+                a
+              ),
+              m.createElement(tg, null, a),
+              m.createElement(
+                tu,
+                {
+                  asChild: !0,
+                  align: 'center',
+                  justify: 'center',
+                  position: 'absolute',
+                  inset: '0',
+                },
+                m.createElement(
+                  'span',
+                  null,
+                  m.createElement(tp, {
+                    size: (function (e, t) {
+                      if (void 0 !== e)
+                        return 'string' == typeof e
+                          ? t(e)
+                          : Object.fromEntries(Object.entries(e).map(([e, r]) => [e, t(r)]));
+                    })(r, tf),
+                  })
+                )
+              )
+            )
+          : a
+      );
+    });
+    tb.displayName = 'BaseButton';
+    let th = m.forwardRef(({ className: e, ...t }, r) =>
+      m.createElement(tb, { ...t, ref: r, className: (0, eY.default)('rt-Button', e) })
+    );
+    th.displayName = 'Button';
+    let ty = {
+        ...eX.asChildPropDef,
+        size: {
+          type: 'enum',
+          className: 'rt-r-size',
+          values: ['1', '2', '3', '4'],
+          default: '4',
+          responsive: !0,
+        },
+        display: {
+          type: 'enum',
+          className: 'rt-r-display',
+          values: ['none', 'initial'],
+          parseValue: function (e) {
+            return 'initial' === e ? 'flex' : e;
+          },
+          responsive: !0,
+        },
+        align: {
+          type: 'enum',
+          className: 'rt-r-ai',
+          values: ['left', 'center', 'right'],
+          parseValue: function (e) {
+            return 'left' === e ? 'start' : 'right' === e ? 'end' : e;
+          },
+          responsive: !0,
+        },
+      },
+      tv = m.forwardRef(
+        (
+          { width: e, minWidth: t, maxWidth: r, height: n, minHeight: a, maxHeight: s, ...i },
+          o
+        ) => {
+          let { asChild: l, children: c, className: u, ...d } = e8(i, ty, ta, ti),
+            { className: p, style: g } = e8(
+              { width: e, minWidth: t, maxWidth: r, height: n, minHeight: a, maxHeight: s },
+              tt,
+              te
+            ),
+            f = l ? eJ.Slot.Root : 'div';
+          return m.createElement(
+            f,
+            { ...d, ref: o, className: (0, eY.default)('rt-Container', u) },
+            (function (e, t) {
+              let { asChild: r, children: n } = e;
+              if (!r) return 'function' == typeof t ? t(n) : t;
+              let a = m.Children.only(n);
+              return m.cloneElement(a, {
+                children: 'function' == typeof t ? t(a.props.children) : t,
+              });
+            })({ asChild: l, children: c }, (e) =>
+              m.createElement(
+                'div',
+                { className: (0, eY.default)('rt-ContainerInner', p), style: g },
+                e
+              )
+            )
+          );
+        }
+      );
+    tv.displayName = 'Container';
+    let tj = {
+        as: { type: 'enum', values: ['span', 'div', 'label', 'p'], default: 'span' },
+        ...eX.asChildPropDef,
+        size: {
+          type: 'enum',
+          className: 'rt-r-size',
+          values: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+          responsive: !0,
+        },
+        weight: {
+          type: 'enum',
+          className: 'rt-r-weight',
+          values: ['light', 'regular', 'medium', 'bold'],
+          responsive: !0,
+        },
+        align: {
+          type: 'enum',
+          className: 'rt-r-ta',
+          values: ['left', 'center', 'right'],
+          responsive: !0,
+        },
+        trim: {
+          type: 'enum',
+          className: 'rt-r-lt',
+          values: ['normal', 'start', 'end', 'both'],
+          responsive: !0,
+        },
+        truncate: { type: 'boolean', className: 'rt-truncate' },
+        wrap: {
+          type: 'enum',
+          className: 'rt-r-tw',
+          values: ['wrap', 'nowrap', 'pretty', 'balance'],
+          responsive: !0,
+        },
+        ...eq.colorPropDef,
+        ...eQ,
+      },
+      tx = m.forwardRef((e, t) => {
+        let {
+          children: r,
+          className: n,
+          asChild: a,
+          as: s = 'span',
+          color: i,
+          ...o
+        } = e8(e, tj, ti);
+        return m.createElement(
+          eJ.Slot.Root,
+          { 'data-accent-color': i, ...o, ref: t, className: (0, eY.default)('rt-Text', n) },
+          a ? r : m.createElement(s, null, r)
+        );
+      });
+    tx.displayName = 'Text';
+    var tw = e.i(20783);
+    let tk = {
+        size: {
+          type: 'enum',
+          className: 'rt-r-size',
+          values: ['1', '2', '3'],
+          default: '2',
+          responsive: !0,
+        },
+        variant: {
+          type: 'enum',
+          className: 'rt-variant',
+          values: ['classic', 'surface', 'soft'],
+          default: 'surface',
+        },
+        ...eq.colorPropDef,
+        ...eZ.radiusPropDef,
+      },
+      tO = {
+        side: { type: 'enum', values: ['left', 'right'] },
+        ...eq.colorPropDef,
+        gap: tc.gap,
+        px: e7.px,
+        pl: e7.pl,
+        pr: e7.pr,
+      },
+      tC = m.forwardRef((e, t) => {
+        let r = m.useRef(null),
+          { children: n, className: a, color: s, radius: i, style: o, ...l } = e8(e, tk, ti);
+        return m.createElement(
+          'div',
+          {
+            'data-accent-color': s,
+            'data-radius': i,
+            style: o,
+            className: (0, eY.default)('rt-TextFieldRoot', a),
+            onPointerDown: (e) => {
+              let t = e.target;
+              if (t.closest('input, button, a')) return;
+              let n = r.current;
+              if (!n) return;
+              let a = t.closest(`
+            .rt-TextFieldSlot[data-side='right'],
+            .rt-TextFieldSlot:not([data-side='right']) ~ .rt-TextFieldSlot:not([data-side='left'])
+          `)
+                ? n.value.length
+                : 0;
+              requestAnimationFrame(() => {
+                try {
+                  n.setSelectionRange(a, a);
+                } catch {}
+                n.focus();
+              });
+            },
+          },
+          m.createElement('input', {
+            spellCheck: 'false',
+            ...l,
+            ref: (0, tw.composeRefs)(r, t),
+            className: 'rt-reset rt-TextFieldInput',
+          }),
+          n
+        );
+      });
+    tC.displayName = 'TextField.Root';
+    let tI = m.forwardRef((e, t) => {
+      let { className: r, color: n, side: a, ...s } = e8(e, tO);
+      return m.createElement('div', {
+        'data-accent-color': n,
+        'data-side': a,
+        ...s,
+        ref: t,
+        className: (0, eY.default)('rt-TextFieldSlot', r),
+      });
+    });
+    (tI.displayName = 'TextField.Slot'), e.s(['Root', () => tC, 'Slot', () => tI], 10416);
+    var tN = e.i(10416),
+      tN = tN,
+      tS = e.i(65079),
+      tP = e.i(44343);
+    function tM(e) {
+      try {
+        let t = document.createElement('div');
+        (t.className = 'kfc-toast'),
+          (t.textContent = e),
+          document.body.appendChild(t),
+          requestAnimationFrame(() => t.classList.add('kfc-toast--visible')),
+          setTimeout(() => {
+            t.classList.remove('kfc-toast--visible'), setTimeout(() => t.remove(), 300);
+          }, 3e3);
+      } catch (t) {
+        alert(e);
+      }
+    }
+    e.s(
+      [
+        'default',
+        0,
+        () => {
+          let e = (0, p.useCurrentAccount)(),
+            {
+              data: t,
+              actions: r,
+              state: n,
+              chickenBoxId: a,
+              flagId: s,
+            } = (() => {
+              let e = (0, p.useCurrentAccount)(),
+                t = e?.address,
+                r = (0, eH.useNetworkVariable)('packageId'),
+                n = (0, p.useIotaClient)(),
+                { mutate: a, isPending: s } = (0, p.useSignAndExecuteTransaction)(),
+                [i, o] = (0, m.useState)(() =>
+                  e?.address ? localStorage.getItem(`chickenBoxId_${e.address}`) : null
+                ),
+                [l, c] = (0, m.useState)(() =>
+                  e?.address ? localStorage.getItem(`flagId_${e.address}`) : null
+                ),
+                [u, d] = (0, m.useState)(!1),
+                [g, f] = (0, m.useState)(),
+                [b, h] = (0, m.useState)(null),
+                {
+                  data: y,
+                  isPending: v,
+                  error: j,
+                  refetch: x,
+                } = (0, p.useIotaClientQuery)(
+                  'getObject',
+                  { id: i, options: { showContent: !0, showOwner: !0 } },
+                  { enabled: !!i }
+                ),
+                w = y?.data
+                  ? (function (e) {
+                      if (e.content?.dataType !== 'moveObject')
+                        return console.log('Data is not a moveObject:', e.content?.dataType), null;
+                      let t = e.content.fields;
+                      if (!t || !t.chicken)
+                        return console.log('No chicken fields found in object data'), null;
+                      console.log('ChickenBox fields structure:', JSON.stringify(t, null, 2));
+                      let r = t.chicken;
+                      try {
+                        return {
+                          chickenKg: parseInt(String(r.chicken_kg), 10),
+                          garlicG: parseInt(String(r.garlic_g), 10),
+                          milkMl: parseInt(String(r.milk_ml), 10),
+                          saltG: parseInt(String(r.salt_g), 10),
+                          pepperG: parseInt(String(r.pepper_g), 10),
+                          flourG: parseInt(String(r.flour_g), 10),
+                          cornstarchG: parseInt(String(r.cornstarch_g), 10),
+                          eggs: parseInt(String(r.eggs), 10),
+                        };
+                      } catch (e) {
+                        return console.error('Error parsing chicken fields:', e), null;
+                      }
+                    })(y.data)
+                  : null,
+                k = !!y?.data;
+              return {
+                data: w,
+                actions: {
+                  fryChicken: async (e, s, i, l, c, u, p, m) => {
+                    if (r)
+                      try {
+                        h(null), f(void 0);
+                        let g = new eW();
+                        g.moveCall({
+                          arguments: [
+                            g.pure.u16(e),
+                            g.pure.u16(s),
+                            g.pure.u16(i),
+                            g.pure.u16(l),
+                            g.pure.u16(c),
+                            g.pure.u16(u),
+                            g.pure.u16(p),
+                            g.pure.u16(m),
+                          ],
+                          target: `${r}::kfc::fry`,
+                        }),
+                          g.setGasBudget(5e6),
+                          a(
+                            { transaction: g },
+                            {
+                              onSuccess: async ({ digest: e }) => {
+                                f(e), d(!0);
+                                try {
+                                  let { effects: r } = await n.waitForTransaction({
+                                      digest: e,
+                                      options: { showEffects: !0 },
+                                    }),
+                                    a = r?.created?.[0]?.reference?.objectId;
+                                  a
+                                    ? (o(a),
+                                      t && localStorage.setItem(`chickenBoxId_${t}`, a),
+                                      await x(),
+                                      d(!1))
+                                    : (d(!1),
+                                      console.warn(
+                                        'No chicken box ID found in transaction effects'
+                                      ));
+                                } catch (e) {
+                                  console.error('Error waiting for transaction:', e), d(!1);
+                                }
+                              },
+                              onError: (e) => {
+                                let t = String(e);
+                                e instanceof Error && (t = e.message),
+                                  t.includes('Rejected from user')
+                                    ? (t =
+                                        'Transaction rejected by user. Please approve in your wallet.')
+                                    : t.includes('InsufficientGas') &&
+                                      (t = 'Insufficient gas. Please add more gas and try again.');
+                                let r = Error(t);
+                                h(r), console.error('Error:', e);
+                              },
+                            }
+                          );
+                      } catch (e) {
+                        h(e instanceof Error ? e : Error(String(e))),
+                          console.error('Error frying chicken:', e);
+                      }
+                  },
+                  getFlag: async () => {
+                    if (i && r)
+                      try {
+                        h(null), f(void 0);
+                        let e = new eW();
+                        e.moveCall({ arguments: [e.object(i)], target: `${r}::kfc::get_flag` }),
+                          e.setGasBudget(5e6),
+                          a(
+                            { transaction: e },
+                            {
+                              onSuccess: async ({ digest: e }) => {
+                                f(e), d(!0);
+                                try {
+                                  let r,
+                                    { effects: a } = await n.waitForTransaction({
+                                      digest: e,
+                                      options: { showEffects: !0 },
+                                    }),
+                                    s = a?.created ?? [];
+                                  if (s.length > 0) {
+                                    for (let e of s) {
+                                      let t = e?.reference?.objectId,
+                                        n = e?.reference?.type || e?.type || '';
+                                      if (t && String(n).toLowerCase().includes('flag')) {
+                                        r = t;
+                                        break;
+                                      }
+                                    }
+                                    !r &&
+                                      s[0]?.reference?.objectId &&
+                                      (r = s[0].reference.objectId);
+                                  }
+                                  if (!r && a?.mutated?.length)
+                                    for (let e of a.mutated) {
+                                      let t = e?.reference?.objectId,
+                                        n = e?.reference?.type || e?.type || '';
+                                      if (t && String(n).toLowerCase().includes('flag')) {
+                                        r = t;
+                                        break;
+                                      }
+                                    }
+                                  r
+                                    ? (c(r), t && localStorage.setItem(`flagId_${t}`, r), d(!1))
+                                    : (d(!1),
+                                      console.warn('No flag ID found in transaction effects', a));
+                                } catch (e) {
+                                  console.error('Error waiting for transaction:', e), d(!1);
+                                }
+                              },
+                              onError: (e) => {
+                                d(!1);
+                                let t = String(e);
+                                e instanceof Error && (t = e.message),
+                                  t.includes('Rejected from user')
+                                    ? (t =
+                                        'Transaction rejected by user. Please approve in your wallet.')
+                                    : t.includes('InsufficientGas') &&
+                                      (t = 'Insufficient gas. Please add more gas and try again.');
+                                let r = Error(t);
+                                h(r), console.error('Error:', e);
+                              },
+                            }
+                          );
+                      } catch (e) {
+                        h(e instanceof Error ? e : Error(String(e))),
+                          console.error('Error getting flag:', e);
+                      }
+                  },
+                  clearObject: () => {
+                    o(null),
+                      c(null),
+                      h(null),
+                      t &&
+                        (localStorage.removeItem(`chickenBoxId_${t}`),
+                        localStorage.removeItem(`flagId_${t}`));
+                  },
+                },
+                state: {
+                  isLoading: u,
+                  isPending: s,
+                  isConfirming: !1,
+                  isConfirmed: !!g && !u && !s,
+                  hash: g,
+                  error: j || b,
+                },
+                chickenBoxId: i,
+                flagId: l,
+                objectExists: k,
+                hasValidData: !!w,
+                isFetching: v,
+              };
+            })(),
+            [i, o] = (0, m.useState)({
+              chickenKg: '1',
+              garlicG: '10',
+              milkMl: '300',
+              saltG: '15',
+              pepperG: '5',
+              flourG: '200',
+              cornstarchG: '100',
+              eggs: '2',
+            }),
+            l = (e, t) => {
+              o((r) => ({ ...r, [e]: t }));
+            },
+            c = (e) => {
+              if (null == e) return '-';
+              if ('number' == typeof e) return Number.isFinite(e) ? String(e) : '-';
+              if ('string' == typeof e) return '' === e.trim() ? '-' : e;
+              try {
+                return String(e);
+              } catch {
+                return '-';
+              }
+            };
+          return e
+            ? (0, d.jsxs)('div', {
+                className: 'app-container',
+                children: [
+                  (0, d.jsxs)('div', {
+                    className: 'hero',
+                    children: [
+                      (0, d.jsx)('h1', { children: '🍗 KFC Challenge' }),
+                      (0, d.jsx)('p', {
+                        children: 'Master the perfect fried chicken recipe and claim your reward!',
+                      }),
+                    ],
+                  }),
+                  (0, d.jsxs)(tv, {
+                    style: { maxWidth: '900px', margin: '0 auto' },
+                    children: [
+                      s &&
+                        (0, d.jsxs)('div', {
+                          className: 'card status-reward',
+                          children: [
+                            (0, d.jsxs)('div', {
+                              className: 'card-header',
+                              children: [
+                                (0, d.jsx)('span', { style: { fontSize: '2rem' }, children: '🎖️' }),
+                                (0, d.jsx)('h2', { children: 'Reward Claimed' }),
+                              ],
+                            }),
+                            (0, d.jsx)(tx, {
+                              style: { color: '#fcd34d', marginBottom: '1rem', fontSize: '1.1rem' },
+                              children:
+                                "🔥 You're a KFC Legend! You've successfully completed the perfect recipe challenge!",
+                            }),
+                            (0, d.jsxs)('div', {
+                              style: {
+                                background: 'rgba(0,0,0,0.3)',
+                                padding: '1rem',
+                                borderRadius: '8px',
+                                borderLeft: '3px solid #ffc600',
+                              },
+                              children: [
+                                (0, d.jsx)(tx, {
+                                  size: '1',
+                                  style: { color: '#a0a0a0', marginBottom: '0.5rem' },
+                                  children: 'Reward ID:',
+                                }),
+                                (0, d.jsx)(tx, { size: '2', className: 'kv', children: s }),
+                              ],
+                            }),
+                          ],
+                        }),
+                      a &&
+                        t &&
+                        (0, d.jsxs)('div', {
+                          className: 'card',
+                          children: [
+                            (0, d.jsxs)('div', {
+                              className: 'card-header',
+                              children: [
+                                (0, d.jsx)('span', { style: { fontSize: '2rem' }, children: '📦' }),
+                                (0, d.jsx)('h2', { children: 'Your Creation' }),
+                              ],
+                            }),
+                            (0, d.jsxs)('div', {
+                              className: 'form-grid',
+                              children: [
+                                (0, d.jsxs)('div', {
+                                  className: 'form-group',
+                                  children: [
+                                    (0, d.jsx)('span', {
+                                      style: { color: '#ffc600' },
+                                      children: '🐔 Chicken',
+                                    }),
+                                    (0, d.jsxs)(tx, { children: [c(t.chickenKg), ' kg'] }),
+                                  ],
+                                }),
+                                (0, d.jsxs)('div', {
+                                  className: 'form-group',
+                                  children: [
+                                    (0, d.jsx)('span', {
+                                      style: { color: '#ffc600' },
+                                      children: '🧄 Garlic',
+                                    }),
+                                    (0, d.jsxs)(tx, { children: [c(t.garlicG), ' g'] }),
+                                  ],
+                                }),
+                                (0, d.jsxs)('div', {
+                                  className: 'form-group',
+                                  children: [
+                                    (0, d.jsx)('span', {
+                                      style: { color: '#ffc600' },
+                                      children: '🥛 Milk',
+                                    }),
+                                    (0, d.jsxs)(tx, { children: [c(t.milkMl), ' ml'] }),
+                                  ],
+                                }),
+                                (0, d.jsxs)('div', {
+                                  className: 'form-group',
+                                  children: [
+                                    (0, d.jsx)('span', {
+                                      style: { color: '#ffc600' },
+                                      children: '🧂 Salt',
+                                    }),
+                                    (0, d.jsxs)(tx, { children: [c(t.saltG), ' g'] }),
+                                  ],
+                                }),
+                                (0, d.jsxs)('div', {
+                                  className: 'form-group',
+                                  children: [
+                                    (0, d.jsx)('span', {
+                                      style: { color: '#ffc600' },
+                                      children: '🌶️ Pepper',
+                                    }),
+                                    (0, d.jsxs)(tx, { children: [c(t.pepperG), ' g'] }),
+                                  ],
+                                }),
+                                (0, d.jsxs)('div', {
+                                  className: 'form-group',
+                                  children: [
+                                    (0, d.jsx)('span', {
+                                      style: { color: '#ffc600' },
+                                      children: '🍞 Flour',
+                                    }),
+                                    (0, d.jsxs)(tx, { children: [c(t.flourG), ' g'] }),
+                                  ],
+                                }),
+                                (0, d.jsxs)('div', {
+                                  className: 'form-group',
+                                  children: [
+                                    (0, d.jsx)('span', {
+                                      style: { color: '#ffc600' },
+                                      children: '🥔 Cornstarch',
+                                    }),
+                                    (0, d.jsxs)(tx, { children: [c(t.cornstarchG), ' g'] }),
+                                  ],
+                                }),
+                                (0, d.jsxs)('div', {
+                                  className: 'form-group',
+                                  children: [
+                                    (0, d.jsx)('span', {
+                                      style: { color: '#ffc600' },
+                                      children: '🥚 Eggs',
+                                    }),
+                                    (0, d.jsx)(tx, { children: c(t.eggs) }),
+                                  ],
+                                }),
+                              ],
+                            }),
+                            (0, d.jsx)('div', {
+                              style: {
+                                background: 'rgba(0,0,0,0.3)',
+                                padding: '1rem',
+                                borderRadius: '8px',
+                                marginTop: '1rem',
+                                marginBottom: '1rem',
+                                borderLeft: '3px solid #ffc600',
+                              },
+                              children: (0, d.jsxs)(tx, {
+                                size: '1',
+                                style: { color: '#a0a0a0' },
+                                children: [
+                                  'ChickenBox ID: ',
+                                  (0, d.jsx)('span', { className: 'kv', children: a }),
+                                ],
+                              }),
+                            }),
+                            !s &&
+                              (0, d.jsx)(th, {
+                                size: '3',
+                                className: 'primary-btn',
+                                onClick: () => {
+                                  window.confirm(
+                                    '🍗 Ready to claim your reward?\n\nYou have successfully completed the challenge!'
+                                  ) && r.getFlag();
+                                },
+                                disabled: n.isLoading || n.isPending,
+                                children:
+                                  n.isLoading || n.isPending
+                                    ? (0, d.jsxs)(d.Fragment, {
+                                        children: [
+                                          (0, d.jsx)(tS.default, {
+                                            size: 14,
+                                            style: { marginRight: '8px' },
+                                          }),
+                                          'Processing...',
+                                        ],
+                                      })
+                                    : '🎁 Claim Reward',
+                              }),
+                          ],
+                        }),
+                      (0, d.jsxs)('div', {
+                        className: 'card',
+                        children: [
+                          (0, d.jsxs)('div', {
+                            className: 'card-header',
+                            children: [
+                              (0, d.jsx)('span', { style: { fontSize: '2rem' }, children: '👨‍🍳' }),
+                              (0, d.jsx)('h2', { children: 'Craft Your Recipe' }),
+                            ],
+                          }),
+                          (0, d.jsxs)('div', {
+                            style: {
+                              marginBottom: '1.5rem',
+                              display: 'flex',
+                              gap: '0.75rem',
+                              flexWrap: 'wrap',
+                            },
+                            children: [
+                              (0, d.jsx)('button', {
+                                className: 'secondary-btn',
+                                onClick: () => {
+                                  o({
+                                    chickenKg: '1',
+                                    garlicG: '10',
+                                    milkMl: '300',
+                                    saltG: '15',
+                                    pepperG: '5',
+                                    flourG: '200',
+                                    cornstarchG: '100',
+                                    eggs: '2',
+                                  });
+                                },
+                                children: '⚡ Use Perfect Recipe',
+                              }),
+                              a &&
+                                (0, d.jsx)('button', {
+                                  className: 'secondary-btn',
+                                  onClick: () =>
+                                    ((e) => {
+                                      if (e)
+                                        try {
+                                          (0, tP.default)(e), tM('Copied to clipboard');
+                                        } catch (e) {
+                                          console.error(e), tM('Copy failed');
+                                        }
+                                    })(a),
+                                  children: '📋 Copy ChickenBox ID',
+                                }),
+                            ],
+                          }),
+                          (0, d.jsxs)('div', {
+                            className: 'form-grid',
+                            children: [
+                              (0, d.jsxs)('div', {
+                                className: 'form-group',
+                                children: [
+                                  (0, d.jsx)('label', { children: '🐔 Chicken (kg)' }),
+                                  (0, d.jsx)(tN.Root, {
+                                    value: i.chickenKg,
+                                    onChange: (e) => l('chickenKg', e.target.value),
+                                    type: 'number',
+                                    min: '0',
+                                    max: '65535',
+                                  }),
+                                ],
+                              }),
+                              (0, d.jsxs)('div', {
+                                className: 'form-group',
+                                children: [
+                                  (0, d.jsx)('label', { children: '🧄 Garlic (g)' }),
+                                  (0, d.jsx)(tN.Root, {
+                                    value: i.garlicG,
+                                    onChange: (e) => l('garlicG', e.target.value),
+                                    type: 'number',
+                                    min: '0',
+                                    max: '65535',
+                                  }),
+                                ],
+                              }),
+                              (0, d.jsxs)('div', {
+                                className: 'form-group',
+                                children: [
+                                  (0, d.jsx)('label', { children: '🥛 Milk (ml)' }),
+                                  (0, d.jsx)(tN.Root, {
+                                    value: i.milkMl,
+                                    onChange: (e) => l('milkMl', e.target.value),
+                                    type: 'number',
+                                    min: '0',
+                                    max: '65535',
+                                  }),
+                                ],
+                              }),
+                              (0, d.jsxs)('div', {
+                                className: 'form-group',
+                                children: [
+                                  (0, d.jsx)('label', { children: '🧂 Salt (g)' }),
+                                  (0, d.jsx)(tN.Root, {
+                                    value: i.saltG,
+                                    onChange: (e) => l('saltG', e.target.value),
+                                    type: 'number',
+                                    min: '0',
+                                    max: '65535',
+                                  }),
+                                ],
+                              }),
+                              (0, d.jsxs)('div', {
+                                className: 'form-group',
+                                children: [
+                                  (0, d.jsx)('label', { children: '🌶️ Pepper (g)' }),
+                                  (0, d.jsx)(tN.Root, {
+                                    value: i.pepperG,
+                                    onChange: (e) => l('pepperG', e.target.value),
+                                    type: 'number',
+                                    min: '0',
+                                    max: '65535',
+                                  }),
+                                ],
+                              }),
+                              (0, d.jsxs)('div', {
+                                className: 'form-group',
+                                children: [
+                                  (0, d.jsx)('label', { children: '🍞 Flour (g)' }),
+                                  (0, d.jsx)(tN.Root, {
+                                    value: i.flourG,
+                                    onChange: (e) => l('flourG', e.target.value),
+                                    type: 'number',
+                                    min: '0',
+                                    max: '65535',
+                                  }),
+                                ],
+                              }),
+                              (0, d.jsxs)('div', {
+                                className: 'form-group',
+                                children: [
+                                  (0, d.jsx)('label', { children: '🥔 Cornstarch (g)' }),
+                                  (0, d.jsx)(tN.Root, {
+                                    value: i.cornstarchG,
+                                    onChange: (e) => l('cornstarchG', e.target.value),
+                                    type: 'number',
+                                    min: '0',
+                                    max: '65535',
+                                  }),
+                                ],
+                              }),
+                              (0, d.jsxs)('div', {
+                                className: 'form-group',
+                                children: [
+                                  (0, d.jsx)('label', { children: '🥚 Eggs' }),
+                                  (0, d.jsx)(tN.Root, {
+                                    value: i.eggs,
+                                    onChange: (e) => l('eggs', e.target.value),
+                                    type: 'number',
+                                    min: '0',
+                                    max: '65535',
+                                  }),
+                                ],
+                              }),
+                            ],
+                          }),
+                          (0, d.jsx)(th, {
+                            size: '3',
+                            className: 'primary-btn',
+                            onClick: () =>
+                              r.fryChicken(
+                                parseInt(i.chickenKg),
+                                parseInt(i.garlicG),
+                                parseInt(i.milkMl),
+                                parseInt(i.saltG),
+                                parseInt(i.pepperG),
+                                parseInt(i.flourG),
+                                parseInt(i.cornstarchG),
+                                parseInt(i.eggs)
+                              ),
+                            disabled: n.isPending || n.isLoading,
+                            children: n.isLoading
+                              ? (0, d.jsxs)(d.Fragment, {
+                                  children: [
+                                    (0, d.jsx)(tS.default, {
+                                      size: 16,
+                                      style: { marginRight: '8px' },
+                                    }),
+                                    'Frying...',
+                                  ],
+                                })
+                              : '🍗 Fry KFC Chicken',
+                          }),
+                        ],
+                      }),
+                      n.hash &&
+                        (0, d.jsxs)('div', {
+                          className: 'card status-success',
+                          children: [
+                            (0, d.jsxs)('div', {
+                              style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.75rem',
+                                marginBottom: '1rem',
+                              },
+                              children: [
+                                (0, d.jsx)('span', {
+                                  style: { fontSize: '1.5rem' },
+                                  children: '✅',
+                                }),
+                                (0, d.jsx)(tx, {
+                                  style: { fontSize: '1.1rem', fontWeight: '600' },
+                                  children: 'Transaction Confirmed',
+                                }),
+                              ],
+                            }),
+                            (0, d.jsxs)('div', {
+                              style: {
+                                background: 'rgba(0,0,0,0.3)',
+                                padding: '1rem',
+                                borderRadius: '8px',
+                                borderLeft: '3px solid #22c55e',
+                              },
+                              children: [
+                                (0, d.jsx)(tx, {
+                                  size: '1',
+                                  style: { color: '#a0a0a0', marginBottom: '0.5rem' },
+                                  children: 'Transaction Hash:',
+                                }),
+                                (0, d.jsx)(tx, { size: '2', className: 'kv', children: n.hash }),
+                              ],
+                            }),
+                          ],
+                        }),
+                      n.error &&
+                        (0, d.jsxs)('div', {
+                          className: 'card status-error',
+                          children: [
+                            (0, d.jsxs)('div', {
+                              style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.75rem',
+                                marginBottom: '1rem',
+                              },
+                              children: [
+                                (0, d.jsx)('span', {
+                                  style: { fontSize: '1.5rem' },
+                                  children: '⚠️',
+                                }),
+                                (0, d.jsx)(tx, {
+                                  style: {
+                                    fontSize: '1.1rem',
+                                    fontWeight: '600',
+                                    color: '#ef4444',
+                                  },
+                                  children: 'Oops! Something went wrong',
+                                }),
+                              ],
+                            }),
+                            (0, d.jsx)(tx, {
+                              style: { color: '#fca5a5', marginBottom: '0.75rem' },
+                              children: n.error?.message || String(n.error),
+                            }),
+                            n.error?.message?.includes('Rejected from user') &&
+                              (0, d.jsx)(tx, {
+                                size: '1',
+                                style: { color: '#fca5a5', fontStyle: 'italic' },
+                                children: '💡 Please approve the transaction in your wallet popup',
+                              }),
+                          ],
+                        }),
+                    ],
+                  }),
+                ],
+              })
+            : (0, d.jsxs)('div', {
+                className: 'app-container',
+                style: { paddingTop: '2.5rem', paddingBottom: '2.5rem' },
+                children: [
+                  (0, d.jsxs)('div', {
+                    className: 'hero',
+                    style: { textAlign: 'left' },
+                    children: [
+                      (0, d.jsx)('h1', { children: '🍗 KFC Chicken dApp' }),
+                      (0, d.jsx)('p', {
+                        children:
+                          'Welcome! Connect your wallet to start frying, collecting and claiming rewards.',
+                      }),
+                      (0, d.jsxs)('div', {
+                        style: { marginTop: '1rem' },
+                        children: [
+                          (0, d.jsx)('button', {
+                            className: 'primary-btn',
+                            onClick: () => window.scrollTo({ top: 400, behavior: 'smooth' }),
+                            children: 'Get Started',
+                          }),
+                          (0, d.jsx)('button', {
+                            className: 'secondary-btn',
+                            style: { marginLeft: '0.6rem' },
+                            onClick: () => tM('Connect to see recipes'),
+                            children: 'Why connect?',
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
+                  (0, d.jsxs)('div', {
+                    className: 'card',
+                    style: { marginTop: '1.25rem' },
+                    children: [
+                      (0, d.jsxs)('div', {
+                        className: 'card-header',
+                        children: [
+                          (0, d.jsx)('span', { style: { fontSize: '1.6rem' }, children: '✨' }),
+                          (0, d.jsx)('h2', { children: 'How it works' }),
+                        ],
+                      }),
+                      (0, d.jsxs)('div', {
+                        className: 'form-grid',
+                        style: { gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' },
+                        children: [
+                          (0, d.jsxs)('div', {
+                            className: 'feature-card card',
+                            children: [
+                              (0, d.jsx)('h3', { children: 'Fry' }),
+                              (0, d.jsx)('p', {
+                                className: 'muted',
+                                children: 'Create recipes and fry chicken on-chain.',
+                              }),
+                            ],
+                          }),
+                          (0, d.jsxs)('div', {
+                            className: 'feature-card card',
+                            children: [
+                              (0, d.jsx)('h3', { children: 'Collect' }),
+                              (0, d.jsx)('p', {
+                                className: 'muted',
+                                children: 'Store ChickenBoxes as proof of your creations.',
+                              }),
+                            ],
+                          }),
+                          (0, d.jsxs)('div', {
+                            className: 'feature-card card',
+                            children: [
+                              (0, d.jsx)('h3', { children: 'Claim' }),
+                              (0, d.jsx)('p', {
+                                className: 'muted',
+                                children: 'Complete challenges to earn rewards and flags.',
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
+                ],
+              });
+        },
+      ],
+      28028
+    );
+  },
+]);

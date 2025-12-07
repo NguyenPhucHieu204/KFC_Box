@@ -1,3 +1,1057 @@
-module.exports=[41667,a=>{"use strict";let b;var c=a.i(87924),d=a.i(98912),e=a.i(42871),f=a.i(76644),g=a.i(18544),h=a.i(33791),i=class extends h.Subscribable{constructor(a={}){super(),this.config=a,this.#a=new Map}#a;build(a,b,c){let d=b.queryKey,g=b.queryHash??(0,e.hashQueryKeyByOptions)(d,b),h=this.get(g);return h||(h=new f.Query({client:a,queryKey:d,queryHash:g,options:a.defaultQueryOptions(b),state:c,defaultOptions:a.getQueryDefaults(d)}),this.add(h)),h}add(a){this.#a.has(a.queryHash)||(this.#a.set(a.queryHash,a),this.notify({type:"added",query:a}))}remove(a){let b=this.#a.get(a.queryHash);b&&(a.destroy(),b===a&&this.#a.delete(a.queryHash),this.notify({type:"removed",query:a}))}clear(){g.notifyManager.batch(()=>{this.getAll().forEach(a=>{this.remove(a)})})}get(a){return this.#a.get(a)}getAll(){return[...this.#a.values()]}find(a){let b={exact:!0,...a};return this.getAll().find(a=>(0,e.matchQuery)(b,a))}findAll(a={}){let b=this.getAll();return Object.keys(a).length>0?b.filter(b=>(0,e.matchQuery)(a,b)):b}notify(a){g.notifyManager.batch(()=>{this.listeners.forEach(b=>{b(a)})})}onFocus(){g.notifyManager.batch(()=>{this.getAll().forEach(a=>{a.onFocus()})})}onOnline(){g.notifyManager.batch(()=>{this.getAll().forEach(a=>{a.onOnline()})})}},j=a.i(12794),k=h,l=class extends k.Subscribable{constructor(a={}){super(),this.config=a,this.#b=new Set,this.#c=new Map,this.#d=0}#b;#c;#d;build(a,b,c){let d=new j.Mutation({client:a,mutationCache:this,mutationId:++this.#d,options:a.defaultMutationOptions(b),state:c});return this.add(d),d}add(a){this.#b.add(a);let b=m(a);if("string"==typeof b){let c=this.#c.get(b);c?c.push(a):this.#c.set(b,[a])}this.notify({type:"added",mutation:a})}remove(a){if(this.#b.delete(a)){let b=m(a);if("string"==typeof b){let c=this.#c.get(b);if(c)if(c.length>1){let b=c.indexOf(a);-1!==b&&c.splice(b,1)}else c[0]===a&&this.#c.delete(b)}}this.notify({type:"removed",mutation:a})}canRun(a){let b=m(a);if("string"!=typeof b)return!0;{let c=this.#c.get(b),d=c?.find(a=>"pending"===a.state.status);return!d||d===a}}runNext(a){let b=m(a);if("string"!=typeof b)return Promise.resolve();{let c=this.#c.get(b)?.find(b=>b!==a&&b.state.isPaused);return c?.continue()??Promise.resolve()}}clear(){g.notifyManager.batch(()=>{this.#b.forEach(a=>{this.notify({type:"removed",mutation:a})}),this.#b.clear(),this.#c.clear()})}getAll(){return Array.from(this.#b)}find(a){let b={exact:!0,...a};return this.getAll().find(a=>(0,e.matchMutation)(b,a))}findAll(a={}){return this.getAll().filter(b=>(0,e.matchMutation)(a,b))}notify(a){g.notifyManager.batch(()=>{this.listeners.forEach(b=>{b(a)})})}resumePausedMutations(){let a=this.getAll().filter(a=>a.state.isPaused);return g.notifyManager.batch(()=>Promise.all(a.map(a=>a.continue().catch(e.noop))))}};function m(a){return a.options.scope?.id}var n=a.i(99745),o=a.i(12552),p=a.i(74684),q=class{#e;#f;#g;#h;#i;#j;#k;#l;constructor(a={}){this.#e=a.queryCache||new i,this.#f=a.mutationCache||new l,this.#g=a.defaultOptions||{},this.#h=new Map,this.#i=new Map,this.#j=0}mount(){this.#j++,1===this.#j&&(this.#k=n.focusManager.subscribe(async a=>{a&&(await this.resumePausedMutations(),this.#e.onFocus())}),this.#l=o.onlineManager.subscribe(async a=>{a&&(await this.resumePausedMutations(),this.#e.onOnline())}))}unmount(){this.#j--,0===this.#j&&(this.#k?.(),this.#k=void 0,this.#l?.(),this.#l=void 0)}isFetching(a){return this.#e.findAll({...a,fetchStatus:"fetching"}).length}isMutating(a){return this.#f.findAll({...a,status:"pending"}).length}getQueryData(a){let b=this.defaultQueryOptions({queryKey:a});return this.#e.get(b.queryHash)?.state.data}ensureQueryData(a){let b=this.defaultQueryOptions(a),c=this.#e.build(this,b),d=c.state.data;return void 0===d?this.fetchQuery(a):(a.revalidateIfStale&&c.isStaleByTime((0,e.resolveStaleTime)(b.staleTime,c))&&this.prefetchQuery(b),Promise.resolve(d))}getQueriesData(a){return this.#e.findAll(a).map(({queryKey:a,state:b})=>[a,b.data])}setQueryData(a,b,c){let d=this.defaultQueryOptions({queryKey:a}),f=this.#e.get(d.queryHash),g=f?.state.data,h=(0,e.functionalUpdate)(b,g);if(void 0!==h)return this.#e.build(this,d).setData(h,{...c,manual:!0})}setQueriesData(a,b,c){return g.notifyManager.batch(()=>this.#e.findAll(a).map(({queryKey:a})=>[a,this.setQueryData(a,b,c)]))}getQueryState(a){let b=this.defaultQueryOptions({queryKey:a});return this.#e.get(b.queryHash)?.state}removeQueries(a){let b=this.#e;g.notifyManager.batch(()=>{b.findAll(a).forEach(a=>{b.remove(a)})})}resetQueries(a,b){let c=this.#e;return g.notifyManager.batch(()=>(c.findAll(a).forEach(a=>{a.reset()}),this.refetchQueries({type:"active",...a},b)))}cancelQueries(a,b={}){let c={revert:!0,...b};return Promise.all(g.notifyManager.batch(()=>this.#e.findAll(a).map(a=>a.cancel(c)))).then(e.noop).catch(e.noop)}invalidateQueries(a,b={}){return g.notifyManager.batch(()=>(this.#e.findAll(a).forEach(a=>{a.invalidate()}),a?.refetchType==="none")?Promise.resolve():this.refetchQueries({...a,type:a?.refetchType??a?.type??"active"},b))}refetchQueries(a,b={}){let c={...b,cancelRefetch:b.cancelRefetch??!0};return Promise.all(g.notifyManager.batch(()=>this.#e.findAll(a).filter(a=>!a.isDisabled()&&!a.isStatic()).map(a=>{let b=a.fetch(void 0,c);return c.throwOnError||(b=b.catch(e.noop)),"paused"===a.state.fetchStatus?Promise.resolve():b}))).then(e.noop)}fetchQuery(a){let b=this.defaultQueryOptions(a);void 0===b.retry&&(b.retry=!1);let c=this.#e.build(this,b);return c.isStaleByTime((0,e.resolveStaleTime)(b.staleTime,c))?c.fetch(b):Promise.resolve(c.state.data)}prefetchQuery(a){return this.fetchQuery(a).then(e.noop).catch(e.noop)}fetchInfiniteQuery(a){return a.behavior=(0,p.infiniteQueryBehavior)(a.pages),this.fetchQuery(a)}prefetchInfiniteQuery(a){return this.fetchInfiniteQuery(a).then(e.noop).catch(e.noop)}ensureInfiniteQueryData(a){return a.behavior=(0,p.infiniteQueryBehavior)(a.pages),this.ensureQueryData(a)}resumePausedMutations(){return o.onlineManager.isOnline()?this.#f.resumePausedMutations():Promise.resolve()}getQueryCache(){return this.#e}getMutationCache(){return this.#f}getDefaultOptions(){return this.#g}setDefaultOptions(a){this.#g=a}setQueryDefaults(a,b){this.#h.set((0,e.hashKey)(a),{queryKey:a,defaultOptions:b})}getQueryDefaults(a){let b=[...this.#h.values()],c={};return b.forEach(b=>{(0,e.partialMatchKey)(a,b.queryKey)&&Object.assign(c,b.defaultOptions)}),c}setMutationDefaults(a,b){this.#i.set((0,e.hashKey)(a),{mutationKey:a,defaultOptions:b})}getMutationDefaults(a){let b=[...this.#i.values()],c={};return b.forEach(b=>{(0,e.partialMatchKey)(a,b.mutationKey)&&Object.assign(c,b.defaultOptions)}),c}defaultQueryOptions(a){if(a._defaulted)return a;let b={...this.#g.queries,...this.getQueryDefaults(a.queryKey),...a,_defaulted:!0};return b.queryHash||(b.queryHash=(0,e.hashQueryKeyByOptions)(b.queryKey,b)),void 0===b.refetchOnReconnect&&(b.refetchOnReconnect="always"!==b.networkMode),void 0===b.throwOnError&&(b.throwOnError=!!b.suspense),!b.networkMode&&b.persister&&(b.networkMode="offlineFirst"),b.queryFn===e.skipToken&&(b.enabled=!1),b}defaultMutationOptions(a){return a?._defaulted?a:{...this.#g.mutations,...a?.mutationKey&&this.getMutationDefaults(a.mutationKey),...a,_defaulted:!0}}clear(){this.#e.clear(),this.#f.clear()}},r=a.i(37927),s=a.i(72131),t=a.i(28525),u=a.i(7827),u=u,v=a.i(88289),w=a.i(7554),x=a.i(70121),y=a.i(50104),z=a.i(96743),A=a.i(92843),B=a.i(4691),C=a.i(92616),D=a.i(77192),E=a.i(30553),F=Symbol("radix.slottable"),G=a.i(25152),H=a.i(28094),[I,J]=(0,y.createContextScope)("Tooltip",[B.createPopperScope]),K=(0,B.createPopperScope)(),L="TooltipProvider",M="tooltip.open",[N,O]=I(L),P=a=>{let{__scopeTooltip:b,delayDuration:d=700,skipDelayDuration:e=300,disableHoverableContent:f=!1,children:g}=a,h=s.useRef(!0),i=s.useRef(!1),j=s.useRef(0);return s.useEffect(()=>{let a=j.current;return()=>window.clearTimeout(a)},[]),(0,c.jsx)(N,{scope:b,isOpenDelayedRef:h,delayDuration:d,onOpen:s.useCallback(()=>{window.clearTimeout(j.current),h.current=!1},[]),onClose:s.useCallback(()=>{window.clearTimeout(j.current),j.current=window.setTimeout(()=>h.current=!0,e)},[e]),isPointerInTransitRef:i,onPointerInTransitChange:s.useCallback(a=>{i.current=a},[]),disableHoverableContent:f,children:g})};P.displayName=L;var Q="Tooltip",[R,S]=I(Q),T=a=>{let{__scopeTooltip:b,children:d,open:e,defaultOpen:f,onOpenChange:g,disableHoverableContent:h,delayDuration:i}=a,j=O(Q,a.__scopeTooltip),k=K(b),[l,m]=s.useState(null),n=(0,A.useId)(),o=s.useRef(0),p=h??j.disableHoverableContent,q=i??j.delayDuration,r=s.useRef(!1),[t,u]=(0,G.useControllableState)({prop:e,defaultProp:f??!1,onChange:a=>{a?(j.onOpen(),document.dispatchEvent(new CustomEvent(M))):j.onClose(),g?.(a)},caller:Q}),v=s.useMemo(()=>t?r.current?"delayed-open":"instant-open":"closed",[t]),w=s.useCallback(()=>{window.clearTimeout(o.current),o.current=0,r.current=!1,u(!0)},[u]),x=s.useCallback(()=>{window.clearTimeout(o.current),o.current=0,u(!1)},[u]),y=s.useCallback(()=>{window.clearTimeout(o.current),o.current=window.setTimeout(()=>{r.current=!0,u(!0),o.current=0},q)},[q,u]);return s.useEffect(()=>()=>{o.current&&(window.clearTimeout(o.current),o.current=0)},[]),(0,c.jsx)(B.Root,{...k,children:(0,c.jsx)(R,{scope:b,contentId:n,open:t,stateAttribute:v,trigger:l,onTriggerChange:m,onTriggerEnter:s.useCallback(()=>{j.isOpenDelayedRef.current?y():w()},[j.isOpenDelayedRef,y,w]),onTriggerLeave:s.useCallback(()=>{p?x():(window.clearTimeout(o.current),o.current=0)},[x,p]),onOpen:w,onClose:x,disableHoverableContent:p,children:d})})};T.displayName=Q;var U="TooltipTrigger",V=s.forwardRef((a,b)=>{let{__scopeTooltip:d,...e}=a,f=S(U,d),g=O(U,d),h=K(d),i=s.useRef(null),j=(0,x.useComposedRefs)(b,i,f.onTriggerChange),k=s.useRef(!1),l=s.useRef(!1),m=s.useCallback(()=>k.current=!1,[]);return s.useEffect(()=>()=>document.removeEventListener("pointerup",m),[m]),(0,c.jsx)(B.Anchor,{asChild:!0,...h,children:(0,c.jsx)(E.Primitive.button,{"aria-describedby":f.open?f.contentId:void 0,"data-state":f.stateAttribute,...e,ref:j,onPointerMove:(0,w.composeEventHandlers)(a.onPointerMove,a=>{"touch"!==a.pointerType&&(l.current||g.isPointerInTransitRef.current||(f.onTriggerEnter(),l.current=!0))}),onPointerLeave:(0,w.composeEventHandlers)(a.onPointerLeave,()=>{f.onTriggerLeave(),l.current=!1}),onPointerDown:(0,w.composeEventHandlers)(a.onPointerDown,()=>{f.open&&f.onClose(),k.current=!0,document.addEventListener("pointerup",m,{once:!0})}),onFocus:(0,w.composeEventHandlers)(a.onFocus,()=>{k.current||f.onOpen()}),onBlur:(0,w.composeEventHandlers)(a.onBlur,f.onClose),onClick:(0,w.composeEventHandlers)(a.onClick,f.onClose)})})});V.displayName=U;var W="TooltipPortal",[X,Y]=I(W,{forceMount:void 0}),Z=a=>{let{__scopeTooltip:b,forceMount:d,children:e,container:f}=a,g=S(W,b);return(0,c.jsx)(X,{scope:b,forceMount:d,children:(0,c.jsx)(D.Presence,{present:d||g.open,children:(0,c.jsx)(C.Portal,{asChild:!0,container:f,children:e})})})};Z.displayName=W;var $="TooltipContent",_=s.forwardRef((a,b)=>{let d=Y($,a.__scopeTooltip),{forceMount:e=d.forceMount,side:f="top",...g}=a,h=S($,a.__scopeTooltip);return(0,c.jsx)(D.Presence,{present:e||h.open,children:h.disableHoverableContent?(0,c.jsx)(ae,{side:f,...g,ref:b}):(0,c.jsx)(aa,{side:f,...g,ref:b})})}),aa=s.forwardRef((a,b)=>{let d=S($,a.__scopeTooltip),e=O($,a.__scopeTooltip),f=s.useRef(null),g=(0,x.useComposedRefs)(b,f),[h,i]=s.useState(null),{trigger:j,onClose:k}=d,l=f.current,{onPointerInTransitChange:m}=e,n=s.useCallback(()=>{i(null),m(!1)},[m]),o=s.useCallback((a,b)=>{let c,d=a.currentTarget,e={x:a.clientX,y:a.clientY},f=function(a,b){let c=Math.abs(b.top-a.y),d=Math.abs(b.bottom-a.y),e=Math.abs(b.right-a.x),f=Math.abs(b.left-a.x);switch(Math.min(c,d,e,f)){case f:return"left";case e:return"right";case c:return"top";case d:return"bottom";default:throw Error("unreachable")}}(e,d.getBoundingClientRect());i(((c=[...function(a,b,c=5){let d=[];switch(b){case"top":d.push({x:a.x-c,y:a.y+c},{x:a.x+c,y:a.y+c});break;case"bottom":d.push({x:a.x-c,y:a.y-c},{x:a.x+c,y:a.y-c});break;case"left":d.push({x:a.x+c,y:a.y-c},{x:a.x+c,y:a.y+c});break;case"right":d.push({x:a.x-c,y:a.y-c},{x:a.x-c,y:a.y+c})}return d}(e,f),...function(a){let{top:b,right:c,bottom:d,left:e}=a;return[{x:e,y:b},{x:c,y:b},{x:c,y:d},{x:e,y:d}]}(b.getBoundingClientRect())].slice()).sort((a,b)=>a.x<b.x?-1:a.x>b.x?1:a.y<b.y?-1:1*!!(a.y>b.y)),function(a){if(a.length<=1)return a.slice();let b=[];for(let c=0;c<a.length;c++){let d=a[c];for(;b.length>=2;){let a=b[b.length-1],c=b[b.length-2];if((a.x-c.x)*(d.y-c.y)>=(a.y-c.y)*(d.x-c.x))b.pop();else break}b.push(d)}b.pop();let c=[];for(let b=a.length-1;b>=0;b--){let d=a[b];for(;c.length>=2;){let a=c[c.length-1],b=c[c.length-2];if((a.x-b.x)*(d.y-b.y)>=(a.y-b.y)*(d.x-b.x))c.pop();else break}c.push(d)}return(c.pop(),1===b.length&&1===c.length&&b[0].x===c[0].x&&b[0].y===c[0].y)?b:b.concat(c)}(c))),m(!0)},[m]);return s.useEffect(()=>()=>n(),[n]),s.useEffect(()=>{if(j&&l){let a=a=>o(a,l),b=a=>o(a,j);return j.addEventListener("pointerleave",a),l.addEventListener("pointerleave",b),()=>{j.removeEventListener("pointerleave",a),l.removeEventListener("pointerleave",b)}}},[j,l,o,n]),s.useEffect(()=>{if(h){let a=a=>{let b=a.target,c={x:a.clientX,y:a.clientY},d=j?.contains(b)||l?.contains(b),e=!function(a,b){let{x:c,y:d}=a,e=!1;for(let a=0,f=b.length-1;a<b.length;f=a++){let g=b[a],h=b[f],i=g.x,j=g.y,k=h.x,l=h.y;j>d!=l>d&&c<(k-i)*(d-j)/(l-j)+i&&(e=!e)}return e}(c,h);d?n():e&&(n(),k())};return document.addEventListener("pointermove",a),()=>document.removeEventListener("pointermove",a)}},[j,l,h,k,n]),(0,c.jsx)(ae,{...a,ref:g})}),[ab,ac]=I(Q,{isInside:!1}),ad=((b=({children:a})=>(0,c.jsx)(c.Fragment,{children:a})).displayName="TooltipContent.Slottable",b.__radixId=F,b),ae=s.forwardRef((a,b)=>{let{__scopeTooltip:d,children:e,"aria-label":f,onEscapeKeyDown:g,onPointerDownOutside:h,...i}=a,j=S($,d),k=K(d),{onClose:l}=j;return s.useEffect(()=>(document.addEventListener(M,l),()=>document.removeEventListener(M,l)),[l]),s.useEffect(()=>{if(j.trigger){let a=a=>{let b=a.target;b?.contains(j.trigger)&&l()};return window.addEventListener("scroll",a,{capture:!0}),()=>window.removeEventListener("scroll",a,{capture:!0})}},[j.trigger,l]),(0,c.jsx)(z.DismissableLayer,{asChild:!0,disableOutsidePointerEvents:!1,onEscapeKeyDown:g,onPointerDownOutside:h,onFocusOutside:a=>a.preventDefault(),onDismiss:l,children:(0,c.jsxs)(B.Content,{"data-state":j.stateAttribute,...k,...i,ref:b,style:{...i.style,"--radix-tooltip-content-transform-origin":"var(--radix-popper-transform-origin)","--radix-tooltip-content-available-width":"var(--radix-popper-available-width)","--radix-tooltip-content-available-height":"var(--radix-popper-available-height)","--radix-tooltip-trigger-width":"var(--radix-popper-anchor-width)","--radix-tooltip-trigger-height":"var(--radix-popper-anchor-height)"},children:[(0,c.jsx)(ad,{children:e}),(0,c.jsx)(ab,{scope:d,isInside:!0,children:(0,c.jsx)(H.Root,{id:j.contentId,role:"tooltip",children:f||e})})]})})});_.displayName=$;var af="TooltipArrow",ag=s.forwardRef((a,b)=>{let{__scopeTooltip:d,...e}=a,f=K(d);return ac(af,d).isInside?null:(0,c.jsx)(B.Arrow,{...f,...e,ref:b})});ag.displayName=af,a.s(["Arrow",()=>ag,"Content",()=>_,"Portal",()=>Z,"Provider",()=>P,"Root",()=>T,"Tooltip",()=>T,"TooltipArrow",()=>ag,"TooltipContent",()=>_,"TooltipPortal",()=>Z,"TooltipProvider",()=>P,"TooltipTrigger",()=>V,"Trigger",()=>V,"createTooltipScope",()=>J],99811);var ah=a.i(99811),ah=ah,ai=a.i(71680),aj=a.i(5707),ak=a.i(88023);let al={...ai.asChildPropDef,hasBackground:{type:"boolean",default:!0},appearance:{type:"enum",values:["inherit","light","dark"],default:"inherit"},accentColor:{type:"enum",values:aj.accentColors,default:"indigo"},grayColor:{type:"enum",values:aj.grayColors,default:"auto"},panelBackground:{type:"enum",values:["solid","translucent"],default:"translucent"},radius:{type:"enum",values:ak.radii,default:"medium"},scaling:{type:"enum",values:["90%","95%","100%","105%","110%"],default:"100%"}},am=()=>{},an=s.createContext(void 0),ao=s.forwardRef((a,b)=>void 0===s.useContext(an)?s.createElement(ah.Provider,{delayDuration:200},s.createElement(u.Provider,{dir:"ltr"},s.createElement(ap,{...a,ref:b}))):s.createElement(aq,{...a,ref:b}));ao.displayName="Theme";let ap=s.forwardRef((a,b)=>{let{appearance:c=al.appearance.default,accentColor:d=al.accentColor.default,grayColor:e=al.grayColor.default,panelBackground:f=al.panelBackground.default,radius:g=al.radius.default,scaling:h=al.scaling.default,hasBackground:i=al.hasBackground.default,...j}=a,[k,l]=s.useState(c);s.useEffect(()=>l(c),[c]);let[m,n]=s.useState(d);s.useEffect(()=>n(d),[d]);let[o,p]=s.useState(e);s.useEffect(()=>p(e),[e]);let[q,r]=s.useState(f);s.useEffect(()=>r(f),[f]);let[t,u]=s.useState(g);s.useEffect(()=>u(g),[g]);let[v,w]=s.useState(h);return s.useEffect(()=>w(h),[h]),s.createElement(aq,{...j,ref:b,isRoot:!0,hasBackground:i,appearance:k,accentColor:m,grayColor:o,panelBackground:q,radius:t,scaling:v,onAppearanceChange:l,onAccentColorChange:n,onGrayColorChange:p,onPanelBackgroundChange:r,onRadiusChange:u,onScalingChange:w})});ap.displayName="ThemeRoot";let aq=s.forwardRef((a,b)=>{let c=s.useContext(an),{asChild:d,isRoot:e,hasBackground:f,appearance:g=c?.appearance??al.appearance.default,accentColor:h=c?.accentColor??al.accentColor.default,grayColor:i=c?.resolvedGrayColor??al.grayColor.default,panelBackground:j=c?.panelBackground??al.panelBackground.default,radius:k=c?.radius??al.radius.default,scaling:l=c?.scaling??al.scaling.default,onAppearanceChange:m=am,onAccentColorChange:n=am,onGrayColorChange:o=am,onPanelBackgroundChange:p=am,onRadiusChange:q=am,onScalingChange:r=am,...u}=a,w=d?v.Slot.Root:"div",x="auto"===i?function(a){switch(a){case"tomato":case"red":case"ruby":case"crimson":case"pink":case"plum":case"purple":case"violet":return"mauve";case"iris":case"indigo":case"blue":case"sky":case"cyan":return"slate";case"teal":case"jade":case"mint":case"green":return"sage";case"grass":case"lime":return"olive";case"yellow":case"amber":case"orange":case"brown":case"gold":case"bronze":return"sand";case"gray":return"gray"}}(h):i,y="light"===a.appearance||"dark"===a.appearance;return s.createElement(an.Provider,{value:s.useMemo(()=>({appearance:g,accentColor:h,grayColor:i,resolvedGrayColor:x,panelBackground:j,radius:k,scaling:l,onAppearanceChange:m,onAccentColorChange:n,onGrayColorChange:o,onPanelBackgroundChange:p,onRadiusChange:q,onScalingChange:r}),[g,h,i,x,j,k,l,m,n,o,p,q,r])},s.createElement(w,{"data-is-root-theme":e?"true":"false","data-accent-color":h,"data-gray-color":x,"data-has-background":(void 0===f?e||y:f)?"true":"false","data-panel-background":j,"data-radius":k,"data-scaling":l,ref:b,...u,className:(0,t.default)("radix-themes",{light:"light"===g,dark:"dark"===g},u.className)}))});aq.displayName="ThemeImpl";var ar=a.i(38847);let as=new q;function at({children:a}){return(0,c.jsx)(ao,{appearance:"dark",children:(0,c.jsx)(r.QueryClientProvider,{client:as,children:(0,c.jsx)(d.IotaClientProvider,{networks:ar.networkConfig,defaultNetwork:"devnet",children:(0,c.jsx)(d.WalletProvider,{autoConnect:!0,children:a})})})})}a.s(["Provider",()=>at],41667)}];
+module.exports = [
+  41667,
+  (a) => {
+    'use strict';
+    let b;
+    var c = a.i(87924),
+      d = a.i(98912),
+      e = a.i(42871),
+      f = a.i(76644),
+      g = a.i(18544),
+      h = a.i(33791),
+      i = class extends h.Subscribable {
+        constructor(a = {}) {
+          super(), (this.config = a), (this.#a = new Map());
+        }
+        #a;
+        build(a, b, c) {
+          let d = b.queryKey,
+            g = b.queryHash ?? (0, e.hashQueryKeyByOptions)(d, b),
+            h = this.get(g);
+          return (
+            h ||
+              ((h = new f.Query({
+                client: a,
+                queryKey: d,
+                queryHash: g,
+                options: a.defaultQueryOptions(b),
+                state: c,
+                defaultOptions: a.getQueryDefaults(d),
+              })),
+              this.add(h)),
+            h
+          );
+        }
+        add(a) {
+          this.#a.has(a.queryHash) ||
+            (this.#a.set(a.queryHash, a), this.notify({ type: 'added', query: a }));
+        }
+        remove(a) {
+          let b = this.#a.get(a.queryHash);
+          b &&
+            (a.destroy(),
+            b === a && this.#a.delete(a.queryHash),
+            this.notify({ type: 'removed', query: a }));
+        }
+        clear() {
+          g.notifyManager.batch(() => {
+            this.getAll().forEach((a) => {
+              this.remove(a);
+            });
+          });
+        }
+        get(a) {
+          return this.#a.get(a);
+        }
+        getAll() {
+          return [...this.#a.values()];
+        }
+        find(a) {
+          let b = { exact: !0, ...a };
+          return this.getAll().find((a) => (0, e.matchQuery)(b, a));
+        }
+        findAll(a = {}) {
+          let b = this.getAll();
+          return Object.keys(a).length > 0 ? b.filter((b) => (0, e.matchQuery)(a, b)) : b;
+        }
+        notify(a) {
+          g.notifyManager.batch(() => {
+            this.listeners.forEach((b) => {
+              b(a);
+            });
+          });
+        }
+        onFocus() {
+          g.notifyManager.batch(() => {
+            this.getAll().forEach((a) => {
+              a.onFocus();
+            });
+          });
+        }
+        onOnline() {
+          g.notifyManager.batch(() => {
+            this.getAll().forEach((a) => {
+              a.onOnline();
+            });
+          });
+        }
+      },
+      j = a.i(12794),
+      k = h,
+      l = class extends k.Subscribable {
+        constructor(a = {}) {
+          super(), (this.config = a), (this.#b = new Set()), (this.#c = new Map()), (this.#d = 0);
+        }
+        #b;
+        #c;
+        #d;
+        build(a, b, c) {
+          let d = new j.Mutation({
+            client: a,
+            mutationCache: this,
+            mutationId: ++this.#d,
+            options: a.defaultMutationOptions(b),
+            state: c,
+          });
+          return this.add(d), d;
+        }
+        add(a) {
+          this.#b.add(a);
+          let b = m(a);
+          if ('string' == typeof b) {
+            let c = this.#c.get(b);
+            c ? c.push(a) : this.#c.set(b, [a]);
+          }
+          this.notify({ type: 'added', mutation: a });
+        }
+        remove(a) {
+          if (this.#b.delete(a)) {
+            let b = m(a);
+            if ('string' == typeof b) {
+              let c = this.#c.get(b);
+              if (c)
+                if (c.length > 1) {
+                  let b = c.indexOf(a);
+                  -1 !== b && c.splice(b, 1);
+                } else c[0] === a && this.#c.delete(b);
+            }
+          }
+          this.notify({ type: 'removed', mutation: a });
+        }
+        canRun(a) {
+          let b = m(a);
+          if ('string' != typeof b) return !0;
+          {
+            let c = this.#c.get(b),
+              d = c?.find((a) => 'pending' === a.state.status);
+            return !d || d === a;
+          }
+        }
+        runNext(a) {
+          let b = m(a);
+          if ('string' != typeof b) return Promise.resolve();
+          {
+            let c = this.#c.get(b)?.find((b) => b !== a && b.state.isPaused);
+            return c?.continue() ?? Promise.resolve();
+          }
+        }
+        clear() {
+          g.notifyManager.batch(() => {
+            this.#b.forEach((a) => {
+              this.notify({ type: 'removed', mutation: a });
+            }),
+              this.#b.clear(),
+              this.#c.clear();
+          });
+        }
+        getAll() {
+          return Array.from(this.#b);
+        }
+        find(a) {
+          let b = { exact: !0, ...a };
+          return this.getAll().find((a) => (0, e.matchMutation)(b, a));
+        }
+        findAll(a = {}) {
+          return this.getAll().filter((b) => (0, e.matchMutation)(a, b));
+        }
+        notify(a) {
+          g.notifyManager.batch(() => {
+            this.listeners.forEach((b) => {
+              b(a);
+            });
+          });
+        }
+        resumePausedMutations() {
+          let a = this.getAll().filter((a) => a.state.isPaused);
+          return g.notifyManager.batch(() => Promise.all(a.map((a) => a.continue().catch(e.noop))));
+        }
+      };
+    function m(a) {
+      return a.options.scope?.id;
+    }
+    var n = a.i(99745),
+      o = a.i(12552),
+      p = a.i(74684),
+      q = class {
+        #e;
+        #f;
+        #g;
+        #h;
+        #i;
+        #j;
+        #k;
+        #l;
+        constructor(a = {}) {
+          (this.#e = a.queryCache || new i()),
+            (this.#f = a.mutationCache || new l()),
+            (this.#g = a.defaultOptions || {}),
+            (this.#h = new Map()),
+            (this.#i = new Map()),
+            (this.#j = 0);
+        }
+        mount() {
+          this.#j++,
+            1 === this.#j &&
+              ((this.#k = n.focusManager.subscribe(async (a) => {
+                a && (await this.resumePausedMutations(), this.#e.onFocus());
+              })),
+              (this.#l = o.onlineManager.subscribe(async (a) => {
+                a && (await this.resumePausedMutations(), this.#e.onOnline());
+              })));
+        }
+        unmount() {
+          this.#j--,
+            0 === this.#j && (this.#k?.(), (this.#k = void 0), this.#l?.(), (this.#l = void 0));
+        }
+        isFetching(a) {
+          return this.#e.findAll({ ...a, fetchStatus: 'fetching' }).length;
+        }
+        isMutating(a) {
+          return this.#f.findAll({ ...a, status: 'pending' }).length;
+        }
+        getQueryData(a) {
+          let b = this.defaultQueryOptions({ queryKey: a });
+          return this.#e.get(b.queryHash)?.state.data;
+        }
+        ensureQueryData(a) {
+          let b = this.defaultQueryOptions(a),
+            c = this.#e.build(this, b),
+            d = c.state.data;
+          return void 0 === d
+            ? this.fetchQuery(a)
+            : (a.revalidateIfStale &&
+                c.isStaleByTime((0, e.resolveStaleTime)(b.staleTime, c)) &&
+                this.prefetchQuery(b),
+              Promise.resolve(d));
+        }
+        getQueriesData(a) {
+          return this.#e.findAll(a).map(({ queryKey: a, state: b }) => [a, b.data]);
+        }
+        setQueryData(a, b, c) {
+          let d = this.defaultQueryOptions({ queryKey: a }),
+            f = this.#e.get(d.queryHash),
+            g = f?.state.data,
+            h = (0, e.functionalUpdate)(b, g);
+          if (void 0 !== h) return this.#e.build(this, d).setData(h, { ...c, manual: !0 });
+        }
+        setQueriesData(a, b, c) {
+          return g.notifyManager.batch(() =>
+            this.#e.findAll(a).map(({ queryKey: a }) => [a, this.setQueryData(a, b, c)])
+          );
+        }
+        getQueryState(a) {
+          let b = this.defaultQueryOptions({ queryKey: a });
+          return this.#e.get(b.queryHash)?.state;
+        }
+        removeQueries(a) {
+          let b = this.#e;
+          g.notifyManager.batch(() => {
+            b.findAll(a).forEach((a) => {
+              b.remove(a);
+            });
+          });
+        }
+        resetQueries(a, b) {
+          let c = this.#e;
+          return g.notifyManager.batch(
+            () => (
+              c.findAll(a).forEach((a) => {
+                a.reset();
+              }),
+              this.refetchQueries({ type: 'active', ...a }, b)
+            )
+          );
+        }
+        cancelQueries(a, b = {}) {
+          let c = { revert: !0, ...b };
+          return Promise.all(
+            g.notifyManager.batch(() => this.#e.findAll(a).map((a) => a.cancel(c)))
+          )
+            .then(e.noop)
+            .catch(e.noop);
+        }
+        invalidateQueries(a, b = {}) {
+          return g.notifyManager.batch(() =>
+            (this.#e.findAll(a).forEach((a) => {
+              a.invalidate();
+            }),
+            a?.refetchType === 'none')
+              ? Promise.resolve()
+              : this.refetchQueries({ ...a, type: a?.refetchType ?? a?.type ?? 'active' }, b)
+          );
+        }
+        refetchQueries(a, b = {}) {
+          let c = { ...b, cancelRefetch: b.cancelRefetch ?? !0 };
+          return Promise.all(
+            g.notifyManager.batch(() =>
+              this.#e
+                .findAll(a)
+                .filter((a) => !a.isDisabled() && !a.isStatic())
+                .map((a) => {
+                  let b = a.fetch(void 0, c);
+                  return (
+                    c.throwOnError || (b = b.catch(e.noop)),
+                    'paused' === a.state.fetchStatus ? Promise.resolve() : b
+                  );
+                })
+            )
+          ).then(e.noop);
+        }
+        fetchQuery(a) {
+          let b = this.defaultQueryOptions(a);
+          void 0 === b.retry && (b.retry = !1);
+          let c = this.#e.build(this, b);
+          return c.isStaleByTime((0, e.resolveStaleTime)(b.staleTime, c))
+            ? c.fetch(b)
+            : Promise.resolve(c.state.data);
+        }
+        prefetchQuery(a) {
+          return this.fetchQuery(a).then(e.noop).catch(e.noop);
+        }
+        fetchInfiniteQuery(a) {
+          return (a.behavior = (0, p.infiniteQueryBehavior)(a.pages)), this.fetchQuery(a);
+        }
+        prefetchInfiniteQuery(a) {
+          return this.fetchInfiniteQuery(a).then(e.noop).catch(e.noop);
+        }
+        ensureInfiniteQueryData(a) {
+          return (a.behavior = (0, p.infiniteQueryBehavior)(a.pages)), this.ensureQueryData(a);
+        }
+        resumePausedMutations() {
+          return o.onlineManager.isOnline() ? this.#f.resumePausedMutations() : Promise.resolve();
+        }
+        getQueryCache() {
+          return this.#e;
+        }
+        getMutationCache() {
+          return this.#f;
+        }
+        getDefaultOptions() {
+          return this.#g;
+        }
+        setDefaultOptions(a) {
+          this.#g = a;
+        }
+        setQueryDefaults(a, b) {
+          this.#h.set((0, e.hashKey)(a), { queryKey: a, defaultOptions: b });
+        }
+        getQueryDefaults(a) {
+          let b = [...this.#h.values()],
+            c = {};
+          return (
+            b.forEach((b) => {
+              (0, e.partialMatchKey)(a, b.queryKey) && Object.assign(c, b.defaultOptions);
+            }),
+            c
+          );
+        }
+        setMutationDefaults(a, b) {
+          this.#i.set((0, e.hashKey)(a), { mutationKey: a, defaultOptions: b });
+        }
+        getMutationDefaults(a) {
+          let b = [...this.#i.values()],
+            c = {};
+          return (
+            b.forEach((b) => {
+              (0, e.partialMatchKey)(a, b.mutationKey) && Object.assign(c, b.defaultOptions);
+            }),
+            c
+          );
+        }
+        defaultQueryOptions(a) {
+          if (a._defaulted) return a;
+          let b = {
+            ...this.#g.queries,
+            ...this.getQueryDefaults(a.queryKey),
+            ...a,
+            _defaulted: !0,
+          };
+          return (
+            b.queryHash || (b.queryHash = (0, e.hashQueryKeyByOptions)(b.queryKey, b)),
+            void 0 === b.refetchOnReconnect && (b.refetchOnReconnect = 'always' !== b.networkMode),
+            void 0 === b.throwOnError && (b.throwOnError = !!b.suspense),
+            !b.networkMode && b.persister && (b.networkMode = 'offlineFirst'),
+            b.queryFn === e.skipToken && (b.enabled = !1),
+            b
+          );
+        }
+        defaultMutationOptions(a) {
+          return a?._defaulted
+            ? a
+            : {
+                ...this.#g.mutations,
+                ...(a?.mutationKey && this.getMutationDefaults(a.mutationKey)),
+                ...a,
+                _defaulted: !0,
+              };
+        }
+        clear() {
+          this.#e.clear(), this.#f.clear();
+        }
+      },
+      r = a.i(37927),
+      s = a.i(72131),
+      t = a.i(28525),
+      u = a.i(7827),
+      u = u,
+      v = a.i(88289),
+      w = a.i(7554),
+      x = a.i(70121),
+      y = a.i(50104),
+      z = a.i(96743),
+      A = a.i(92843),
+      B = a.i(4691),
+      C = a.i(92616),
+      D = a.i(77192),
+      E = a.i(30553),
+      F = Symbol('radix.slottable'),
+      G = a.i(25152),
+      H = a.i(28094),
+      [I, J] = (0, y.createContextScope)('Tooltip', [B.createPopperScope]),
+      K = (0, B.createPopperScope)(),
+      L = 'TooltipProvider',
+      M = 'tooltip.open',
+      [N, O] = I(L),
+      P = (a) => {
+        let {
+            __scopeTooltip: b,
+            delayDuration: d = 700,
+            skipDelayDuration: e = 300,
+            disableHoverableContent: f = !1,
+            children: g,
+          } = a,
+          h = s.useRef(!0),
+          i = s.useRef(!1),
+          j = s.useRef(0);
+        return (
+          s.useEffect(() => {
+            let a = j.current;
+            return () => window.clearTimeout(a);
+          }, []),
+          (0, c.jsx)(N, {
+            scope: b,
+            isOpenDelayedRef: h,
+            delayDuration: d,
+            onOpen: s.useCallback(() => {
+              window.clearTimeout(j.current), (h.current = !1);
+            }, []),
+            onClose: s.useCallback(() => {
+              window.clearTimeout(j.current),
+                (j.current = window.setTimeout(() => (h.current = !0), e));
+            }, [e]),
+            isPointerInTransitRef: i,
+            onPointerInTransitChange: s.useCallback((a) => {
+              i.current = a;
+            }, []),
+            disableHoverableContent: f,
+            children: g,
+          })
+        );
+      };
+    P.displayName = L;
+    var Q = 'Tooltip',
+      [R, S] = I(Q),
+      T = (a) => {
+        let {
+            __scopeTooltip: b,
+            children: d,
+            open: e,
+            defaultOpen: f,
+            onOpenChange: g,
+            disableHoverableContent: h,
+            delayDuration: i,
+          } = a,
+          j = O(Q, a.__scopeTooltip),
+          k = K(b),
+          [l, m] = s.useState(null),
+          n = (0, A.useId)(),
+          o = s.useRef(0),
+          p = h ?? j.disableHoverableContent,
+          q = i ?? j.delayDuration,
+          r = s.useRef(!1),
+          [t, u] = (0, G.useControllableState)({
+            prop: e,
+            defaultProp: f ?? !1,
+            onChange: (a) => {
+              a ? (j.onOpen(), document.dispatchEvent(new CustomEvent(M))) : j.onClose(), g?.(a);
+            },
+            caller: Q,
+          }),
+          v = s.useMemo(() => (t ? (r.current ? 'delayed-open' : 'instant-open') : 'closed'), [t]),
+          w = s.useCallback(() => {
+            window.clearTimeout(o.current), (o.current = 0), (r.current = !1), u(!0);
+          }, [u]),
+          x = s.useCallback(() => {
+            window.clearTimeout(o.current), (o.current = 0), u(!1);
+          }, [u]),
+          y = s.useCallback(() => {
+            window.clearTimeout(o.current),
+              (o.current = window.setTimeout(() => {
+                (r.current = !0), u(!0), (o.current = 0);
+              }, q));
+          }, [q, u]);
+        return (
+          s.useEffect(
+            () => () => {
+              o.current && (window.clearTimeout(o.current), (o.current = 0));
+            },
+            []
+          ),
+          (0, c.jsx)(B.Root, {
+            ...k,
+            children: (0, c.jsx)(R, {
+              scope: b,
+              contentId: n,
+              open: t,
+              stateAttribute: v,
+              trigger: l,
+              onTriggerChange: m,
+              onTriggerEnter: s.useCallback(() => {
+                j.isOpenDelayedRef.current ? y() : w();
+              }, [j.isOpenDelayedRef, y, w]),
+              onTriggerLeave: s.useCallback(() => {
+                p ? x() : (window.clearTimeout(o.current), (o.current = 0));
+              }, [x, p]),
+              onOpen: w,
+              onClose: x,
+              disableHoverableContent: p,
+              children: d,
+            }),
+          })
+        );
+      };
+    T.displayName = Q;
+    var U = 'TooltipTrigger',
+      V = s.forwardRef((a, b) => {
+        let { __scopeTooltip: d, ...e } = a,
+          f = S(U, d),
+          g = O(U, d),
+          h = K(d),
+          i = s.useRef(null),
+          j = (0, x.useComposedRefs)(b, i, f.onTriggerChange),
+          k = s.useRef(!1),
+          l = s.useRef(!1),
+          m = s.useCallback(() => (k.current = !1), []);
+        return (
+          s.useEffect(() => () => document.removeEventListener('pointerup', m), [m]),
+          (0, c.jsx)(B.Anchor, {
+            asChild: !0,
+            ...h,
+            children: (0, c.jsx)(E.Primitive.button, {
+              'aria-describedby': f.open ? f.contentId : void 0,
+              'data-state': f.stateAttribute,
+              ...e,
+              ref: j,
+              onPointerMove: (0, w.composeEventHandlers)(a.onPointerMove, (a) => {
+                'touch' !== a.pointerType &&
+                  (l.current ||
+                    g.isPointerInTransitRef.current ||
+                    (f.onTriggerEnter(), (l.current = !0)));
+              }),
+              onPointerLeave: (0, w.composeEventHandlers)(a.onPointerLeave, () => {
+                f.onTriggerLeave(), (l.current = !1);
+              }),
+              onPointerDown: (0, w.composeEventHandlers)(a.onPointerDown, () => {
+                f.open && f.onClose(),
+                  (k.current = !0),
+                  document.addEventListener('pointerup', m, { once: !0 });
+              }),
+              onFocus: (0, w.composeEventHandlers)(a.onFocus, () => {
+                k.current || f.onOpen();
+              }),
+              onBlur: (0, w.composeEventHandlers)(a.onBlur, f.onClose),
+              onClick: (0, w.composeEventHandlers)(a.onClick, f.onClose),
+            }),
+          })
+        );
+      });
+    V.displayName = U;
+    var W = 'TooltipPortal',
+      [X, Y] = I(W, { forceMount: void 0 }),
+      Z = (a) => {
+        let { __scopeTooltip: b, forceMount: d, children: e, container: f } = a,
+          g = S(W, b);
+        return (0, c.jsx)(X, {
+          scope: b,
+          forceMount: d,
+          children: (0, c.jsx)(D.Presence, {
+            present: d || g.open,
+            children: (0, c.jsx)(C.Portal, { asChild: !0, container: f, children: e }),
+          }),
+        });
+      };
+    Z.displayName = W;
+    var $ = 'TooltipContent',
+      _ = s.forwardRef((a, b) => {
+        let d = Y($, a.__scopeTooltip),
+          { forceMount: e = d.forceMount, side: f = 'top', ...g } = a,
+          h = S($, a.__scopeTooltip);
+        return (0, c.jsx)(D.Presence, {
+          present: e || h.open,
+          children: h.disableHoverableContent
+            ? (0, c.jsx)(ae, { side: f, ...g, ref: b })
+            : (0, c.jsx)(aa, { side: f, ...g, ref: b }),
+        });
+      }),
+      aa = s.forwardRef((a, b) => {
+        let d = S($, a.__scopeTooltip),
+          e = O($, a.__scopeTooltip),
+          f = s.useRef(null),
+          g = (0, x.useComposedRefs)(b, f),
+          [h, i] = s.useState(null),
+          { trigger: j, onClose: k } = d,
+          l = f.current,
+          { onPointerInTransitChange: m } = e,
+          n = s.useCallback(() => {
+            i(null), m(!1);
+          }, [m]),
+          o = s.useCallback(
+            (a, b) => {
+              let c,
+                d = a.currentTarget,
+                e = { x: a.clientX, y: a.clientY },
+                f = (function (a, b) {
+                  let c = Math.abs(b.top - a.y),
+                    d = Math.abs(b.bottom - a.y),
+                    e = Math.abs(b.right - a.x),
+                    f = Math.abs(b.left - a.x);
+                  switch (Math.min(c, d, e, f)) {
+                    case f:
+                      return 'left';
+                    case e:
+                      return 'right';
+                    case c:
+                      return 'top';
+                    case d:
+                      return 'bottom';
+                    default:
+                      throw Error('unreachable');
+                  }
+                })(e, d.getBoundingClientRect());
+              i(
+                ((c = [
+                  ...(function (a, b, c = 5) {
+                    let d = [];
+                    switch (b) {
+                      case 'top':
+                        d.push({ x: a.x - c, y: a.y + c }, { x: a.x + c, y: a.y + c });
+                        break;
+                      case 'bottom':
+                        d.push({ x: a.x - c, y: a.y - c }, { x: a.x + c, y: a.y - c });
+                        break;
+                      case 'left':
+                        d.push({ x: a.x + c, y: a.y - c }, { x: a.x + c, y: a.y + c });
+                        break;
+                      case 'right':
+                        d.push({ x: a.x - c, y: a.y - c }, { x: a.x - c, y: a.y + c });
+                    }
+                    return d;
+                  })(e, f),
+                  ...(function (a) {
+                    let { top: b, right: c, bottom: d, left: e } = a;
+                    return [
+                      { x: e, y: b },
+                      { x: c, y: b },
+                      { x: c, y: d },
+                      { x: e, y: d },
+                    ];
+                  })(b.getBoundingClientRect()),
+                ].slice()).sort((a, b) =>
+                  a.x < b.x ? -1 : a.x > b.x ? 1 : a.y < b.y ? -1 : 1 * !!(a.y > b.y)
+                ),
+                (function (a) {
+                  if (a.length <= 1) return a.slice();
+                  let b = [];
+                  for (let c = 0; c < a.length; c++) {
+                    let d = a[c];
+                    for (; b.length >= 2; ) {
+                      let a = b[b.length - 1],
+                        c = b[b.length - 2];
+                      if ((a.x - c.x) * (d.y - c.y) >= (a.y - c.y) * (d.x - c.x)) b.pop();
+                      else break;
+                    }
+                    b.push(d);
+                  }
+                  b.pop();
+                  let c = [];
+                  for (let b = a.length - 1; b >= 0; b--) {
+                    let d = a[b];
+                    for (; c.length >= 2; ) {
+                      let a = c[c.length - 1],
+                        b = c[c.length - 2];
+                      if ((a.x - b.x) * (d.y - b.y) >= (a.y - b.y) * (d.x - b.x)) c.pop();
+                      else break;
+                    }
+                    c.push(d);
+                  }
+                  return (c.pop(),
+                  1 === b.length && 1 === c.length && b[0].x === c[0].x && b[0].y === c[0].y)
+                    ? b
+                    : b.concat(c);
+                })(c))
+              ),
+                m(!0);
+            },
+            [m]
+          );
+        return (
+          s.useEffect(() => () => n(), [n]),
+          s.useEffect(() => {
+            if (j && l) {
+              let a = (a) => o(a, l),
+                b = (a) => o(a, j);
+              return (
+                j.addEventListener('pointerleave', a),
+                l.addEventListener('pointerleave', b),
+                () => {
+                  j.removeEventListener('pointerleave', a),
+                    l.removeEventListener('pointerleave', b);
+                }
+              );
+            }
+          }, [j, l, o, n]),
+          s.useEffect(() => {
+            if (h) {
+              let a = (a) => {
+                let b = a.target,
+                  c = { x: a.clientX, y: a.clientY },
+                  d = j?.contains(b) || l?.contains(b),
+                  e = !(function (a, b) {
+                    let { x: c, y: d } = a,
+                      e = !1;
+                    for (let a = 0, f = b.length - 1; a < b.length; f = a++) {
+                      let g = b[a],
+                        h = b[f],
+                        i = g.x,
+                        j = g.y,
+                        k = h.x,
+                        l = h.y;
+                      j > d != l > d && c < ((k - i) * (d - j)) / (l - j) + i && (e = !e);
+                    }
+                    return e;
+                  })(c, h);
+                d ? n() : e && (n(), k());
+              };
+              return (
+                document.addEventListener('pointermove', a),
+                () => document.removeEventListener('pointermove', a)
+              );
+            }
+          }, [j, l, h, k, n]),
+          (0, c.jsx)(ae, { ...a, ref: g })
+        );
+      }),
+      [ab, ac] = I(Q, { isInside: !1 }),
+      ad =
+        (((b = ({ children: a }) => (0, c.jsx)(c.Fragment, { children: a })).displayName =
+          'TooltipContent.Slottable'),
+        (b.__radixId = F),
+        b),
+      ae = s.forwardRef((a, b) => {
+        let {
+            __scopeTooltip: d,
+            children: e,
+            'aria-label': f,
+            onEscapeKeyDown: g,
+            onPointerDownOutside: h,
+            ...i
+          } = a,
+          j = S($, d),
+          k = K(d),
+          { onClose: l } = j;
+        return (
+          s.useEffect(
+            () => (document.addEventListener(M, l), () => document.removeEventListener(M, l)),
+            [l]
+          ),
+          s.useEffect(() => {
+            if (j.trigger) {
+              let a = (a) => {
+                let b = a.target;
+                b?.contains(j.trigger) && l();
+              };
+              return (
+                window.addEventListener('scroll', a, { capture: !0 }),
+                () => window.removeEventListener('scroll', a, { capture: !0 })
+              );
+            }
+          }, [j.trigger, l]),
+          (0, c.jsx)(z.DismissableLayer, {
+            asChild: !0,
+            disableOutsidePointerEvents: !1,
+            onEscapeKeyDown: g,
+            onPointerDownOutside: h,
+            onFocusOutside: (a) => a.preventDefault(),
+            onDismiss: l,
+            children: (0, c.jsxs)(B.Content, {
+              'data-state': j.stateAttribute,
+              ...k,
+              ...i,
+              ref: b,
+              style: {
+                ...i.style,
+                '--radix-tooltip-content-transform-origin': 'var(--radix-popper-transform-origin)',
+                '--radix-tooltip-content-available-width': 'var(--radix-popper-available-width)',
+                '--radix-tooltip-content-available-height': 'var(--radix-popper-available-height)',
+                '--radix-tooltip-trigger-width': 'var(--radix-popper-anchor-width)',
+                '--radix-tooltip-trigger-height': 'var(--radix-popper-anchor-height)',
+              },
+              children: [
+                (0, c.jsx)(ad, { children: e }),
+                (0, c.jsx)(ab, {
+                  scope: d,
+                  isInside: !0,
+                  children: (0, c.jsx)(H.Root, {
+                    id: j.contentId,
+                    role: 'tooltip',
+                    children: f || e,
+                  }),
+                }),
+              ],
+            }),
+          })
+        );
+      });
+    _.displayName = $;
+    var af = 'TooltipArrow',
+      ag = s.forwardRef((a, b) => {
+        let { __scopeTooltip: d, ...e } = a,
+          f = K(d);
+        return ac(af, d).isInside ? null : (0, c.jsx)(B.Arrow, { ...f, ...e, ref: b });
+      });
+    (ag.displayName = af),
+      a.s(
+        [
+          'Arrow',
+          () => ag,
+          'Content',
+          () => _,
+          'Portal',
+          () => Z,
+          'Provider',
+          () => P,
+          'Root',
+          () => T,
+          'Tooltip',
+          () => T,
+          'TooltipArrow',
+          () => ag,
+          'TooltipContent',
+          () => _,
+          'TooltipPortal',
+          () => Z,
+          'TooltipProvider',
+          () => P,
+          'TooltipTrigger',
+          () => V,
+          'Trigger',
+          () => V,
+          'createTooltipScope',
+          () => J,
+        ],
+        99811
+      );
+    var ah = a.i(99811),
+      ah = ah,
+      ai = a.i(71680),
+      aj = a.i(5707),
+      ak = a.i(88023);
+    let al = {
+        ...ai.asChildPropDef,
+        hasBackground: { type: 'boolean', default: !0 },
+        appearance: { type: 'enum', values: ['inherit', 'light', 'dark'], default: 'inherit' },
+        accentColor: { type: 'enum', values: aj.accentColors, default: 'indigo' },
+        grayColor: { type: 'enum', values: aj.grayColors, default: 'auto' },
+        panelBackground: { type: 'enum', values: ['solid', 'translucent'], default: 'translucent' },
+        radius: { type: 'enum', values: ak.radii, default: 'medium' },
+        scaling: { type: 'enum', values: ['90%', '95%', '100%', '105%', '110%'], default: '100%' },
+      },
+      am = () => {},
+      an = s.createContext(void 0),
+      ao = s.forwardRef((a, b) =>
+        void 0 === s.useContext(an)
+          ? s.createElement(
+              ah.Provider,
+              { delayDuration: 200 },
+              s.createElement(u.Provider, { dir: 'ltr' }, s.createElement(ap, { ...a, ref: b }))
+            )
+          : s.createElement(aq, { ...a, ref: b })
+      );
+    ao.displayName = 'Theme';
+    let ap = s.forwardRef((a, b) => {
+      let {
+          appearance: c = al.appearance.default,
+          accentColor: d = al.accentColor.default,
+          grayColor: e = al.grayColor.default,
+          panelBackground: f = al.panelBackground.default,
+          radius: g = al.radius.default,
+          scaling: h = al.scaling.default,
+          hasBackground: i = al.hasBackground.default,
+          ...j
+        } = a,
+        [k, l] = s.useState(c);
+      s.useEffect(() => l(c), [c]);
+      let [m, n] = s.useState(d);
+      s.useEffect(() => n(d), [d]);
+      let [o, p] = s.useState(e);
+      s.useEffect(() => p(e), [e]);
+      let [q, r] = s.useState(f);
+      s.useEffect(() => r(f), [f]);
+      let [t, u] = s.useState(g);
+      s.useEffect(() => u(g), [g]);
+      let [v, w] = s.useState(h);
+      return (
+        s.useEffect(() => w(h), [h]),
+        s.createElement(aq, {
+          ...j,
+          ref: b,
+          isRoot: !0,
+          hasBackground: i,
+          appearance: k,
+          accentColor: m,
+          grayColor: o,
+          panelBackground: q,
+          radius: t,
+          scaling: v,
+          onAppearanceChange: l,
+          onAccentColorChange: n,
+          onGrayColorChange: p,
+          onPanelBackgroundChange: r,
+          onRadiusChange: u,
+          onScalingChange: w,
+        })
+      );
+    });
+    ap.displayName = 'ThemeRoot';
+    let aq = s.forwardRef((a, b) => {
+      let c = s.useContext(an),
+        {
+          asChild: d,
+          isRoot: e,
+          hasBackground: f,
+          appearance: g = c?.appearance ?? al.appearance.default,
+          accentColor: h = c?.accentColor ?? al.accentColor.default,
+          grayColor: i = c?.resolvedGrayColor ?? al.grayColor.default,
+          panelBackground: j = c?.panelBackground ?? al.panelBackground.default,
+          radius: k = c?.radius ?? al.radius.default,
+          scaling: l = c?.scaling ?? al.scaling.default,
+          onAppearanceChange: m = am,
+          onAccentColorChange: n = am,
+          onGrayColorChange: o = am,
+          onPanelBackgroundChange: p = am,
+          onRadiusChange: q = am,
+          onScalingChange: r = am,
+          ...u
+        } = a,
+        w = d ? v.Slot.Root : 'div',
+        x =
+          'auto' === i
+            ? (function (a) {
+                switch (a) {
+                  case 'tomato':
+                  case 'red':
+                  case 'ruby':
+                  case 'crimson':
+                  case 'pink':
+                  case 'plum':
+                  case 'purple':
+                  case 'violet':
+                    return 'mauve';
+                  case 'iris':
+                  case 'indigo':
+                  case 'blue':
+                  case 'sky':
+                  case 'cyan':
+                    return 'slate';
+                  case 'teal':
+                  case 'jade':
+                  case 'mint':
+                  case 'green':
+                    return 'sage';
+                  case 'grass':
+                  case 'lime':
+                    return 'olive';
+                  case 'yellow':
+                  case 'amber':
+                  case 'orange':
+                  case 'brown':
+                  case 'gold':
+                  case 'bronze':
+                    return 'sand';
+                  case 'gray':
+                    return 'gray';
+                }
+              })(h)
+            : i,
+        y = 'light' === a.appearance || 'dark' === a.appearance;
+      return s.createElement(
+        an.Provider,
+        {
+          value: s.useMemo(
+            () => ({
+              appearance: g,
+              accentColor: h,
+              grayColor: i,
+              resolvedGrayColor: x,
+              panelBackground: j,
+              radius: k,
+              scaling: l,
+              onAppearanceChange: m,
+              onAccentColorChange: n,
+              onGrayColorChange: o,
+              onPanelBackgroundChange: p,
+              onRadiusChange: q,
+              onScalingChange: r,
+            }),
+            [g, h, i, x, j, k, l, m, n, o, p, q, r]
+          ),
+        },
+        s.createElement(w, {
+          'data-is-root-theme': e ? 'true' : 'false',
+          'data-accent-color': h,
+          'data-gray-color': x,
+          'data-has-background': (void 0 === f ? e || y : f) ? 'true' : 'false',
+          'data-panel-background': j,
+          'data-radius': k,
+          'data-scaling': l,
+          ref: b,
+          ...u,
+          className: (0, t.default)(
+            'radix-themes',
+            { light: 'light' === g, dark: 'dark' === g },
+            u.className
+          ),
+        })
+      );
+    });
+    aq.displayName = 'ThemeImpl';
+    var ar = a.i(38847);
+    let as = new q();
+    function at({ children: a }) {
+      return (0, c.jsx)(ao, {
+        appearance: 'dark',
+        children: (0, c.jsx)(r.QueryClientProvider, {
+          client: as,
+          children: (0, c.jsx)(d.IotaClientProvider, {
+            networks: ar.networkConfig,
+            defaultNetwork: 'testnet',
+            children: (0, c.jsx)(d.WalletProvider, { autoConnect: !0, children: a }),
+          }),
+        }),
+      });
+    }
+    a.s(['Provider', () => at], 41667);
+  },
+];
 
 //# sourceMappingURL=components_Provider_tsx_2e940fb7._.js.map

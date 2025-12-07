@@ -1,3 +1,141 @@
-module.exports=[93695,(a,b,c)=>{b.exports=a.x("next/dist/shared/lib/no-fallback-error.external.js",()=>require("next/dist/shared/lib/no-fallback-error.external.js"))},70864,a=>{a.n(a.i(33290))},43619,a=>{a.n(a.i(79962))},13718,a=>{a.n(a.i(85523))},18198,a=>{a.n(a.i(45518))},61906,a=>{"use strict";let b=(0,a.i(11857).registerClientReference)(function(){throw Error("Attempted to call WalletConnect() from the server but WalletConnect is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/components/Wallet-connect.tsx <module evaluation>","WalletConnect");a.s(["WalletConnect",0,b])},9221,a=>{"use strict";let b=(0,a.i(11857).registerClientReference)(function(){throw Error("Attempted to call WalletConnect() from the server but WalletConnect is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/components/Wallet-connect.tsx","WalletConnect");a.s(["WalletConnect",0,b])},70440,a=>{"use strict";a.i(61906);var b=a.i(9221);a.n(b)},91103,a=>{"use strict";let b=(0,a.i(11857).registerClientReference)(function(){throw Error("Attempted to call the default export of [project]/components/sample.tsx <module evaluation> from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/components/sample.tsx <module evaluation>","default");a.s(["default",0,b])},2816,a=>{"use strict";let b=(0,a.i(11857).registerClientReference)(function(){throw Error("Attempted to call the default export of [project]/components/sample.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/components/sample.tsx","default");a.s(["default",0,b])},89587,a=>{"use strict";a.i(91103);var b=a.i(2816);a.n(b)},50708,a=>{"use strict";var b=a.i(7997),c=a.i(70440),d=a.i(89587);function e(){return(0,b.jsxs)("div",{children:[(0,b.jsx)(c.WalletConnect,{}),(0,b.jsx)(d.default,{})]})}a.s(["default",()=>e])}];
+module.exports = [
+  93695,
+  (a, b, c) => {
+    b.exports = a.x('next/dist/shared/lib/no-fallback-error.external.js', () =>
+      require('next/dist/shared/lib/no-fallback-error.external.js')
+    );
+  },
+  70864,
+  (a) => {
+    a.n(a.i(33290));
+  },
+  43619,
+  (a) => {
+    a.n(a.i(79962));
+  },
+  13718,
+  (a) => {
+    a.n(a.i(85523));
+  },
+  18198,
+  (a) => {
+    a.n(a.i(45518));
+  },
+  61906,
+  (a) => {
+    'use strict';
+    let b = (0, a.i(11857).registerClientReference)(
+      function () {
+        throw Error(
+          "Attempted to call WalletConnect() from the server but WalletConnect is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component."
+        );
+      },
+      '[project]/components/Wallet-connect.tsx <module evaluation>',
+      'WalletConnect'
+    );
+    a.s(['WalletConnect', 0, b]);
+  },
+  9221,
+  (a) => {
+    'use strict';
+    let b = (0, a.i(11857).registerClientReference)(
+      function () {
+        throw Error(
+          "Attempted to call WalletConnect() from the server but WalletConnect is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component."
+        );
+      },
+      '[project]/components/Wallet-connect.tsx',
+      'WalletConnect'
+    );
+    a.s(['WalletConnect', 0, b]);
+  },
+  70440,
+  (a) => {
+    'use strict';
+    a.i(61906);
+    var b = a.i(9221);
+    a.n(b);
+  },
+  91103,
+  (a) => {
+    'use strict';
+    let b = (0, a.i(11857).registerClientReference)(
+      function () {
+        throw Error(
+          "Attempted to call the default export of [project]/components/sample.tsx <module evaluation> from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component."
+        );
+      },
+      '[project]/components/sample.tsx <module evaluation>',
+      'default'
+    );
+    a.s(['default', 0, b]);
+  },
+  2816,
+  (a) => {
+    'use strict';
+    let b = (0, a.i(11857).registerClientReference)(
+      function () {
+        throw Error(
+          "Attempted to call the default export of [project]/components/sample.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component."
+        );
+      },
+      '[project]/components/sample.tsx',
+      'default'
+    );
+    a.s(['default', 0, b]);
+  },
+  89587,
+  (a) => {
+    'use strict';
+    a.i(91103);
+    var b = a.i(2816);
+    a.n(b);
+  },
+  50708,
+  (a) => {
+    'use strict';
+    var b = a.i(7997),
+      c = a.i(70440),
+      d = a.i(89587);
+    function e() {
+      return (0, b.jsxs)('div', {
+        className: 'app-shell',
+        children: [
+          (0, b.jsxs)('header', {
+            className: 'site-header',
+            children: [
+              (0, b.jsx)('div', {
+                className: 'header-left',
+                children: (0, b.jsxs)('div', {
+                  className: 'brand',
+                  children: [
+                    (0, b.jsx)('img', {
+                      src: '/kfc-logo.png',
+                      alt: 'KFC',
+                      className: 'brand-logo',
+                    }),
+                    (0, b.jsx)('span', { className: 'brand-name', children: 'KFC Box' }),
+                  ],
+                }),
+              }),
+              (0, b.jsx)('div', {
+                className: 'header-right',
+                children: (0, b.jsx)(c.WalletConnect, {}),
+              }),
+            ],
+          }),
+          (0, b.jsx)('main', { className: 'site-main', children: (0, b.jsx)(d.default, {}) }),
+          (0, b.jsx)('footer', {
+            className: 'site-footer',
+            children: (0, b.jsxs)('div', {
+              children: ['© ', new Date().getFullYear(), ' KFC Box — Fry responsibly 🍗'],
+            }),
+          }),
+        ],
+      });
+    }
+    a.s(['default', () => e]);
+  },
+];
 
 //# sourceMappingURL=%5Broot-of-the-server%5D__5ee1306e._.js.map

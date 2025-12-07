@@ -14,43 +14,19 @@
     "configOrigin": "next.config.ts",
     "useFileSystemPublicRoutes": true,
     "generateEtags": true,
-    "pageExtensions": [
-      "tsx",
-      "ts",
-      "jsx",
-      "js"
-    ],
+    "pageExtensions": ["tsx", "ts", "jsx", "js"],
     "poweredByHeader": true,
     "compress": true,
     "images": {
-      "deviceSizes": [
-        640,
-        750,
-        828,
-        1080,
-        1200,
-        1920,
-        2048,
-        3840
-      ],
-      "imageSizes": [
-        32,
-        48,
-        64,
-        96,
-        128,
-        256,
-        384
-      ],
+      "deviceSizes": [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+      "imageSizes": [32, 48, 64, 96, 128, 256, 384],
       "path": "/_next/image",
       "loader": "default",
       "loaderFile": "",
       "domains": [],
       "disableStaticImages": false,
       "minimumCacheTTL": 14400,
-      "formats": [
-        "image/webp"
-      ],
+      "formats": ["image/webp"],
       "maximumRedirects": 3,
       "dangerouslyAllowLocalIP": false,
       "dangerouslyAllowSVG": false,
@@ -63,9 +39,7 @@
         }
       ],
       "remotePatterns": [],
-      "qualities": [
-        75
-      ],
+      "qualities": [75],
       "unoptimized": false
     },
     "devIndicators": {
@@ -99,7 +73,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/mnt/c/Users/Admin/pizza_box",
+    "outputFileTracingRoot": "/mnt/c/Users/Admin/KFC_Box/KFC_Box",
     "cacheComponents": false,
     "cacheLife": {
       "default": {
@@ -289,11 +263,11 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts",
     "turbopack": {
-      "root": "/mnt/c/Users/Admin/pizza_box"
+      "root": "/mnt/c/Users/Admin/KFC_Box/KFC_Box"
     },
     "distDirRoot": ".next"
   },
-  "appDir": "/mnt/c/Users/Admin/pizza_box",
+  "appDir": "/mnt/c/Users/Admin/KFC_Box/KFC_Box",
   "relativeAppDir": "",
   "files": [
     ".next/routes-manifest.json",
