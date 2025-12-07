@@ -18,6 +18,8 @@ import { useContract } from "@/hooks/useContract";
 import { Button, Container, Heading, Text, TextField } from "@radix-ui/themes";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useState } from "react";
+import copy from "copy-to-clipboard";
+import { showToast } from "@/lib/toast";
 
 const SampleIntegration = () => {
   const currentAccount = useCurrentAccount();
@@ -40,140 +42,179 @@ const SampleIntegration = () => {
     setIngredients((prev) => ({ ...prev, [field]: value }));
   };
 
+  const applyPreset = () => {
+    setIngredients({
+      chickenKg: "1",
+      garlicG: "10",
+      milkMl: "300",
+      saltG: "15",
+      pepperG: "5",
+      flourG: "200",
+      cornstarchG: "100",
+      eggs: "2",
+    });
+  };
+
+  const copyId = (id?: string) => {
+    if (!id) return;
+    try {
+      copy(id);
+      showToast("Copied to clipboard");
+    } catch (e) {
+      console.error(e);
+      showToast("Copy failed");
+    }
+  };
+
+  const handleClaimReward = () => {
+    const confirmed = window.confirm(
+      "🍗 Ready to claim your reward?\n\nYou have successfully completed the challenge!"
+    );
+    if (confirmed) {
+      actions.getFlag();
+    }
+  };
+
+  const safe = (v: any) => {
+    if (v === undefined || v === null) return "-";
+    if (typeof v === "number") return Number.isFinite(v) ? String(v) : "-";
+    if (typeof v === "string") {
+      // guard against numeric strings that may be empty
+      if (v.trim() === "") return "-";
+      return v;
+    }
+    try {
+      return String(v);
+    } catch {
+      return "-";
+    }
+  };
+
   if (!isConnected) {
     return (
-      <div
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "1rem",
-        }}
-      >
-        <div style={{ maxWidth: "500px", width: "100%" }}>
-          <Heading size="6" style={{ marginBottom: "1rem" }}>
-            🍗 KFC Chicken dApp
-          </Heading>
-          <Text>Please connect your wallet to fry chicken!</Text>
+      <div className="app-container" style={{ paddingTop: "2.5rem", paddingBottom: "2.5rem" }}>
+        <div className="hero" style={{ textAlign: "left" }}>
+          <h1>🍗 KFC Chicken dApp</h1>
+          <p>Welcome! Connect your wallet to start frying, collecting and claiming rewards.</p>
+          <div style={{ marginTop: "1rem" }}>
+            <button className="primary-btn" onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}>Get Started</button>
+            <button className="secondary-btn" style={{ marginLeft: "0.6rem" }} onClick={() => showToast('Connect to see recipes')}>Why connect?</button>
+          </div>
+        </div>
+
+        <div className="card" style={{ marginTop: '1.25rem' }}>
+          <div className="card-header">
+            <span style={{ fontSize: '1.6rem' }}>✨</span>
+            <h2>How it works</h2>
+          </div>
+          <div className="form-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+            <div className="feature-card card">
+              <h3>Fry</h3>
+              <p className="muted">Create recipes and fry chicken on-chain.</p>
+            </div>
+            <div className="feature-card card">
+              <h3>Collect</h3>
+              <p className="muted">Store ChickenBoxes as proof of your creations.</p>
+            </div>
+            <div className="feature-card card">
+              <h3>Claim</h3>
+              <p className="muted">Complete challenges to earn rewards and flags.</p>
+            </div>
+          </div>
         </div>
       </div>
-    );
+    )
   }
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        padding: "1rem",
-        background: "var(--gray-a2)",
-      }}
-    >
-      <Container style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <Heading size="6" style={{ marginBottom: "2rem" }}>
-          🍗 KFC Fried Chicken dApp
-        </Heading>
+    <div className="app-container">
+      <div className="hero">
+        <h1>🍗 KFC Challenge</h1>
+        <p>Master the perfect fried chicken recipe and claim your reward!</p>
+      </div>
 
-        {/* Flag Status */}
+      <Container style={{ maxWidth: "900px", margin: "0 auto" }}>
+        {/* Reward Status Section */}
         {flagId && (
-          <div
-            style={{
-              marginBottom: "1rem",
-              padding: "1.5rem",
-              background: "var(--green-a3)",
-              borderRadius: "8px",
-              border: "2px solid var(--green-7)",
-            }}
-          >
-              <Heading size="4" style={{ marginBottom: "0.5rem" }}>
-              🎉 Congratulations! Flag Captured!
-            </Heading>
-            <Text
-              style={{
-                color: "var(--green-11)",
-                display: "block",
-                marginBottom: "0.5rem",
-              }}
-            >
-              You&apos;ve fried the perfect KFC chicken and earned your flag!
+          <div className="card status-reward">
+            <div className="card-header">
+              <span style={{ fontSize: "2rem" }}>🎖️</span>
+              <h2>Reward Claimed</h2>
+            </div>
+            <Text style={{ color: "#fcd34d", marginBottom: "1rem", fontSize: "1.1rem" }}>
+              🔥 You're a KFC Legend! You've successfully completed the perfect recipe challenge!
             </Text>
-            <Text
-              size="1"
-              style={{
-                color: "var(--gray-a11)",
-                display: "block",
-                fontFamily: "monospace",
-                wordBreak: "break-all",
-              }}
-            >
-              Flag ID: {flagId}
-            </Text>
+            <div style={{ background: "rgba(0,0,0,0.3)", padding: "1rem", borderRadius: "8px", borderLeft: "3px solid #ffc600" }}>
+              <Text size="1" style={{ color: "#a0a0a0", marginBottom: "0.5rem" }}>
+                Reward ID:
+              </Text>
+              <Text size="2" className="kv">
+                {flagId}
+              </Text>
+            </div>
           </div>
         )}
 
         {/* Chicken Box Status */}
         {chickenBoxId && data && (
-          <div
-            style={{
-              marginBottom: "1rem",
-              padding: "1rem",
-              background: "var(--gray-a3)",
-              borderRadius: "8px",
-            }}
-          >
-              <Text
-              size="2"
-              style={{
-                display: "block",
-                marginBottom: "0.5rem",
-                fontWeight: "bold",
-              }}
-            >
-              Your Chicken Box 📦
-            </Text>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "0.5rem",
-                marginBottom: "1rem",
-              }}
-            >
-              <Text size="2">Chicken (kg): {data.chickenKg}</Text>
-              <Text size="2">Garlic (g): {data.garlicG}</Text>
-              <Text size="2">Milk (ml): {data.milkMl}</Text>
-              <Text size="2">Salt (g): {data.saltG}</Text>
-              <Text size="2">Pepper (g): {data.pepperG}</Text>
-              <Text size="2">Flour (g): {data.flourG}</Text>
-              <Text size="2">Cornstarch (g): {data.cornstarchG}</Text>
-              <Text size="2">Eggs: {data.eggs}</Text>
+          <div className="card">
+            <div className="card-header">
+              <span style={{ fontSize: "2rem" }}>📦</span>
+              <h2>Your Creation</h2>
             </div>
-              <Text
-              size="1"
-              style={{
-                color: "var(--gray-a11)",
-                display: "block",
-                fontFamily: "monospace",
-                wordBreak: "break-all",
-              }}
-            >
-              ChickenBox ID: {chickenBoxId}
-            </Text>
-
+            <div className="form-grid">
+              <div className="form-group">
+                <span style={{ color: "#ffc600" }}>🐔 Chicken</span>
+                <Text>{safe(data.chickenKg)} kg</Text>
+              </div>
+              <div className="form-group">
+                <span style={{ color: "#ffc600" }}>🧄 Garlic</span>
+                <Text>{safe(data.garlicG)} g</Text>
+              </div>
+              <div className="form-group">
+                <span style={{ color: "#ffc600" }}>🥛 Milk</span>
+                <Text>{safe(data.milkMl)} ml</Text>
+              </div>
+              <div className="form-group">
+                <span style={{ color: "#ffc600" }}>🧂 Salt</span>
+                <Text>{safe(data.saltG)} g</Text>
+              </div>
+              <div className="form-group">
+                <span style={{ color: "#ffc600" }}>🌶️ Pepper</span>
+                <Text>{safe(data.pepperG)} g</Text>
+              </div>
+              <div className="form-group">
+                <span style={{ color: "#ffc600" }}>🍞 Flour</span>
+                <Text>{safe(data.flourG)} g</Text>
+              </div>
+              <div className="form-group">
+                <span style={{ color: "#ffc600" }}>🥔 Cornstarch</span>
+                <Text>{safe(data.cornstarchG)} g</Text>
+              </div>
+              <div className="form-group">
+                <span style={{ color: "#ffc600" }}>🥚 Eggs</span>
+                <Text>{safe(data.eggs)}</Text>
+              </div>
+            </div>
+            <div style={{ background: "rgba(0,0,0,0.3)", padding: "1rem", borderRadius: "8px", marginTop: "1rem", marginBottom: "1rem", borderLeft: "3px solid #ffc600" }}>
+              <Text size="1" style={{ color: "#a0a0a0" }}>
+                ChickenBox ID: <span className="kv">{chickenBoxId}</span>
+              </Text>
+            </div>
             {!flagId && (
               <Button
-                size="2"
-                style={{ marginTop: "1rem" }}
-                onClick={actions.getFlag}
+                size="3"
+                className="primary-btn"
+                onClick={handleClaimReward}
                 disabled={state.isLoading || state.isPending}
               >
                 {state.isLoading || state.isPending ? (
                   <>
                     <ClipLoader size={14} style={{ marginRight: "8px" }} />
-                    Checking...
+                    Processing...
                   </>
                 ) : (
-                  "🚩 Get Flag"
+                  "🎁 Claim Reward"
                 )}
               </Button>
             )}
@@ -181,157 +222,95 @@ const SampleIntegration = () => {
         )}
 
         {/* Fry Chicken Form */}
-        <div
-          style={{
-            padding: "1.5rem",
-            background: "var(--gray-a3)",
-            borderRadius: "8px",
-            marginBottom: "1rem",
-          }}
-        >
-          <Heading size="4" style={{ marginBottom: "1rem" }}>
-              Fry KFC Chicken 👨‍🍳
-            </Heading>
+        <div className="card">
+          <div className="card-header">
+            <span style={{ fontSize: "2rem" }}>👨‍🍳</span>
+            <h2>Craft Your Recipe</h2>
+          </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1rem",
-              marginBottom: "1rem",
-            }}
-          >
-            <div>
-              <Text
-                size="2"
-                style={{ display: "block", marginBottom: "0.3rem" }}
-              >
-                Chicken (kg)
-              </Text>
+          <div style={{ marginBottom: "1.5rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+            <button className="secondary-btn" onClick={applyPreset}>⚡ Use Perfect Recipe</button>
+            {chickenBoxId && (
+              <button className="secondary-btn" onClick={() => copyId(chickenBoxId)}>📋 Copy ChickenBox ID</button>
+            )}
+          </div>
+
+          <div className="form-grid">
+            <div className="form-group">
+              <label>🐔 Chicken (kg)</label>
               <TextField.Root
                 value={ingredients.chickenKg}
-                onChange={(e) =>
-                  handleIngredientChange("chickenKg", e.target.value)
-                }
+                onChange={(e) => handleIngredientChange("chickenKg", e.target.value)}
                 type="number"
                 min="0"
                 max="65535"
               />
             </div>
-            <div>
-              <Text
-                size="2"
-                style={{ display: "block", marginBottom: "0.3rem" }}
-              >
-                Garlic (g)
-              </Text>
+            <div className="form-group">
+              <label>🧄 Garlic (g)</label>
               <TextField.Root
                 value={ingredients.garlicG}
-                onChange={(e) =>
-                  handleIngredientChange("garlicG", e.target.value)
-                }
+                onChange={(e) => handleIngredientChange("garlicG", e.target.value)}
                 type="number"
                 min="0"
                 max="65535"
               />
             </div>
-            <div>
-              <Text
-                size="2"
-                style={{ display: "block", marginBottom: "0.3rem" }}
-              >
-                Milk (ml)
-              </Text>
+            <div className="form-group">
+              <label>🥛 Milk (ml)</label>
               <TextField.Root
                 value={ingredients.milkMl}
-                onChange={(e) =>
-                  handleIngredientChange("milkMl", e.target.value)
-                }
+                onChange={(e) => handleIngredientChange("milkMl", e.target.value)}
                 type="number"
                 min="0"
                 max="65535"
               />
             </div>
-            <div>
-              <Text
-                size="2"
-                style={{ display: "block", marginBottom: "0.3rem" }}
-              >
-                Salt (g)
-              </Text>
+            <div className="form-group">
+              <label>🧂 Salt (g)</label>
               <TextField.Root
                 value={ingredients.saltG}
-                onChange={(e) =>
-                  handleIngredientChange("saltG", e.target.value)
-                }
+                onChange={(e) => handleIngredientChange("saltG", e.target.value)}
                 type="number"
                 min="0"
                 max="65535"
               />
             </div>
-            <div>
-              <Text
-                size="2"
-                style={{ display: "block", marginBottom: "0.3rem" }}
-              >
-                Pepper (g)
-              </Text>
+            <div className="form-group">
+              <label>🌶️ Pepper (g)</label>
               <TextField.Root
                 value={ingredients.pepperG}
-                onChange={(e) =>
-                  handleIngredientChange("pepperG", e.target.value)
-                }
+                onChange={(e) => handleIngredientChange("pepperG", e.target.value)}
                 type="number"
                 min="0"
                 max="65535"
               />
             </div>
-            <div>
-              <Text
-                size="2"
-                style={{ display: "block", marginBottom: "0.3rem" }}
-              >
-                Flour (g)
-              </Text>
+            <div className="form-group">
+              <label>🍞 Flour (g)</label>
               <TextField.Root
                 value={ingredients.flourG}
-                onChange={(e) =>
-                  handleIngredientChange("flourG", e.target.value)
-                }
+                onChange={(e) => handleIngredientChange("flourG", e.target.value)}
                 type="number"
                 min="0"
                 max="65535"
               />
             </div>
-            <div>
-              <Text
-                size="2"
-                style={{ display: "block", marginBottom: "0.3rem" }}
-              >
-                Cornstarch (g)
-              </Text>
+            <div className="form-group">
+              <label>🥔 Cornstarch (g)</label>
               <TextField.Root
                 value={ingredients.cornstarchG}
-                onChange={(e) =>
-                  handleIngredientChange("cornstarchG", e.target.value)
-                }
+                onChange={(e) => handleIngredientChange("cornstarchG", e.target.value)}
                 type="number"
                 min="0"
                 max="65535"
               />
             </div>
-            <div>
-              <Text
-                size="2"
-                style={{ display: "block", marginBottom: "0.3rem" }}
-              >
-                Eggs
-              </Text>
+            <div className="form-group">
+              <label>🥚 Eggs</label>
               <TextField.Root
                 value={ingredients.eggs}
-                onChange={(e) =>
-                  handleIngredientChange("eggs", e.target.value)
-                }
+                onChange={(e) => handleIngredientChange("eggs", e.target.value)}
                 type="number"
                 min="0"
                 max="65535"
@@ -341,6 +320,7 @@ const SampleIntegration = () => {
 
           <Button
             size="3"
+            className="primary-btn"
             onClick={() =>
               actions.fryChicken(
                 parseInt(ingredients.chickenKg),
@@ -368,57 +348,34 @@ const SampleIntegration = () => {
 
         {/* Transaction Status */}
         {state.hash && (
-          <div
-            style={{
-              marginTop: "1rem",
-              padding: "1rem",
-              background: "var(--gray-a3)",
-              borderRadius: "8px",
-            }}
-          >
-            <Text size="1" style={{ display: "block", marginBottom: "0.5rem" }}>
-              Transaction Hash
-            </Text>
-            <Text
-              size="2"
-              style={{ fontFamily: "monospace", wordBreak: "break-all" }}
-            >
-              {state.hash}
-            </Text>
-            {state.isConfirmed && (
-              <Text
-                size="2"
-                style={{
-                  color: "green",
-                  marginTop: "0.5rem",
-                  display: "block",
-                }}
-              >
-                ✅ Transaction confirmed!
+          <div className="card status-success">
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
+              <span style={{ fontSize: "1.5rem" }}>✅</span>
+              <Text style={{ fontSize: "1.1rem", fontWeight: "600" }}>Transaction Confirmed</Text>
+            </div>
+            <div style={{ background: "rgba(0,0,0,0.3)", padding: "1rem", borderRadius: "8px", borderLeft: "3px solid #22c55e" }}>
+              <Text size="1" style={{ color: "#a0a0a0", marginBottom: "0.5rem" }}>
+                Transaction Hash:
               </Text>
-            )}
+              <Text size="2" className="kv">
+                {state.hash}
+              </Text>
+            </div>
           </div>
         )}
 
         {/* Error Display */}
         {state.error && (
-          <div
-            style={{
-              marginTop: "1rem",
-              padding: "1rem",
-              background: "var(--red-a3)",
-              borderRadius: "8px",
-              border: "1px solid var(--red-7)",
-            }}
-          >
-            <Heading size="3" style={{ color: "var(--red-11)", marginBottom: "0.5rem" }}>
-              ⚠️ Transaction Error
-            </Heading>
-            <Text style={{ color: "var(--red-11)" }}>
+          <div className="card status-error">
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
+              <span style={{ fontSize: "1.5rem" }}>⚠️</span>
+              <Text style={{ fontSize: "1.1rem", fontWeight: "600", color: "#ef4444" }}>Oops! Something went wrong</Text>
+            </div>
+            <Text style={{ color: "#fca5a5", marginBottom: "0.75rem" }}>
               {(state.error as Error)?.message || String(state.error)}
             </Text>
             {(state.error as Error)?.message?.includes("Rejected from user") && (
-              <Text size="1" style={{ color: "var(--red-10)", marginTop: "0.5rem", display: "block" }}>
+              <Text size="1" style={{ color: "#fca5a5", fontStyle: "italic" }}>
                 💡 Please approve the transaction in your wallet popup
               </Text>
             )}
