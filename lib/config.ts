@@ -9,7 +9,7 @@ import { createNetworkConfig } from "@iota/dapp-kit"
 
 // Package IDs - These will be automatically filled when you run `npm run iota-deploy`
 export const DEVNET_PACKAGE_ID = "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a"
-export const TESTNET_PACKAGE_ID = ""
+export const TESTNET_PACKAGE_ID = "0x230f479be3f1826b07798668edf3ce96e387a88293ea59d75fe2c0f93f24ee20"
 export const MAINNET_PACKAGE_ID = ""
 
 // Network configuration
