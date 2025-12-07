@@ -1,0 +1,219 @@
+[00:00:08.659] Server  LOG      ✓ Ready in 5.8s
+[00:00:12.626] Server  LOG      ○ Compiling / ...
+[00:00:17.566] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:36.054] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:36.054] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:36.723] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:36.723] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:38.785] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:38.786] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:43.646] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:43.646] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:43.907] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:43.907] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:51.147] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
+[00:00:51.147] Browser LOG     ChickenBox fields structure: {
+  "chicken": {
+    "type": "0x9db832e7c6fba2bab1459ebec461e381a5f59f6f39d56eb5d1f852b7aaac768a::kfc::Chicken",
+    "fields": {
+      "chicken_kg": 1,
+      "cornstarch_g": 100,
+      "eggs": 2,
+      "flour_g": 200,
+      "garlic_g": 10,
+      "milk_ml": 300,
+      "pepper_g": 5,
+      "salt_g": 15
+    }
+  },
+  "id": {
+    "id": "0x067a4a15396c820a4aeae6f15ec8a4d200972a0609f722279fc784f4e2683687"
+  }
+}
