@@ -1,99 +1,322 @@
-# IOTA dApp Starter
+# KFC Box — IOTA dApp (Fried Chicken Challenge)
 
-A beginner-friendly Next.js template for building IOTA dApps with Move smart contracts.
+A Next.js-based decentralized application (dApp) built on IOTA with Move smart contracts. Create perfect fried chicken recipes on-chain and earn rewards! 🍗
 
 ## 🚀 Quick Start
 
+Get the application running locally in 3 steps:
+
 ```bash
-# Install dependencies
+# 1. Install dependencies
 npm install --legacy-peer-deps
 
-# Deploy your contract
+# 2. (Optional) Deploy contract if developing
 npm run iota-deploy
 
-# Start development server
+# 3. Start development server
 npm run dev
 ```
 
-# KFC Box — IOTA dApp (Fried Chicken)
+Open `http://localhost:3000` in your browser (or the address shown in your terminal).
 
-Hướng dẫn ngắn (Tiếng Việt) để chạy, phát triển và hiểu cấu trúc dự án.
+## 📖 Overview
 
-## 🚀 Chạy dự án (Quick start)
+**KFC Box** is an IOTA dApp where users:
 
-Các bước cơ bản để chạy ứng dụng local:
+1. **Connect** their wallet (MetaMask, Phantom, etc.)
+2. **Fry Chicken** by submitting a recipe with specific ingredients
+3. **Collect** ChickenBox NFTs as proof of creation
+4. **Claim Rewards** (Flags) when they get the perfect recipe
 
-```bash
-# 1. Cài dependencies
-npm install --legacy-peer-deps
+All transactions are recorded on the IOTA blockchain using Move smart contracts.
 
-# 2. (Tùy chọn) Deploy contract nếu bạn đang phát triển contract
-npm run iota-deploy
+## 📁 Project Structure
 
-# 3. Chạy dev server
-npm run dev
+```
+├── app/                          # Next.js App Router
+│   ├── layout.tsx               # Root layout with providers
+│   ├── page.tsx                 # Home page
+│   ├── globals.css              # Global styles + KFC branding
+│
+├── components/                   # Reusable React components
+│   ├── Provider.tsx             # IOTA/Dapp-kit setup
+│   ├── Wallet-connect.tsx       # Wallet connection button
+│   └── sample.tsx               # Main dApp UI
+│
+├── hooks/                        # Custom React hooks
+│   └── useContract.ts           # Contract interaction logic
+│
+├── lib/                          # Configuration & utilities
+│   ├── config.ts                # Network & contract config
+│   └── toast.ts                 # Toast notifications
+│
+├── contract/                     # Move smart contracts
+│   └── pizza_box/
+│       ├── Move.toml            # Contract manifest
+│       └── sources/
+│           └── kfc_box.move     # Contract source code
+│
+├── public/                       # Static assets
+│   └── kfc-logo.png
+│
+└── package.json                 # Dependencies & scripts
 ```
 
-Mở trình duyệt vào `http://localhost:3000` (hoặc địa chỉ/port hiển thị khi dev server khởi động).
+## ⚙️ Available Scripts
 
-## ℹ️ Mô tả ngắn
+| Command                       | Purpose                                      |
+| ----------------------------- | -------------------------------------------- |
+| `npm run dev`                 | Start Next.js dev server on `localhost:3000` |
+| `npm run build`               | Build for production                         |
+| `npm start`                   | Run production server                        |
+| `npm run lint`                | Run ESLint checks                            |
+| `npm run format`              | Format code with Prettier                    |
+| `npm run iota-deploy`         | Deploy/build Move contract                   |
+| `npm run iota-deploy:testnet` | Deploy to testnet                            |
+| `npm run iota-deploy:devnet`  | Deploy to devnet                             |
 
-Ứng dụng là một ví dụ dApp sử dụng IOTA dApp Kit và Move smart contracts để mô phỏng việc "nấu gà KFC" trên blockchain. Người dùng có thể gửi giao dịch để tạo "ChickenBox" và gọi hàm lấy "Flag" khi công thức trùng khớp.
+## 🔧 Configuration
 
-## 📁 Cấu trúc dự án
+### Network Configuration (`lib/config.ts`)
 
-- `app/` — Next.js (App Router) pages, layout và global styles.
-- `components/` — React components tái sử dụng (ví dụ: `Wallet-connect.tsx`, `sample.tsx`).
-- `hooks/` — Custom hooks; `useContract.ts` chứa logic tương tác với Move contract.
-- `lib/` — Cấu hình và utilities (ví dụ: `config.ts`, `toast.ts`).
-- `contract/` — Mã Move contract (sources, Move.toml, build artefacts khi biên dịch).
-- `public/` — Tài nguyên tĩnh (logo, hình ảnh).
-- `package.json` — Scripts & dependencies.
+The app supports multiple IOTA networks:
 
-## ⚙️ Scripts quan trọng
+```typescript
+export const DEVNET_PACKAGE_ID = '0x9db832e7c6fba2bab...';
+export const TESTNET_PACKAGE_ID = ''; // Update after testnet deploy
+export const MAINNET_PACKAGE_ID = ''; // Update after mainnet deploy
+```
 
-- `npm run dev` — Chạy Next.js dev server
-- `npm run build` — Build production
-- `npm start` — Chạy server production sau khi build
-- `npm run iota-deploy` — (wrapper) deploy Move contract lên mạng IOTA (tuỳ dự án)
-- `npm run gen-hex` — hỗ trợ build/convert (nếu bạn dùng script đi kèm)
+**To update after contract deployment:**
 
-## 🧩 Cấu hình môi trường
+1. Deploy contract: `npm run iota-deploy:testnet`
+2. Copy Package ID from output
+3. Update `TESTNET_PACKAGE_ID` in `lib/config.ts`
+4. Change default network in `components/Provider.tsx`
 
-- `lib/config.ts` chứa các biến cấu hình mạng và `packageId` contract. Khi deploy contract mới, cập nhật `DEVNET_PACKAGE_ID`.
-- Nếu cần, tạo file `.env.local` cho các biến runtime (không commit file này vào Git).
+### Environment Variables (Optional)
 
-## 🛠️ Lưu ý kỹ thuật & Best practices
+Create `.env.local` for runtime settings (Git-ignored):
 
-- Đảm bảo sử dụng Node.js >= 18.
-- Khi nâng dependencies (đặc biệt `next`, `@iota/*`), kiểm tra changelog vì có thể có breaking changes.
-- Tránh đặt các selector CSS quá chung (ví dụ thay đổi toàn bộ `p, span`) vì có thể ảnh hưởng tới modal/wallet popups.
+```
+NEXT_PUBLIC_NETWORK=devnet
+```
 
-## 🧪 Test & QA
+## 🎯 How It Works
 
-- Nên thêm unit tests cho `useContract` (mock IOTA client) và UI tests (Playwright) để kiểm tra luồng: connect wallet → fry → get flag.
+### User Flow
 
-## 🚨 Xử lý lỗi phổ biến
+```
+1. User connects wallet → Account authenticated
+2. User fills ingredient form (8 parameters)
+3. Click "Fry" → Transaction submitted
+4. Contract creates ChickenBox with recipe data
+5. If recipe matches → "Claim Reward" button appears
+6. Click "Claim" → Contract verifies recipe & issues Flag
+```
 
-- `Transaction rejected by user` — người dùng từ chối ký giao dịch.
-- `Insufficient gas` — cần cung cấp thêm token testnet hoặc tăng gas budget.
-- `No flag ID found` — contract không trả về Flag (thường do công thức sai).
+### Perfect Recipe (Current Default)
 
-## ✅ Những việc đã làm trong repo (tạm thời)
+```
+- Chicken: 1 kg
+- Garlic: 10g
+- Milk: 300ml
+- Salt: 15g
+- Pepper: 5g
+- Flour: 200g
+- Cornstarch: 100g
+- Eggs: 2
+```
 
-- Scoped CSS để tránh ảnh hưởng tới modal của wallet.
-- Thêm ESLint + Prettier + Husky + lint-staged để cải thiện code style và pre-commit hooks.
+Try different values to test! Only the perfect recipe allows claiming rewards.
 
-## 👩‍💻 Muốn tôi làm tiếp?
+## 📚 Tech Stack
 
-- Tôi có thể: audit dependency (kiểm tra vulnerablities), thêm CI workflow, hoặc refactor `useContract` để an toàn hơn. Nói "làm A" hoặc "làm B" và tôi sẽ bắt đầu.
+- **Frontend**: Next.js 16 (App Router), React 19, TypeScript
+- **Blockchain**: IOTA SDK, @iota/dapp-kit
+- **UI**: Radix UI components
+- **Styling**: Global CSS with KFC brand variables
+- **State**: React hooks + localStorage
+- **Development**: ESLint, Prettier, Husky, lint-staged
 
-## 📚 Tài liệu tham khảo
+## 🛠️ Technical Notes
 
-- IOTA Docs: https://docs.iota.org/
-- IOTA dApp Kit: https://github.com/iotaledger/dapp-kit
-- Next.js: https://nextjs.org/docs
+### Key Components
+
+**`useContract.ts`** — All blockchain interactions:
+
+- `fryChicken()` — Create ChickenBox with ingredients
+- `getFlag()` — Claim reward if recipe matches
+- Data fetching with React Query patterns
+
+**`sample.tsx`** — Main UI:
+
+- Connect state rendering
+- Form inputs for 8 ingredients
+- Status cards for ChickenBox & Flag display
+- Toast notifications for feedback
+
+**`globals.css`** — Scoped styling:
+
+- KFC brand colors (`--kfc-red`, `--kfc-gold`)
+- Utility classes (`.hero`, `.card`, `.primary-btn`)
+- Scoped to `.app-container` to prevent wallet modal conflicts
+
+### Best Practices
+
+- Ensure Node.js >= 18 is installed
+- When upgrading dependencies (especially `next`, `@iota/*`), check changelogs for breaking changes
+- Avoid overly broad CSS selectors that might affect wallet modals
+- Use TypeScript strict mode for type safety
+- Test on devnet before deploying to testnet/mainnet
+
+## ⚠️ Common Issues & Solutions
+
+| Error                          | Cause                 | Solution                                          |
+| ------------------------------ | --------------------- | ------------------------------------------------- |
+| `Transaction rejected by user` | User denied in wallet | Approve transaction in wallet popup               |
+| `Insufficient gas`             | Gas budget too low    | Increase gas-budget in deployment scripts         |
+| `No flag ID found`             | Recipe doesn't match  | Try default recipe: chicken 1kg, garlic 10g, etc. |
+| `Module not found`             | Dependencies missing  | Run `npm install --legacy-peer-deps`              |
+| `Network error`                | RPC endpoint down     | Check network status or switch networks           |
+
+## ✅ What's Included
+
+- ✅ Full KFC branding & responsive UI
+- ✅ IOTA wallet integration (MetaMask, Phantom, etc.)
+- ✅ Move smart contract template
+- ✅ ESLint + Prettier code formatting
+- ✅ Husky pre-commit hooks
+- ✅ Toast notifications
+- ✅ Defensive rendering (NaN prevention)
+- ✅ Responsive layout (mobile-friendly)
+- ✅ localStorage persistence for ChickenBox & Flag IDs
+- ✅ Comprehensive documentation
+
+## 🚀 Deployment
+
+### Deploy to Testnet
+
+```bash
+# 1. Setup testnet wallet (if not done)
+iota client new-env --alias testnet --rpc https://api.testnet.iota.cafe
+iota client switch --env testnet
+
+# 2. Request testnet coins
+iota client faucet
+
+# 3. Deploy contract
+npm run iota-deploy:testnet
+
+# 4. Update config with Package ID
+# Edit lib/config.ts and set TESTNET_PACKAGE_ID
+
+# 5. Switch app to testnet
+# Edit components/Provider.tsx: defaultNetwork="testnet"
+```
+
+### Deploy to Production
+
+```bash
+npm run build
+npm start
+```
+
+For hosting, consider:
+
+- Vercel (recommended for Next.js)
+- Netlify
+- AWS Amplify
+- Docker + your own server
+
+## 📖 Documentation
+
+- **Architecture Details**: See `DEVELOPMENT.md` for code flow diagrams
+- **IOTA Docs**: https://docs.iota.org/
+- **dApp Kit**: https://github.com/iotaledger/dapp-kit
+- **Next.js**: https://nextjs.org/docs
+- **Move Language**: https://docs.iota.org/build/move
+
+## 🧪 Testing Checklist
+
+- [ ] Connect wallet on devnet
+- [ ] Submit fry transaction with default recipe
+- [ ] Verify ChickenBox created
+- [ ] Try alternative ingredient values
+- [ ] Test claim reward on perfect recipe
+- [ ] Check localStorage persistence
+- [ ] Test on testnet after deployment
+- [ ] Verify gas calculations
+- [ ] Test mobile responsiveness
+- [ ] Verify ESLint/Prettier pass
+
+## 📝 Contributing
+
+Contributions welcome! Please:
+
+1. Create a feature branch
+2. Follow ESLint/Prettier rules (enforced by Husky pre-commit hooks)
+3. Test on devnet/testnet before submitting
+4. Update `DEVELOPMENT.md` if changing architecture
+5. Add comments for complex logic
+
+## 🔒 Security Notes
+
+- Private keys are managed by wallet extensions (MetaMask, Phantom)
+- ChickenBox IDs stored in localStorage (user-specific)
+- Always verify contract address before transactions
+- Never commit `.env.local` or private keys
+- Use HTTPS in production
+
+## 📄 License
+
+MIT — Feel free to use as a template for your IOTA dApps!
+
+## 🤝 Support
+
+For issues or questions:
+
+1. Check `DEVELOPMENT.md` for architecture details
+2. Review the Common Issues section above
+3. Check IOTA documentation
+4. Open a GitHub issue with reproduction steps
+
+## 📧 Contact & Links
+
+### Project Information
+
+- **GitHub Repository**: https://github.com/NguyenPhucHieu204/KFC_Box
+- **Project Owner**: NguyenPhucHieu204
+- **Repository**: KFC_Box
+
+### Get Help
+
+- **GitHub Issues**: https://github.com/NguyenPhucHieu204/KFC_Box/issues
+- **IOTA Community**: https://discord.gg/iota
+- **dApp Kit Discussions**: https://github.com/iotaledger/dapp-kit/discussions
+
+### Related Resources
+
+- **IOTA Documentation**: https://docs.iota.org/
+- **IOTA GitHub**: https://github.com/iotaledger/iota
+- **Move Documentation**: https://docs.iota.org/build/move
+- **Next.js Docs**: https://nextjs.org/docs
+
+### Report Issues
+
+Found a bug? Have a feature request?
+
+1. Check existing [GitHub Issues](https://github.com/NguyenPhucHieu204/KFC_Box/issues)
+2. Create a new issue with:
+   - Clear title
+   - Detailed description
+   - Steps to reproduce
+   - Expected vs actual behavior
+   - Environment info (Node version, network, etc.)
 
 ---
 
-_Phiên bản README: 1.0 — 07/12/2025_
+**Version**: 1.0  
+**Last Updated**: December 7, 2025  
+**Maintained by**: KFC Box Development Team  
+**Repository**: https://github.com/NguyenPhucHieu204/KFC_Box
