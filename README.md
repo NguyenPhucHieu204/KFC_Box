@@ -19,6 +19,8 @@ npm run dev
 
 Open `http://localhost:3000` in your browser (or the address shown in your terminal).
 
+Contract Address: https://explorer.iota.org/object/0x1eaf906106e325943a5ed6359783cb0c9c87a2c0daf3624a52d1d17b5352e2c8?module=kfc&network=testnet
+
 ## 📖 Overview
 
 **KFC Box** is an IOTA dApp where users:
