@@ -1,0 +1,10 @@
+# Ensure Move files are detected as Move language by GitHub Linguist
+*.move linguist-language=Move
+
+# Mark build and generated folders as vendored so they don't skew language stats
+contract/pizza_box/build/** linguist-vendored
+.next/** linguist-vendored
+node_modules/** linguist-vendored
+
+# Optional: mark prompts and other generated outputs as vendored
+prompts/** linguist-vendored
